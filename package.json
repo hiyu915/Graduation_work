@@ -1,0 +1,15 @@
+{
+  "name": "runteq-graduate-examination",
+  "private": true,
+  "dependencies": {
+    "@hotwired/turbo-rails": "^8.0.13",
+    "@rails/activestorage": "^6.0.0",
+    "@rails/ujs": "^6.0.0",
+    "esbuild": "^0.17.19"
+  },
+  "version": "0.1.0",
+  "scripts": {
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",
+    "build:watch": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets --watch"
+  }
+}
