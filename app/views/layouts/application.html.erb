@@ -1,16 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-  <head>
-    <title>App</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>リピログ</title>
+</head>
+<body class="bg-slate-100">
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <!-- ヘッダー -->
+  <%= render 'shared/header' %>
 
-  <body>
-    <%= yield %>
-  </body>
+  <!-- メインコンテンツ（top.html.erbなど） -->
+  <%= yield %>
+
+  <!-- フッター -->
+  <%= render 'shared/footer' %>
+
+</body>
 </html>
