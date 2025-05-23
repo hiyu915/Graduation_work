@@ -19,9 +19,10 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    database: myapp_production
-    username: myapp
-    password: <%= ENV["MYAPP_DATABASE_PASSWORD"] %>
+    host: dpg-d0o6dhre5dus73b6umbg-a
+    database: repilog
+    username: repilog_user
+    password: 2nVMKk0xNu7pBK2Wh6CFzvqQGLMF6GlV
   cache:
     <<: *primary_production
     database: myapp_production_cache
