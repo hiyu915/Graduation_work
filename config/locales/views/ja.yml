@@ -1,0 +1,34 @@
+ja:
+  helpers:
+    submit:
+      create: 登録
+      submit: 保存
+      update: 更新
+    label:
+      email: メールアドレス
+      password: パスワード
+      password_confirmation: パスワード確認
+  user_sessions:
+    new:
+      title: ログイン
+      login: ログイン
+      to_register_page: 登録ページへ
+      password_forget: パスワードをお忘れの方はこちら
+  users:
+    new:
+      title: 会員登録
+      to_login_page: ログインページへ
+  header:
+    logo: リピログ
+    ranking_search: 地域別ランキング検索
+    login: ログイン
+    logout: ログアウト
+    to_register_page: 会員登録
+    repilog_index: Myリピログ
+    howto_repilog: リピログの使い方
+    help_page: ヘルプ
+  footer:
+    inquiry: 問い合わせ
+    user_agreement: 利用規約
+    privacy_policy: プライバシーポリシー
+    

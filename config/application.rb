@@ -29,5 +29,7 @@ module Myapp
       g.helper false             # ヘルパーファイルの生成をスキップ
       g.test_framework nil       # テストファイルの生成をスキップ
     end
+
+    config.i18n.default_locale = :ja
   end
 end

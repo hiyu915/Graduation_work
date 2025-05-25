@@ -1,8 +1,9 @@
 <!-- トップバー -->
 <div class="bg-light text-muted small px-4 py-2 d-flex justify-content-end gap-3">
-  <a href="#" class="text-muted text-decoration-none">リピログの使い方</a>
-  <a href="#" class="text-muted text-decoration-none">ヘルプ</a>
-  <%= link_to 'ログアウト', logout_path, class: 'text-muted text-decoration-none', data: { turbo_method: :delete } %>
+  <%= link_to t('header.howto_repilog'), '#', class: 'text-muted text-decoration-none' %>
+  <%= link_to t('header.help_page'), '#', class: 'text-muted text-decoration-none' %>
+  <%= link_to t('header.repilog_index'), '#', class: 'text-muted text-decoration-none' %>
+  <%= link_to t('header.logout'), logout_path, class: 'text-muted text-decoration-none', data: { turbo_method: :delete } %>
 </div>
 
 <!-- メインヘッダー -->
@@ -10,13 +11,11 @@
   <div class="d-flex align-items-center justify-content-between">
     <!-- 左端: ロゴ -->
     <h1 class="h4 fw-bold m-0">
-      <%= link_to 'リピログ', root_path, class: 'text-white text-decoration-none' %>
+      <%= link_to t('header.logo'), root_path, class: 'text-white text-decoration-none' %>
     </h1>
 
     <!-- 中央: 地域別ランキング検索リンク -->
-    <a href="#" class="text-warning fw-semibold text-decoration-none">
-      地域別ランキング検索
-    </a>
+    <%= link_to t('header.ranking_search'), '#', class: 'text-warning fw-semibold text-decoration-none' %>
 
     <!-- 右端: 空白（バランス用） -->
     <div style="width: 9rem;"></div>
