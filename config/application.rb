@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module Myapp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 8.0
+    config.load_defaults 7.1
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
@@ -23,5 +23,11 @@ module Myapp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.generators do |g|
+      g.skip_routes true         # `rails generate` で routes.rb の自動更新をスキップ
+      g.helper false             # ヘルパーファイルの生成をスキップ
+      g.test_framework nil       # テストファイルの生成をスキップ
+    end
   end
 end
