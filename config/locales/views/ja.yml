@@ -14,10 +14,18 @@ ja:
       login: ログイン
       to_register_page: 登録ページへ
       password_forget: パスワードをお忘れの方はこちら
+    create:
+      success: ログインしました
+      failure: ログインに失敗しました
+    destroy:
+      success: ログアウトしました
   users:
     new:
-      title: 会員登録
+      title: ユーザー登録
       to_login_page: ログインページへ
+    create:
+      success: 会員登録が完了しました
+      failure: 会員登録に失敗しました
   header:
     logo: リピログ
     ranking_search: 地域別ランキング検索
