@@ -1,0 +1,87 @@
+<div class="container my-4">
+  <h2 class="mb-4">お店を記録する</h2>
+
+  <%= form_with(model: @post, local: true) do |f| %>
+    <div class="mb-3">
+      <label class="form-label">年月日</label>
+      <div class="row">
+        <div class="col-auto">
+          <%= f.date_field :visited_at, class: 'form-control', style: 'width: 160px;' %>
+      </div>
+    </div>
+
+    <div class="mb-3" style="margin-top: 1.5rem;">
+      <label class="form-label">お店の名前</label>
+      <div class="row">
+        <div class="col-auto">
+          <%= f.text_field :shop_name, class: 'form-control' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">カテゴリ</label>
+      <div class="row">
+        <div class="col-auto">
+          <%= select_tag 'post[category_id]', options_for_select(['（未実装）']), class: 'form-select', disabled: true %>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">場所</label>
+      <div class="row">
+        <div class="col-auto">
+          <%= select_tag 'post[prefecture_id]', options_for_select(['（未実装）']), class: 'form-select', disabled: true, style: 'min-width: 150px;' %>
+        </div>
+        <div class="col-auto">
+          <%= select_tag 'post[city_id]', options_for_select(['（未実装）']), class: 'form-select', disabled: true, style: 'min-width: 150px;' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">同行者</label>
+      <div class="row">
+        <div class="col-auto">
+          <%= select_tag 'post[companion_id]', options_for_select(['（未実装）']), class: 'form-select', disabled: true %>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">気分</label>
+      <div class="row">
+        <div class="col-auto">
+          <%= select_tag 'post[feeling_id]', options_for_select(['（未実装）']), class: 'form-select', disabled: true %>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">来店理由</label>
+      <div class="row">
+        <div class="col-auto">
+          <%= select_tag 'post[visit_reason_id]', options_for_select(['（未実装）']), class: 'form-select', disabled: true %>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">メモ</label>
+      <div class="row">
+        <div class="col-auto">
+          <%= f.text_area :memo, class: 'form-control', rows: 4, style: 'width: 400px;' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <button type="button" class="btn btn-outline-secondary">写真を追加</button>
+    </div>
+
+    <div class="mb-3 text-end">
+      <%= f.submit "お店を記録する", class: 'btn btn-danger text-white' %>
+    </div>
+  <% end %>
+</div>
