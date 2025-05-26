@@ -1,0 +1,31 @@
+<div class="container my-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Myリピログ</h1>
+    <div>
+      <%= link_to '投稿する', "#", class: 'btn btn-primary me-2' %>
+      <div class="btn-group" role="group" aria-label="並び替え">
+        <%= link_to '日時順', "#", class: "btn btn-outline-secondary" %>
+        <%= link_to '訪問回数順', "#", class: "btn btn-outline-secondary" %>
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-hover align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>日時</th>
+        <th>お店の名前</th>
+        <th>カテゴリ</th>
+        <th>場所</th>
+        <th>同行者</th>
+        <th>気分</th>
+        <th>来店理由</th>
+        <th>訪問回数</th>
+        <th>リピ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @posts %>
+    </tbody>
+  </table>
+</div>
