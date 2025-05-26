@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   validates :shop_name, presence: true
+  validates :visited_at, presence: true
   # validates :visit_date, presence: true
   # validates :category_id, presence: true
   # validates :feeling_id, presence: true

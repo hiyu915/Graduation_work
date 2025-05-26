@@ -9,6 +9,8 @@ class CreatePosts < ActiveRecord::Migration[7.1]
       # t.references :visit_reason, null: false, foreign_key: true
       t.text :body
 
+      t.date :visited_at, null: false
+
       t.timestamps
     end
   end
