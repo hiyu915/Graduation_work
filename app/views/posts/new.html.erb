@@ -6,7 +6,8 @@
       <label class="form-label">年月日</label>
       <div class="row">
         <div class="col-auto">
-          <%= f.date_field :visited_at, class: 'form-control', style: 'width: 160px;' %>
+          <%= f.date_field :visit_date, class: 'form-control', style: 'width: 160px;' %>
+        </div>
       </div>
     </div>
 
@@ -23,7 +24,7 @@
       <label class="form-label">カテゴリ</label>
       <div class="row">
         <div class="col-auto">
-          <%= select_tag 'post[category_id]', options_for_select(['（未実装）']), class: 'form-select', disabled: true %>
+          <%= f.collection_select :category_id, Category.all, :id, :name, { prompt: '選択してください' }, class: 'form-select' %>
         </div>
       </div>
     </div>
@@ -32,19 +33,23 @@
       <label class="form-label">場所</label>
       <div class="row">
         <div class="col-auto">
-          <%= select_tag 'post[prefecture_id]', options_for_select(['（未実装）']), class: 'form-select', disabled: true, style: 'min-width: 150px;' %>
-        </div>
-        <div class="col-auto">
-          <%= select_tag 'post[city_id]', options_for_select(['（未実装）']), class: 'form-select', disabled: true, style: 'min-width: 150px;' %>
-        </div>
+          <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name, 
+                { prompt: '都道府県を選択' }, 
+                { class: 'form-select', id: 'prefecture-select', style: 'min-width: 150px;' } %>
       </div>
+    <div class="col-auto">
+      <%= f.select :city_id, [], 
+            { prompt: '都市を選択' }, 
+            { class: 'form-select', id: 'city-select', style: 'min-width: 150px;' } %>
     </div>
+  </div>
+</div>
 
     <div class="mb-3">
       <label class="form-label">同行者</label>
       <div class="row">
         <div class="col-auto">
-          <%= select_tag 'post[companion_id]', options_for_select(['（未実装）']), class: 'form-select', disabled: true %>
+          <%= f.collection_select :companion_id, Companion.all, :id, :name, { prompt: '同行者を選択' }, class: 'form-select' %>
         </div>
       </div>
     </div>
@@ -53,16 +58,16 @@
       <label class="form-label">気分</label>
       <div class="row">
         <div class="col-auto">
-          <%= select_tag 'post[feeling_id]', options_for_select(['（未実装）']), class: 'form-select', disabled: true %>
+          <%= f.collection_select :feeling_id, Feeling.all, :id, :name, { prompt: '気分を選択' }, class: 'form-select' %>
         </div>
       </div>
     </div>
 
     <div class="mb-3">
-      <label class="form-label">来店理由</label>
+      <label class="form-label">来店動機</label>
       <div class="row">
         <div class="col-auto">
-          <%= select_tag 'post[visit_reason_id]', options_for_select(['（未実装）']), class: 'form-select', disabled: true %>
+          <%= f.collection_select :visit_reason_id, VisitReason.all, :id, :name, { prompt: '来店動機を選択' }, class: 'form-select' %>
         </div>
       </div>
     </div>
@@ -71,7 +76,7 @@
       <label class="form-label">メモ</label>
       <div class="row">
         <div class="col-auto">
-          <%= f.text_area :memo, class: 'form-control', rows: 4, style: 'width: 400px;' %>
+          <%= f.text_area :body, class: 'form-control', rows: 4, style: 'width: 400px;' %>
         </div>
       </div>
     </div>
@@ -85,3 +90,32 @@
     </div>
   <% end %>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const prefectureSelect = document.getElementById('prefecture-select');
+    const citySelect = document.getElementById('city-select');
+
+    if (!prefectureSelect || !citySelect) return;
+
+    prefectureSelect.addEventListener('change', () => {
+      const prefectureId = prefectureSelect.value;
+
+      citySelect.innerHTML = '<option value="">都市を選択</option>';
+
+      if (!prefectureId) return;
+
+      fetch(`/cities.json?prefecture_id=${encodeURIComponent(prefectureId)}`)
+        .then(response => response.json())
+        .then(data => {
+          data.forEach(city => {
+            const option = document.createElement('option');
+            option.value = city.id;
+            option.textContent = city.name;
+            citySelect.appendChild(option);
+          });
+        })
+        .catch(error => console.error('都市の取得に失敗:', error));
+    });
+  });
+</script>
