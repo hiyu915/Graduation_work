@@ -6,7 +6,7 @@ class PostImageUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-    'post_placeholder'
+    "post_placeholder"
   end
 
   def extension_allowlist
