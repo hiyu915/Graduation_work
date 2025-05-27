@@ -35,7 +35,11 @@ class PostsController < ApplicationController
       flash.now[:danger] = t("defaults.flash_message.not_created", item: Post.model_name.human)
       render :new, status: :unprocessable_entity
     end
-end
+  end  # ← これを追加
+
+  def show
+    @post = Post.find(params[:id])
+  end
 
   private
 
