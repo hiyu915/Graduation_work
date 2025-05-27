@@ -82,7 +82,11 @@
     </div>
 
     <div class="mb-3">
-      <button type="button" class="btn btn-outline-secondary">写真を追加</button>
+      <%= f.label :post_image, class: "btn btn-outline-secondary", for: "post_image" do %>
+        写真を追加
+      <% end %>
+      <%= f.file_field :post_image, id: "post_image", class: "d-none", accept: 'image/*' %>
+      <%= f.hidden_field :post_image_cache %>
     </div>
 
     <div class="mb-3 text-end">
