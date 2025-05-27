@@ -18,4 +18,5 @@ class Post < ApplicationRecord
 
   # has_many :visits, dependent: :destroy
   # has_many :calendar_records, dependent: :destroy
+  mount_uploader :post_image, PostImageUploader
 end

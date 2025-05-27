@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_05_26_135825) do
+ActiveRecord::Schema[7.1].define(version: 2025_05_27_143432) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -64,6 +64,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_26_135825) do
     t.date "visit_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "post_image"
     t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["companion_id"], name: "index_posts_on_companion_id"
     t.index ["feeling_id"], name: "index_posts_on_feeling_id"

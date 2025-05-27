@@ -41,7 +41,8 @@ end
 
   def post_params
     params.require(:post).permit(
-      :visit_date, :category_id, :companion_id, :feeling_id, :visit_reason_id, :body
+      :visit_date, :category_id, :companion_id, :feeling_id, :visit_reason_id, :body,
+      :post_image, :post_image_cache
     )
   end
 
