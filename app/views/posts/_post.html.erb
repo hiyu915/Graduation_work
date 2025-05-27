@@ -1,23 +1,19 @@
 <tr>
-  <td><%= post.visited_at.strftime('%Y-%m-%d') if post.visited_at %></td>
-  <td><%= post.shop_name %></td>
+  <td><%= post.visit_date.strftime('%Y-%m-%d') if post.visit_date %></td>
+  <td><%= post.shop&.name %></td>
   <td><%= post.category&.name %></td>
-  <td><%= [post.prefecture&.name, post.city&.name].compact.join(' ') %></td>
+  <td><%= [post.shop&.location&.prefecture&.name, post.shop&.location&.city&.name].compact.join(' ') %></td>
   <td><%= post.companion&.name %></td>
   <td><%= post.feeling&.name %></td>
   <td><%= post.visit_reason&.name %></td>
-  <td>
-    <select class="form-select form-select-sm" disabled>
-      <option><%= post.visit_count %></option>
-    </select>
-  </td>
+
   <td>
     <button type="button" class="btn btn-outline-danger btn-sm" disabled>
       ♡
     </button>
   </td>
   <td>
-    <%= link_to '詳細', post_path(post), class: 'btn btn-sm btn-outline-primary me-1' %>
-    <%= link_to '編集する', edit_post_path(post), class: 'btn btn-sm btn-outline-secondary' %>
+    <%= link_to '詳細', "#", class: 'btn btn-sm btn-outline-primary me-1' %>
+    <%= link_to '編集する', "#", class: 'btn btn-sm btn-outline-secondary' %>
   </td>
 </tr>

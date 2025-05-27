@@ -68,3 +68,4 @@ group :test do
 end
 
 gem "pg", ">= 1.1", "< 2.0"
+gem 'csv'
