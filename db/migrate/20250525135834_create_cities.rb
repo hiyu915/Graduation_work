@@ -7,6 +7,6 @@ class CreateCities < ActiveRecord::Migration[7.1]
       t.timestamps
     end
 
-    add_index :cities, [:prefecture_id, :name], unique: true
+    add_index :cities, [ :prefecture_id, :name ], unique: true
   end
 end

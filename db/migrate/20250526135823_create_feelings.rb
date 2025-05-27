@@ -5,7 +5,7 @@ class CreateFeelings < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
-    
+
     add_index :feelings, :name, unique: true
   end
 end
