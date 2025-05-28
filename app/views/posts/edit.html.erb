@@ -1,9 +1,10 @@
+<% content_for(:title, "#{@post.shop.name} #{t('defaults.actions.edit')}") %>
 <div class="container my-4">
-  <h2 class="mb-4">お店を編集する</h2>
+  <h2 class="mb-4"><%= t('posts.edit.title') %></h2>
 
   <%= form_with(model: @post, local: true) do |f| %>
     <div class="mb-3">
-      <label class="form-label">年月日</label>
+      <label class="form-label"><%= t('helpers.label.post.visit_date') %></label>
       <div class="row">
         <div class="col-auto">
           <%= f.date_field :visit_date, class: 'form-control', style: 'width: 160px;' %>
@@ -12,7 +13,7 @@
     </div>
 
     <div class="mb-3" style="margin-top: 1.5rem;">
-      <label class="form-label">お店の名前</label>
+      <label class="form-label"><%= t('helpers.label.post.shop_name') %></label>
       <div class="row">
         <div class="col-auto">
           <%= text_field_tag 'post[shop_name]', @post.shop&.name, class: 'form-control' %>
@@ -21,21 +22,23 @@
     </div>
 
     <div class="mb-3">
-      <label class="form-label">カテゴリ</label>
+      <label class="form-label"><%= t('helpers.label.post.category') %></label>
       <div class="row">
         <div class="col-auto">
-          <%= f.collection_select :category_id, @categories, :id, :name, { prompt: '選択してください' }, class: 'form-select' %>
+          <%= f.collection_select :category_id, @categories, :id, :name,
+                { prompt: t('posts.edit.select.category') },
+                class: 'form-select' %>
         </div>
       </div>
     </div>
 
     <div class="mb-3">
-      <label class="form-label">場所</label>
+      <label class="form-label"><%= t('helpers.label.post.location') %></label>
       <div class="row">
         <div class="col-auto">
           <%= select_tag 'post[prefecture_id]',
                 options_from_collection_for_select(@prefectures, :id, :name, @post.shop&.location&.prefecture_id),
-                prompt: '都道府県を選択',
+                prompt: t('posts.edit.select.prefectures'),
                 class: 'form-select',
                 id: 'prefecture-select',
                 style: 'min-width: 150px;' %>
@@ -43,7 +46,7 @@
         <div class="col-auto">
           <%= select_tag 'post[city_id]',
                 options_from_collection_for_select(@cities || [], :id, :name, @post.shop&.location&.city_id),
-                prompt: '都市を選択',
+                prompt: t('posts.edit.select.city'),
                 class: 'form-select',
                 id: 'city-select',
                 style: 'min-width: 150px;' %>
@@ -52,34 +55,40 @@
     </div>
 
     <div class="mb-3">
-      <label class="form-label">同行者</label>
+      <label class="form-label"><%= t('helpers.label.post.companion') %></label>
       <div class="row">
         <div class="col-auto">
-          <%= f.collection_select :companion_id, @companions, :id, :name, { prompt: '同行者を選択' }, class: 'form-select' %>
+          <%= f.collection_select :companion_id, @companions, :id, :name,
+                { prompt: t('posts.edit.select.companion') },
+                class: 'form-select' %>
         </div>
       </div>
     </div>
 
     <div class="mb-3">
-      <label class="form-label">気分</label>
+      <label class="form-label"><%= t('helpers.label.post.feeling') %></label>
       <div class="row">
         <div class="col-auto">
-          <%= f.collection_select :feeling_id, @feelings, :id, :name, { prompt: '気分を選択' }, class: 'form-select' %>
+          <%= f.collection_select :feeling_id, @feelings, :id, :name,
+                { prompt: t('posts.edit.select.feeling') },
+                class: 'form-select' %>
         </div>
       </div>
     </div>
 
     <div class="mb-3">
-      <label class="form-label">来店動機</label>
+      <label class="form-label"><%= t('helpers.label.post.visit_reason') %></label>
       <div class="row">
         <div class="col-auto">
-          <%= f.collection_select :visit_reason_id, @visit_reasons, :id, :name, { prompt: '来店動機を選択' }, class: 'form-select' %>
+          <%= f.collection_select :visit_reason_id, @visit_reasons, :id, :name,
+                { prompt: t('posts.edit.select.visit_reason') },
+                class: 'form-select' %>
         </div>
       </div>
     </div>
 
     <div class="mb-3">
-      <label class="form-label">メモ</label>
+      <label class="form-label"><%= t('posts.edit.item.memo') %></label>
       <div class="row">
         <div class="col-auto">
           <%= f.text_area :body, class: 'form-control', rows: 4, style: 'width: 400px;' %>
@@ -89,14 +98,14 @@
 
     <div class="mb-3">
       <%= f.label :post_image, class: "btn btn-outline-secondary", for: "post_image" do %>
-        写真を追加
+        <%= t('posts.edit.item.add_photo') %>
       <% end %>
       <%= f.file_field :post_image, id: "post_image", class: "d-none", accept: 'image/*' %>
       <%= f.hidden_field :post_image_cache %>
 
       <% if @post.post_image.present? %>
         <%= f.hidden_field :remove_post_image, id: "remove_post_image_field" %>
-        <button type="button" class="btn btn-danger ms-2" id="remove_image_button">写真を削除</button>
+        <button type="button" class="btn btn-danger ms-2" id="remove_image_button"><%= t('posts.edit.item.delete_photo') %></button>
       <% end %>
     </div>
 
@@ -108,7 +117,7 @@
 
         if (removeButton) {
           removeButton.addEventListener('click', () => {
-            if (confirm('本当に写真を削除しますか？')) {
+            if (confirm('<%= j t("posts.edit.error.fetch_cities") %>')) {
               removeField.value = '1';
               form.submit();
             }
@@ -118,7 +127,7 @@
     </script>
 
     <div class="mb-3 text-end">
-      <%= f.submit "保存する", class: 'btn btn-danger text-white' %>
+      <%= f.submit t('posts.edit.submit'), class: 'btn btn-danger text-white' %>
     </div>
   <% end %>
 </div>
@@ -132,7 +141,7 @@
 
     prefectureSelect.addEventListener('change', () => {
       const prefectureId = prefectureSelect.value;
-      citySelect.innerHTML = '<option value="">都市を選択</option>';
+      citySelect.innerHTML = `<option value="">${'<%= j t("posts.edit.select.city") %>'}</option>`;
 
       if (!prefectureId) return;
 
@@ -146,7 +155,7 @@
             citySelect.appendChild(option);
           });
         })
-        .catch(error => console.error('都市の取得に失敗:', error));
+        .catch(error => console.error('<%= j t("posts.edit.error.fetch_cities") %>', error));
     });
   });
 </script>

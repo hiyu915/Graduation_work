@@ -1,7 +1,25 @@
 ja:
+  application:
+    title: リピログ
+
   defaults:
+    actions:
+      create: 作成
+      post: 投稿
+      edit: 編集
+      show: 詳細
+      index: Myリピログ
+      delete: 削除
+      delete_confirm: 削除しますか？
+      unspecified: 指定なし
     flash_message:
       require_login: ログインしてください
+      created: "%{item}を作成しました"
+      not_created: "%{item}を作成出来ませんでした"
+      updated: "%{item}を更新しました"
+      not_updated: "%{item}を更新出来ませんでした"
+      deleted: "%{item}を削除しました"
+
   helpers:
     submit:
       create: 登録
@@ -11,6 +29,15 @@ ja:
       email: メールアドレス
       password: パスワード
       password_confirmation: パスワード確認
+      post:
+        visit_date: 年月日
+        shop_name: お店の名前
+        category: カテゴリ
+        location: 場所
+        companion: 同行者
+        feeling: 気分
+        visit_reason: 来店動機
+
   user_sessions:
     new:
       title: ログイン
@@ -22,13 +49,90 @@ ja:
       failure: ログインに失敗しました
     destroy:
       success: ログアウトしました
+
   users:
     new:
-      title: ユーザー登録
+      title: 会員登録
       to_login_page: ログインページへ
     create:
       success: 会員登録が完了しました
       failure: 会員登録に失敗しました
+
+  posts:
+    new:
+      title: お店を記録する
+      create: お店を記録する
+      item:
+        visit_date: 年月日
+        shop_name: お店の名前
+        category: カテゴリ
+        location: 場所
+        companion: 同行者
+        feeling: 気分
+        visit_reason: 来店動機
+        memo: メモ
+        add_photo: 写真を追加
+      select:
+        category: カテゴリを選択
+        prefectures: 都道府県を選択
+        city: 市を選択
+        companion: 同行者を選択
+        feeling: 気分を選択
+        visit_reason: 来店動機を選択
+    edit:
+      title: お店を編集する
+      submit: お店を保存する
+      item:
+        visit_date: 年月日
+        shop_name: お店の名前
+        category: カテゴリ
+        location: 場所
+        companion: 同行者
+        feeling: 気分
+        visit_reason: 来店動機
+        memo: メモ
+        add_photo: 写真を追加
+        delete_photo: 写真を削除
+      select:
+        category: カテゴリを選択
+        prefectures: 都道府県を選択
+        city: 市を選択
+        companion: 同行者を選択
+        feeling: 気分を選択
+        visit_reason: 来店動機を選択
+      error:
+        fetch_cities: "都市の取得に失敗しました"
+    show:
+      title: お店の詳細
+      item:
+        visit_date: 年月日
+        shop_name: お店の名前
+        category: カテゴリ
+        location: 場所
+        companion: 同行者
+        feeling: 気分
+        visit_reason: 来店動機
+        memo: メモ
+        edit_detail: 編集/削除
+        detail: 編集する
+        edit: 削除する
+        back_index: Myリピログに戻る
+    index:
+      title: Myリピログ
+      new_post: 投稿する
+      sort:
+        by_visit_date: 年月日順
+      table_header:
+        visit_date: 年月日
+        shop_name: お店の名前
+        category: カテゴリ
+        location: 場所
+        companion: 同行者
+        feeling: 気分
+        visit_reason: 来店動機
+        repeat_count: リピ
+        detail_edit: 詳細/編集
+
   header:
     logo: リピログ
     ranking_search: 地域別ランキング検索
@@ -38,8 +142,8 @@ ja:
     repilog_index: Myリピログ
     howto_repilog: リピログの使い方
     help_page: ヘルプ
+
   footer:
     inquiry: 問い合わせ
     user_agreement: 利用規約
     privacy_policy: プライバシーポリシー
-    
