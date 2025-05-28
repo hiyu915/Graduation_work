@@ -19,6 +19,7 @@ ja:
       updated: "%{item}を更新しました"
       not_updated: "%{item}を更新出来ませんでした"
       deleted: "%{item}を削除しました"
+      form_confirm: "%{item}を入力してください"
 
   helpers:
     submit:
@@ -37,6 +38,7 @@ ja:
         companion: 同行者
         feeling: 気分
         visit_reason: 来店動機
+        prefecture_city: 都道府県/市
 
   user_sessions:
     new:
@@ -100,6 +102,10 @@ ja:
         companion: 同行者を選択
         feeling: 気分を選択
         visit_reason: 来店動機を選択
+      flash_message:
+        delete_photo_confirm: 写真を削除しますか？
+        delete_photo_success: 写真を削除しました
+        delete_photo_failure: 写真の削除に失敗しました
       error:
         fetch_cities: "都市の取得に失敗しました"
     show:
@@ -120,7 +126,7 @@ ja:
         favorite: リピ
     index:
       title: Myリピログ
-      new_post: 投稿する
+      new_post: 記録する
       sort:
         by_visit_date: 年月日順
       table_header:
