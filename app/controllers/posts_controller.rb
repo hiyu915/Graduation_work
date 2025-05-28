@@ -14,12 +14,19 @@ class PostsController < ApplicationController
     prefecture_id = params[:post][:prefecture_id]
     city_id       = params[:post][:city_id]
 
+    if prefecture_id.to_i == 0 || city_id.to_i == 0
+      load_collections
+      flash.now[:danger] = t("defaults.flash_message.form_confirm", item: t("helpers.label.post.prefecture_city"))
+      @post = Post.new(post_params)
+      render :new, status: :unprocessable_entity and return
+    end
+
     location = Location.find_or_create_by(prefecture_id: prefecture_id, city_id: city_id)
 
     shop_name = params[:post][:shop_name].to_s.strip
     if shop_name.blank?
       load_collections
-      flash.now[:danger] = "店舗名を入力してください"
+      flash.now[:danger] = t("defaults.flash_message.form_confirm", item: t("helpers.label.post.shop_name"))
       render :new, status: :unprocessable_entity and return
     end
 
@@ -30,7 +37,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params.merge(shop_id: shop.id))
 
     if @post.save
-      redirect_to posts_path, success: t("defaults.flash_message.created", item: Post.model_name.human)
+      redirect_to posts_path, notice: t("defaults.flash_message.created", item: Post.model_name.human)
     else
       Rails.logger.debug @post.errors.full_messages
       load_collections
@@ -58,13 +65,9 @@ class PostsController < ApplicationController
     prefecture_id = params[:post][:prefecture_id]
     city_id       = params[:post][:city_id]
 
-    location = Location.find_or_create_by(prefecture_id: prefecture_id, city_id: city_id)
-
-    shop_name = params[:post][:shop_name].to_s.strip
-    if shop_name.blank?
+    if prefecture_id.to_i == 0 || city_id.to_i == 0
       load_collections
       @prefectures = Prefecture.order(:name)
-      # 都道府県IDがあるなら都道府県に紐づく市区町村をセット
       if prefecture_id.present?
         prefecture = Prefecture.find_by(id: prefecture_id)
         @cities = prefecture ? prefecture.locations.includes(:city).map(&:city).uniq.sort_by(&:name) : []
@@ -72,7 +75,24 @@ class PostsController < ApplicationController
         @cities = []
       end
 
-      flash.now[:danger] = "店舗名を入力してください"
+      flash.now[:danger] = t("defaults.flash_message.form_confirm", item: t("helpers.label.post.prefecture_city"))
+      render :edit, status: :unprocessable_entity and return
+    end
+
+    location = Location.find_or_create_by(prefecture_id: prefecture_id, city_id: city_id)
+
+    shop_name = params[:post][:shop_name].to_s.strip
+    if shop_name.blank?
+      load_collections
+      @prefectures = Prefecture.order(:name)
+      if prefecture_id.present?
+        prefecture = Prefecture.find_by(id: prefecture_id)
+        @cities = prefecture ? prefecture.locations.includes(:city).map(&:city).uniq.sort_by(&:name) : []
+      else
+        @cities = []
+      end
+
+      flash.now[:danger] = t("defaults.flash_message.form_confirm", item: t("helpers.label.post.shop_name"))
       render :edit, status: :unprocessable_entity and return
     end
 
