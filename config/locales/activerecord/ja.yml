@@ -7,3 +7,15 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード確認
+      post:
+        visit_date: 年月日
+        shop_name: お店の名前
+        category: カテゴリ
+        category_id: カテゴリ
+        prefecture_id: 都道府県
+        city_id: 都市
+        companion_id: 同行者
+        feeling_id: 気分
+        visit_reason_id: 来店理由
+        body: メモ
+        post_image: 写真

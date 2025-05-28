@@ -1,3 +1,4 @@
+<% content_for(:title, "#{@post.shop.name} #{t('defaults.actions.show')}") %>
 <div class="container my-4" style="max-width: 600px;">
   <div class="mb-2 text-center">
     <%= image_tag @post.post_image.url, class: "img-fluid rounded", style: "max-height: 400px;" %>
@@ -6,15 +7,15 @@
   <div class="d-flex justify-content-end mb-4">
     <div class="dropdown">
       <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="postMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-        編集/削除
+        <%= t('posts.show.item.edit_detail') %>
       </button>
       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="postMenuButton">
         <li>
-          <%= link_to '編集する', edit_post_path(@post), class: 'dropdown-item' %>
+          <%= link_to t('posts.show.item.detail'), edit_post_path(@post), class: 'dropdown-item' %>
         </li>
         <li>
-          <%= link_to '削除する', post_path(@post),
-              data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' },
+          <%= link_to t('posts.show.item.edit'), post_path(@post),
+              data: { turbo_method: :delete, turbo_confirm: t('defaults.actions.delete_confirm') },
               class: 'dropdown-item text-danger' %>
         </li>
       </ul>
@@ -26,37 +27,37 @@
   <table class="table table-bordered w-auto">
     <tbody>
       <tr>
-        <th>年月日</th>
+        <th><%= t('posts.show.item.visit_date') %></th>
         <td><%= @post.visit_date.strftime('%Y年%m月%d日') %></td>
       </tr>
       <tr>
-        <th>カテゴリ</th>
+        <th><%= t('posts.show.item.category') %></th>
         <td><%= @post.category.name if @post.category %></td>
       </tr>
       <tr>
-        <th>場所</th>
+        <th><%= t('posts.show.item.location') %></th>
         <td><%= "#{@post.shop.location.prefecture.name} #{@post.shop.location.city.name}" if @post.shop&.location %></td>
       </tr>
       <tr>
-        <th>同行者</th>
+        <th><%= t('posts.show.item.companion') %></th>
         <td><%= @post.companion.name if @post.companion %></td>
       </tr>
       <tr>
-        <th>気分</th>
+        <th><%= t('posts.show.item.feeling') %></th>
         <td><%= @post.feeling.name if @post.feeling %></td>
       </tr>
       <tr>
-        <th>来店理由</th>
+        <th><%= t('posts.show.item.visit_reason') %></th>
         <td><%= @post.visit_reason.name if @post.visit_reason %></td>
       </tr>
       <tr>
-        <th>メモ</th>
+        <th><%= t('posts.show.item.memo') %></th>
         <td><%= simple_format(@post.body) %></td>
       </tr>
     </tbody>
   </table>
 
   <div class="mt-3">
-    <%= link_to '一覧に戻る', posts_path, class: 'btn btn-outline-secondary' %>
+    <%= link_to t('posts.show.item.back_index'), posts_path, class: 'btn btn-outline-secondary' %>
   </div>
 </div>

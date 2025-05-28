@@ -1,11 +1,12 @@
+<% content_for(:title, t('.title')) %>
 <div class="container my-4">
   <div class="d-flex justify-content-between align-items-center mb-3">
-    <h1>Myリピログ</h1>
+    <h1><%= t('posts.index.title') %></h1>
     <div>
-      <%= link_to '投稿する', new_post_path, class: 'btn btn-primary me-2' %>
-      <div class="btn-group" role="group" aria-label="並び替え">
-        <%= link_to '年月日順', "#", class: "btn btn-outline-secondary" %>
-        <%= link_to '訪問回数順', "#", class: "btn btn-outline-secondary" %>
+      <%= link_to t('posts.index.new_post'), new_post_path, class: 'btn btn-primary me-2' %>
+      <div class="btn-group" role="group" aria-label="<%= t('posts.index.sort.by_visit_date') %>">
+        <%= link_to t('posts.index.sort.by_visit_date'), "#", class: "btn btn-outline-secondary" %>
+        <%#= link_to '訪問回数順', "#", class: "btn btn-outline-secondary" %>
       </div>
     </div>
   </div>
@@ -13,15 +14,15 @@
   <table class="table table-hover align-middle table-bordered text-center">
     <thead class="table-light">
       <tr>
-        <th class="w-10">年月日</th>
-        <th class="w-20">お店の名前</th>
-        <th class="w-10">カテゴリ</th>
-        <th class="w-20">場所</th>
-        <th class="w-10">同行者</th>
-        <th class="w-10">気分</th>
-        <th class="w-10">来店動機</th>
-        <th class="w-5">リピ</th>
-        <th class="w-10">詳細/編集</th>
+        <th class="w-10"><%= t('posts.index.table_header.visit_date') %></th>
+        <th class="w-20"><%= t('posts.index.table_header.shop_name') %></th>
+        <th class="w-10"><%= t('posts.index.table_header.category') %></th>
+        <th class="w-20"><%= t('posts.index.table_header.location') %></th>
+        <th class="w-10"><%= t('posts.index.table_header.companion') %></th>
+        <th class="w-10"><%= t('posts.index.table_header.feeling') %></th>
+        <th class="w-10"><%= t('posts.index.table_header.visit_reason') %></th>
+        <th class="w-5"><%= t('posts.index.table_header.repeat_count') %></th>
+        <th class="w-10"><%= t('posts.index.table_header.detail_edit') %></th>
       </tr>
     </thead>
     <tbody>

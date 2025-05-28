@@ -9,11 +9,11 @@
 
   <td>
     <button type="button" class="btn btn-outline-danger btn-sm" disabled>
-      ♡
+      <%= t('posts.index.table_header.repeat_count') %>
     </button>
   </td>
   <td>
-    <%= link_to '詳細', post_path(post), class: 'btn btn-sm btn-outline-primary me-1' %>
-    <%= link_to '編集', edit_post_path(post), class: 'btn btn-sm btn-outline-secondary' %>
+    <%= link_to t('defaults.actions.show'), post_path(post), class: 'btn btn-sm btn-outline-primary me-1' %>
+    <%= link_to t('defaults.actions.edit'), edit_post_path(post), class: 'btn btn-sm btn-outline-secondary' %>
   </td>
 </tr>
