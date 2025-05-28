@@ -13,8 +13,8 @@ class Post < ApplicationRecord
   belongs_to :visit_reason
   belongs_to :shop
 
-  # has_many :favorites, dependent: :destroy
-  # has_many :favorited_users, through: :favorites, source: :user
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_users, through: :favorites, source: :user
 
   # has_many :visits, dependent: :destroy
   # has_many :calendar_records, dependent: :destroy
