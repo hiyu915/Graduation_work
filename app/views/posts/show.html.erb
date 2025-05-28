@@ -9,9 +9,13 @@
         編集/削除
       </button>
       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="postMenuButton">
-        <li><%= link_to '編集する',"#", class: 'dropdown-item' %></li>
         <li>
-          <%= link_to '削除する',"#", method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'dropdown-item text-danger' %>
+          <%= link_to '編集する', edit_post_path(@post), class: 'dropdown-item' %>
+        </li>
+        <li>
+          <%= link_to '削除する', post_path(@post),
+              data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' },
+              class: 'dropdown-item text-danger' %>
         </li>
       </ul>
     </div>
