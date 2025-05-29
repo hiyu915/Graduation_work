@@ -3,7 +3,7 @@ require 'csv'
 CSVROW_PREFNAME = 6
 CSVROW_CITYNAME = 7
 
-CSV.foreach(Rails.root.join("db/csv/ken_all.csv"), encoding: "Shift_JIS:UTF-8") do |row|
+CSV.foreach(Rails.root.join("db/csv/ken_all.csv"), encoding: "Shift_JIS:UTF-8", invalid: :replace, undef: :replace, replace: '?') do |row|
   prefecture_name = row[CSVROW_PREFNAME]
   city_name = row[CSVROW_CITYNAME]
 
