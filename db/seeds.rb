@@ -1,9 +1,9 @@
 require 'csv'
 
-CSVROW_PREFNAME = 6
-CSVROW_CITYNAME = 7
+CSVROW_PREFNAME = 1
+CSVROW_CITYNAME = 2
 
-CSV.foreach(Rails.root.join("db/csv/ken_all.csv"), encoding: "Shift_JIS:UTF-8", invalid: :replace, undef: :replace, replace: '?') do |row|
+CSV.foreach(Rails.root.join("db/csv/ken_all.csv"), encoding: "UTF-8", invalid: :replace, undef: :replace, replace: '?') do |row|
   prefecture_name = row[CSVROW_PREFNAME]
   city_name = row[CSVROW_CITYNAME]
 
@@ -12,6 +12,7 @@ CSV.foreach(Rails.root.join("db/csv/ken_all.csv"), encoding: "Shift_JIS:UTF-8", 
   prefecture = Prefecture.find_or_create_by(name: prefecture_name)
   City.find_or_create_by(name: city_name, prefecture_id: prefecture.id)
 end
+
 
 # カテゴリ
 categories = [
