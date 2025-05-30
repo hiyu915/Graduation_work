@@ -1,37 +1,21 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  # For details on connection pooling, see Rails configuration guide
-  # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: db
-  username: postgres
-  password: password
 
 development:
   <<: *default
+  host: db
+  username: postgres
+  password: password
   database: myapp_development
 
 test:
   <<: *default
+  host: db
+  username: postgres
+  password: password
   database: myapp_test
 
 production:
-  primary: &primary_production
-    <<: *default
-    host: dpg-d0o6dhre5dus73b6umbg-a
-    database: repilog
-    username: repilog_user
-    password: 2nVMKk0xNu7pBK2Wh6CFzvqQGLMF6GlV
-  cache:
-    <<: *primary_production
-    database: myapp_production_cache
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *primary_production
-    database: myapp_production_queue
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *primary_production
-    database: myapp_production_cable
-    migrations_paths: db/cable_migrate
+  <<: *default
