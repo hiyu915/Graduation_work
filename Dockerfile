@@ -17,7 +17,15 @@ ENV RAILS_ENV="production" \
 FROM base AS build
 
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential default-libmysqlclient-dev git libyaml-dev node-gyp pkg-config python-is-python3 && \
+    apt-get install --no-install-recommends -y \
+        build-essential \
+        default-libmysqlclient-dev \
+        git \
+        libyaml-dev \
+        node-gyp \
+        pkg-config \
+        libpq-dev \
+        python-is-python3 && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 ARG NODE_VERSION=20.19.2
