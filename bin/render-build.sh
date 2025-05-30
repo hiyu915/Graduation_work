@@ -1,17 +1,19 @@
 #!/usr/bin/env bash
 set -o errexit
 
-echo "Installing gems..."
+echo "Running bundle install..."
 bundle install
 
 echo "Precompiling assets..."
 bundle exec rake assets:precompile
 
-echo "Cleaning old assets..."
+echo "Cleaning assets..."
 bundle exec rake assets:clean
 
-echo "Running db:migrate..."
-bundle exec rake db:migrate
+echo "Running migrations..."
+bin/rails db:migrate
 
-echo "Seeding data..."
-bundle exec rake db:seed
+echo "Seeding database..."
+bin/rails db:seed
+
+echo "Build script finished."
