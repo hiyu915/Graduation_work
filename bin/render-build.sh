@@ -1,4 +1,9 @@
+#!/usr/bin/env bash
 set -o errexit
+
+echo "Terminating existing database connections..."
+psql $DATABASE_URL -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = 'repilog' AND pid <> pg_backend_pid();"
+
 echo "Running bundle install..."
 bundle install
 
