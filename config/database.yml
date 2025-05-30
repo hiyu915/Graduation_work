@@ -15,8 +15,13 @@ test:
   database: <%= ENV.fetch("POSTGRES_TEST_DB", "myapp_test") %>
 
 production:
-  <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
+  primary:
+    <<: *default
+    url: <%= ENV['DATABASE_URL'] %>
+
+  queue:
+    <<: *default
+    database: <%= ENV.fetch("POSTGRES_QUEUE_DB", "myapp_production_queue") %>
 
 cable:
   <<: *default
