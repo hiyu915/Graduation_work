@@ -107,7 +107,6 @@
     const citySelect = document.getElementById('city-select');
     if (!prefectureSelect || !citySelect) return;
 
-    // data-placeholder属性から文言を取得（なければデフォルト文言）
     const defaultCityOptionText = citySelect.dataset.placeholder || '<%= j t("posts.new.select.city") %>';
 
     const prefectureId = prefectureSelect.value;

@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [ :show, :edit, :update, :destroy ]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :remove_image]
 
   def index
     @posts = current_user.posts.includes(:user, :category, :shop, :feeling, :companion, :visit_reason)
@@ -110,9 +110,11 @@ class PostsController < ApplicationController
 
     if @post.update(post_params.merge(shop_id: shop.id))
       if params[:post][:remove_post_image] == '1'
-        @post.post_image.purge
+        @post.remove_post_image!
+        @post.save
       end
-      redirect_to posts_path, notice: t("defaults.flash_message.updated", item: Post.model_name.human)
+
+      redirect_to post_path(@post), notice: t("defaults.flash_message.updated", item: Post.model_name.human)
     else
       load_collections
       @prefectures = Prefecture.order(:name)
@@ -130,6 +132,12 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy!
     redirect_to posts_path, success: t("defaults.flash_message.deleted", item: Post.model_name.human)
+  end
+
+  def remove_image
+    @post.remove_post_image!
+    @post.save
+    redirect_to post_path(@post), notice: t("defaults.flash_message.image_removed")
   end
 
   private

@@ -8,11 +8,14 @@ Rails.application.routes.draw do
     collection do
       get :cities
     end
+    member do
+      delete :remove_image
+    end
   end
 
   resources :cities, only: [:index]
 
   get "login", to: "user_sessions#new"
-  post "login", to: "user_sessions#create"
+  post "login", to: "user_sessions# create"
   delete "logout", to: "user_sessions#destroy"
 end

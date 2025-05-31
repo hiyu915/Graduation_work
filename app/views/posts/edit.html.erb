@@ -2,7 +2,13 @@
 <div class="container my-4">
   <h2 class="mb-4"><%= t('posts.edit.title') %></h2>
 
-  <%= form_with(model: @post, local: true) do |f| %>
+  <% if notice.present? %>
+    <div class="alert alert-success" role="alert" id="flash_notice">
+      <%= notice %>
+    </div>
+  <% end %>
+
+  <%= form_with(model: @post, local: false, id: "edit_post_form") do |f| %>
     <div class="mb-3">
       <label class="form-label"><%= t('helpers.label.post.visit_date') %></label>
       <div class="row">
@@ -110,23 +116,6 @@
       <% end %>
     </div>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const removeButton = document.getElementById('remove_image_button');
-        const removeField = document.getElementById('remove_post_image_field');
-        const form = removeButton?.closest('form');
-
-        if (removeButton) {
-          removeButton.addEventListener('click', () => {
-            if (confirm('<%= j t("posts.edit.flash_message.delete_photo_confirm") %>')) {
-              removeField.value = '1';
-              form.submit();
-            }
-          });
-        }
-      });
-    </script>
-
     <div class="mb-3 text-end">
       <%= f.submit t('posts.edit.submit'), class: 'btn btn-danger text-white' %>
     </div>
@@ -134,6 +123,28 @@
 </div>
 
 <script>
+  document.addEventListener('turbo:load', () => {
+    const removeButton = document.getElementById('remove_image_button');
+    const removeField = document.getElementById('remove_post_image_field');
+    const form = document.getElementById('edit_post_form');
+    if (!form) return;
+
+    if (removeButton) {
+      if (!removeButton.dataset.listenerAdded) {
+        removeButton.dataset.listenerAdded = "true";
+        removeButton.addEventListener('click', () => {
+          if (form.dataset.isSubmitting === "true") return;
+
+          if (confirm('<%= j t("posts.edit.flash_message.delete_photo_confirm") %>')) {
+            removeField.value = '1';
+            form.dataset.isSubmitting = "true";
+            form.requestSubmit();
+          }
+        });
+      }
+    }
+  });
+
   function handlePrefectureChange() {
     const prefectureSelect = document.getElementById('prefecture-select');
     const citySelect = document.getElementById('city-select');
@@ -149,7 +160,7 @@
     fetch(`/posts/cities.json?prefecture_id=${encodeURIComponent(prefectureId)}`)
       .then(response => response.json())
       .then(json => {
-        const cities = json.data; // new.htmlに合わせてjson.dataに修正
+        const cities = json.data;
         cities.forEach(city => {
           const option = document.createElement('option');
           option.value = city.id;
@@ -157,7 +168,6 @@
           citySelect.appendChild(option);
         });
 
-        // 追加したoptionを全て追加後に初期値をセットする
         <% if @post.shop&.location&.city_id.present? %>
           citySelect.value = '<%= @post.shop.location.city_id %>';
         <% end %>
