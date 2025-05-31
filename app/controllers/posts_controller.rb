@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @posts = Post.includes(:user, :category, :shop, :feeling, :companion, :visit_reason)
+    @posts = current_user.posts.includes(:user, :category, :shop, :feeling, :companion, :visit_reason)
   end
 
   def new
@@ -142,6 +142,9 @@ class PostsController < ApplicationController
   end
 
   def set_post
-    @post = Post.find(params[:id])
+    @post = current_user.posts.find_by(id: params[:id])
+    unless @post
+      redirect_to posts_path, alert: t("defaults.flash_message.not_authorized")
+    end
   end
 end
