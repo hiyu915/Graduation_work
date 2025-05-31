@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <div class="mb-3" style="margin-top: 1.5rem;">
+    <div class="mb-3 mt-4">
       <label class="form-label"><%= t('posts.new.item.shop_name') %></label>
       <div class="row">
         <div class="col-auto">
@@ -107,7 +107,7 @@
     const citySelect = document.getElementById('city-select');
     if (!prefectureSelect || !citySelect) return;
 
-    const defaultCityOptionText = citySelect.dataset.placeholder || '<%= j t("posts.new.select.city") %>';
+    const defaultCityOptionText = citySelect.dataset.placeholder || "<%= j t('posts.new.select.city') %>";
 
     const prefectureId = prefectureSelect.value;
     citySelect.innerHTML = `<option value="">${defaultCityOptionText}</option>`;
@@ -125,7 +125,7 @@
           citySelect.appendChild(option);
         });
       })
-      .catch(error => console.error('<%= j t("posts.edit.error.fetch_cities") %>', error));
+      .catch(error => console.error("<%= j t('posts.edit.error.fetch_cities') %>", error));
   }
 
   document.addEventListener('turbo:load', () => {
