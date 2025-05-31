@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[new create]
 
   resources :posts, only: %i[index new create show edit update destroy] do
-    resource :favorite, only: [:create, :destroy]
+    resource :favorite, only: [ :create, :destroy ]
     collection do
       get :cities
     end
@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :cities, only: [:index]
+  resources :cities, only: [ :index ]
 
   get "login", to: "user_sessions#new"
   post "login", to: "user_sessions#create"
