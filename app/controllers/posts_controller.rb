@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :remove_image]
+  before_action :set_post, only: [ :show, :edit, :update, :destroy, :remove_image ]
 
   def index
     @posts = current_user.posts.includes(:user, :category, :shop, :feeling, :companion, :visit_reason)
@@ -110,7 +110,7 @@ class PostsController < ApplicationController
     shop.save!
 
     if @post.update(post_params.merge(shop_id: shop.id))
-      if params[:post][:remove_post_image] == '1'
+      if params[:post][:remove_post_image] == "1"
         @post.remove_post_image!
         @post.save
       end
