@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [ :show, :edit, :update, :destroy, :remove_image ]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :remove_image]
 
   def index
     @posts = current_user.posts.includes(:user, :category, :shop, :feeling, :companion, :visit_reason)
@@ -36,7 +36,6 @@ class PostsController < ApplicationController
     if shop_name.blank?
       load_collections
       flash.now[:danger] = t("defaults.flash_message.form_confirm", item: t("helpers.label.post.shop_name"))
-      @post = Post.new(post_params)
       render :new, status: :unprocessable_entity and return
     end
 
@@ -44,10 +43,12 @@ class PostsController < ApplicationController
     shop.location = location
     shop.save!
 
-    @post = Post.new(post_params.merge(shop_id: shop.id))
+    @post = current_user.posts.build(post_params.merge(shop_id: shop.id))
+
     if @post.save
       redirect_to posts_path, notice: t("defaults.flash_message.created", item: Post.model_name.human)
     else
+      Rails.logger.debug @post.errors.full_messages
       load_collections
       flash.now[:danger] = t("defaults.flash_message.not_created", item: Post.model_name.human)
       render :new, status: :unprocessable_entity
@@ -109,7 +110,7 @@ class PostsController < ApplicationController
     shop.save!
 
     if @post.update(post_params.merge(shop_id: shop.id))
-      if params[:post][:remove_post_image] == "1"
+      if params[:post][:remove_post_image] == '1'
         @post.remove_post_image!
         @post.save
       end
