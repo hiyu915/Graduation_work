@@ -1,6 +1,6 @@
 <% content_for(:title, t('.title')) %>
 <div class="container my-4">
-  <h2 class="mb-4"><%= t('posts.new.title') %></h2>
+  <h2 class="mb-4"><%= t('.title') %></h2>
 
   <%= form_with(model: @post, local: true) do |f| %>
     <div class="mb-3">
@@ -39,9 +39,14 @@
                 { class: 'form-select', id: 'prefecture-select', style: 'min-width: 150px;' } %>
         </div>
         <div class="col-auto">
-          <%= f.select :city_id, [], 
-                { prompt: t('posts.new.select.city') }, 
-                { class: 'form-select', id: 'city-select', style: 'min-width: 150px;' } %>
+          <%= f.select :city_id, [],
+                { prompt: t('posts.new.select.city') },
+                {
+                  class: 'form-select',
+                  id: 'city-select',
+                  style: 'min-width: 150px;',
+                  data: { placeholder: t('posts.new.select.city') }
+                } %>
         </div>
       </div>
     </div>
@@ -97,43 +102,40 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  function handlePrefectureChange() {
     const prefectureSelect = document.getElementById('prefecture-select');
     const citySelect = document.getElementById('city-select');
-
     if (!prefectureSelect || !citySelect) return;
 
-    prefectureSelect.addEventListener('change', () => {
-      const prefectureId = prefectureSelect.value;
+    // data-placeholder属性から文言を取得（なければデフォルト文言）
+    const defaultCityOptionText = citySelect.dataset.placeholder || '<%= j t("posts.new.select.city") %>';
 
-      citySelect.innerHTML = `<option value="">${'<%= j t('posts.new.select.city') %>'}</option>`;
+    const prefectureId = prefectureSelect.value;
+    citySelect.innerHTML = `<option value="">${defaultCityOptionText}</option>`;
 
-      if (!prefectureId) return;
+    if (!prefectureId) return;
 
-      fetch(`/cities.json?prefecture_id=${encodeURIComponent(prefectureId)}`)
-        .then(response => response.json())
-        .then(data => {
-          data.forEach(city => {
-            const option = document.createElement('option');
-            option.value = city.id;
-            option.textContent = city.name;
-            citySelect.appendChild(option);
-          });
-        })
-        .catch(error => console.error('<%= j t('posts.edit.error.fetch_cities') %>', error));
-    });
-  });
-</script>
+    fetch(`/posts/cities.json?prefecture_id=${encodeURIComponent(prefectureId)}`)
+      .then(response => response.json())
+      .then(json => {
+        const cities = json.data;
+        cities.forEach(city => {
+          const option = document.createElement('option');
+          option.value = city.id;
+          option.textContent = city.name;
+          citySelect.appendChild(option);
+        });
+      })
+      .catch(error => console.error('<%= j t("posts.edit.error.fetch_cities") %>', error));
+  }
 
-<script>
-  document.addEventListener('turbo:load', function() {
-    if (!window.sessionStorage.getItem('reloaded')) {
-      window.sessionStorage.setItem('reloaded', 'true');
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
-    } else {
-      window.sessionStorage.removeItem('reloaded');
+  document.addEventListener('turbo:load', () => {
+    const prefectureSelect = document.getElementById('prefecture-select');
+    if (!prefectureSelect) return;
+
+    if (!prefectureSelect.dataset.listenerAttached) {
+      prefectureSelect.addEventListener('change', handlePrefectureChange);
+      prefectureSelect.dataset.listenerAttached = 'true';
     }
   });
 </script>

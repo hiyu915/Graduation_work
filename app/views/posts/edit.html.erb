@@ -49,7 +49,8 @@
                 prompt: t('posts.edit.select.city'),
                 class: 'form-select',
                 id: 'city-select',
-                style: 'min-width: 150px;' %>
+                style: 'min-width: 150px;',
+                data: { placeholder: t('posts.edit.select.city') } %>
         </div>
       </div>
     </div>
@@ -133,42 +134,43 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  function handlePrefectureChange() {
     const prefectureSelect = document.getElementById('prefecture-select');
     const citySelect = document.getElementById('city-select');
-
     if (!prefectureSelect || !citySelect) return;
 
-    prefectureSelect.addEventListener('change', () => {
-      const prefectureId = prefectureSelect.value;
-      citySelect.innerHTML = `<option value="">${'<%= j t("posts.edit.select.city") %>'}</option>`;
+    const defaultCityOptionText = citySelect.dataset.placeholder || '<%= j t("posts.edit.select.city") %>';
+    const prefectureId = prefectureSelect.value;
 
-      if (!prefectureId) return;
+    citySelect.innerHTML = `<option value="">${defaultCityOptionText}</option>`;
 
-      fetch(`/cities.json?prefecture_id=${encodeURIComponent(prefectureId)}`)
-        .then(response => response.json())
-        .then(data => {
-          data.forEach(city => {
-            const option = document.createElement('option');
-            option.value = city.id;
-            option.textContent = city.name;
-            citySelect.appendChild(option);
-          });
-        })
-        .catch(error => console.error('<%= j t("posts.edit.error.fetch_cities") %>', error));
-    });
-  });
-</script>
+    if (!prefectureId) return;
 
-<script>
-  document.addEventListener('turbo:load', function() {
-    if (!window.sessionStorage.getItem('reloaded')) {
-      window.sessionStorage.setItem('reloaded', 'true');
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
-    } else {
-      window.sessionStorage.removeItem('reloaded');
+    fetch(`/posts/cities.json?prefecture_id=${encodeURIComponent(prefectureId)}`)
+      .then(response => response.json())
+      .then(json => {
+        const cities = json.data; // new.htmlに合わせてjson.dataに修正
+        cities.forEach(city => {
+          const option = document.createElement('option');
+          option.value = city.id;
+          option.textContent = city.name;
+          citySelect.appendChild(option);
+        });
+
+        // 追加したoptionを全て追加後に初期値をセットする
+        <% if @post.shop&.location&.city_id.present? %>
+          citySelect.value = '<%= @post.shop.location.city_id %>';
+        <% end %>
+      })
+      .catch(error => console.error('<%= j t("posts.edit.error.fetch_cities") %>', error));
+  }
+
+  document.addEventListener('turbo:load', () => {
+    handlePrefectureChange();
+
+    const prefectureSelect = document.getElementById('prefecture-select');
+    if (prefectureSelect) {
+      prefectureSelect.addEventListener('change', handlePrefectureChange);
     }
   });
 </script>
