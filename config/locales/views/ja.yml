@@ -20,6 +20,7 @@ ja:
       not_updated: "%{item}を更新出来ませんでした"
       deleted: "%{item}を削除しました"
       form_confirm: "%{item}を入力してください"
+      not_authorized: "この操作を行う権限がありません。"
 
   helpers:
     submit:
