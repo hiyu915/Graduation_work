@@ -7,13 +7,13 @@
   <td><%= post.feeling&.name %></td>
   <td><%= post.visit_reason&.name %></td>
 
-  <td class="text-center">
-    <% if current_user && current_user.favorites.exists?(post_id: post.id) %>
-      <%= button_to post_favorite_path(post), method: :delete, class: 'btn btn-link p-0', form: { data: { turbo: false } } do %>
+  <td class="text-center" id="favorite-button-<%= post.id %>">
+    <% if current_user.favorites.exists?(post_id: post.id) %>
+      <%= button_to post_favorite_path(post), method: :delete, class: 'btn btn-link p-0' do %>
         <i class="fas fa-heart text-danger"></i>
       <% end %>
     <% else %>
-      <%= button_to post_favorite_path(post), method: :post, class: 'btn btn-link p-0', form: { data: { turbo: false } } do %>
+      <%= button_to post_favorite_path(post), method: :post, class: 'btn btn-link p-0' do %>
         <i class="far fa-heart text-secondary"></i>
       <% end %>
     <% end %>
