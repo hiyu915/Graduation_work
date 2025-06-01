@@ -1,7 +1,7 @@
 class FavoritesController < ApplicationController
   before_action :require_login
   before_action :set_post
-  
+
   def create
     current_user.favorites.create(post: @post)
     respond_to do |format|
