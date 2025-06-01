@@ -8,15 +8,17 @@
     <% if current_user %>
       <div class="me-2 d-flex align-items-center">
         <span class="me-2"><%= t('posts.show.item.favorite') %></span>
-        <% if current_user.favorites.exists?(post_id: @post.id) %>
-          <%= button_to post_favorite_path(@post), method: :delete, class: 'btn btn-link btn-sm p-0', form: { data: { turbo: false } } do %>
-            <i class="fas fa-heart text-danger fs-4"></i>
+        <div id="favorite-button-<%= @post.id %>">
+          <% if current_user.favorites.exists?(post_id: @post.id) %>
+            <%= button_to post_favorite_path(@post), method: :delete, class: 'btn btn-link btn-sm p-0' do %>
+              <i class="fas fa-heart text-danger fs-4"></i>
+            <% end %>
+          <% else %>
+            <%= button_to post_favorite_path(@post), method: :post, class: 'btn btn-link btn-sm p-0' do %>
+              <i class="far fa-heart text-secondary fs-4"></i>
+            <% end %>
           <% end %>
-        <% else %>
-          <%= button_to post_favorite_path(@post), method: :post, class: 'btn btn-link btn-sm p-0', form: { data: { turbo: false } } do %>
-            <i class="far fa-heart text-secondary fs-4"></i>
-          <% end %>
-        <% end %>
+        </div>
       </div>
     <% end %>
 

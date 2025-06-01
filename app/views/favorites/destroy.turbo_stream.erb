@@ -1,0 +1,7 @@
+<%= turbo_stream.replace "favorite-button-#{@post.id}" do %>
+  <td class="text-center" id="favorite-button-<%= @post.id %>">
+    <%= button_to post_favorite_path(@post), method: :post, class: 'btn btn-link p-0' do %>
+      <i class="far fa-heart text-secondary"></i>
+    <% end %>
+  </td>
+<% end %>
