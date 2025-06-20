@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_05_28_183102) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_17_022840) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,6 +72,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_28_183102) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "post_image"
+    t.integer "visits_count"
     t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["companion_id"], name: "index_posts_on_companion_id"
     t.index ["feeling_id"], name: "index_posts_on_feeling_id"
@@ -111,6 +112,17 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_28_183102) do
     t.index ["name"], name: "index_visit_reasons_on_name", unique: true
   end
 
+  create_table "visits", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.date "visited_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "count"
+    t.bigint "shop_id"
+    t.index ["shop_id"], name: "index_visits_on_shop_id"
+    t.index ["user_id"], name: "index_visits_on_user_id"
+  end
+
   add_foreign_key "cities", "prefectures"
   add_foreign_key "locations", "cities"
   add_foreign_key "locations", "prefectures"
@@ -121,4 +133,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_28_183102) do
   add_foreign_key "posts", "users"
   add_foreign_key "posts", "visit_reasons"
   add_foreign_key "shops", "locations"
+  add_foreign_key "visits", "shops"
+  add_foreign_key "visits", "users"
 end

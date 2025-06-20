@@ -5,11 +5,13 @@ Rails.application.routes.draw do
 
   resources :posts, only: %i[index new create show edit update destroy] do
     resource :favorite, only: [ :create, :destroy ]
+    resource :visit, only: [:create, :destroy]
     collection do
       get :cities
     end
     member do
       delete :remove_image
+      get :history
     end
   end
 

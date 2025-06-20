@@ -1,0 +1,5 @@
+class AddShopIdToVisits < ActiveRecord::Migration[7.1]
+  def change
+    add_reference :visits, :shop, null: true, foreign_key: true
+  end
+end
