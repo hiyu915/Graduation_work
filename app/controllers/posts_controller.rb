@@ -171,7 +171,7 @@ class PostsController < ApplicationController
     @history_posts = Post.same_shop_and_location(shop_id, location_id)
                        .includes(:category, :feeling, :companion, :visit_reason)
 
-    visits = Visit.where(user: current_user, shop_id: [@post.shop_id])  # もしくは history 投稿すべての shop_id を収集
+    visits = Visit.where(user: current_user, shop_id: [ @post.shop_id ])  # もしくは history 投稿すべての shop_id を収集
     @visits_by_shop = visits.index_by(&:shop_id)
   end
 

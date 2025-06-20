@@ -19,9 +19,9 @@ class Post < ApplicationRecord
   mount_uploader :post_image, PostImageUploader
 
   scope :latest_unique_by_shop_and_location, -> {
-    select('DISTINCT ON (shops.id, shops.location_id) posts.*')
+    select("DISTINCT ON (shops.id, shops.location_id) posts.*")
       .joins(:shop)
-      .order('shops.id, shops.location_id, posts.visit_date DESC')
+      .order("shops.id, shops.location_id, posts.visit_date DESC")
   }
 
   scope :same_shop_and_location, ->(shop_id, location_id) {
