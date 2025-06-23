@@ -16,7 +16,15 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorited_users, through: :favorites, source: :user
 
-  # has_many :visits, dependent: :destroy
-  # has_many :calendar_records, dependent: :destroy
   mount_uploader :post_image, PostImageUploader
+
+  scope :latest_unique_by_shop_and_location, -> {
+    select("DISTINCT ON (shops.id, shops.location_id) posts.*")
+      .joins(:shop)
+      .order("shops.id, shops.location_id, posts.visit_date DESC")
+  }
+
+  scope :same_shop_and_location, ->(shop_id, location_id) {
+    joins(:shop).where(shops: { id: shop_id, location_id: location_id }).order(visit_date: :desc)
+  }
 end

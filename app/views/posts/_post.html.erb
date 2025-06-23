@@ -7,6 +7,14 @@
   <td><%= post.feeling&.name %></td>
   <td><%= post.visit_reason&.name %></td>
 
+  <% visit = @visits_by_shop[post.shop_id] %>
+  <td class="text-center visit-count" id="visit-count-<%= post.id %>">
+    <%= visit&.count.to_i %>
+    <% if show_history_button %>
+      <%= link_to t('defaults.actions.history_visit'), history_post_path(post), class: "btn btn-sm btn-outline-primary ms-2" %>
+    <% end %>
+  </td>
+
   <td class="text-center" id="favorite-button-<%= post.id %>">
     <% if current_user.favorites.exists?(post_id: post.id) %>
       <%= button_to post_favorite_path(post), method: :delete, class: 'btn btn-link p-0' do %>

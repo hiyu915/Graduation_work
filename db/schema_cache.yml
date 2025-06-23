@@ -1,0 +1,877 @@
+--- !ruby/object:ActiveRecord::ConnectionAdapters::SchemaCache
+columns:
+  ar_internal_metadata:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: key
+    sql_type_metadata: &1 !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::TypeMetadata
+      delegate_dc_obj: !ruby/object:ActiveRecord::ConnectionAdapters::SqlTypeMetadata
+        sql_type: character varying
+        type: :string
+        limit:
+        precision:
+        scale:
+      oid: 1043
+      fmod: -1
+    'null': false
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: value
+    sql_type_metadata: *1
+    'null': true
+    default:
+    default_function:
+    collation:
+    comment:
+  - &3 !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: created_at
+    sql_type_metadata: &2 !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::TypeMetadata
+      delegate_dc_obj: !ruby/object:ActiveRecord::ConnectionAdapters::SqlTypeMetadata
+        sql_type: timestamp(6) without time zone
+        type: :datetime
+        limit:
+        precision: 6
+        scale:
+      oid: 1114
+      fmod: 6
+    'null': false
+    default:
+    default_function:
+    collation:
+    comment:
+  - &4 !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: updated_at
+    sql_type_metadata: *2
+    'null': false
+    default:
+    default_function:
+    collation:
+    comment:
+  categories:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial: true
+    identity:
+    generated: ''
+    name: id
+    sql_type_metadata: &5 !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::TypeMetadata
+      delegate_dc_obj: !ruby/object:ActiveRecord::ConnectionAdapters::SqlTypeMetadata
+        sql_type: bigint
+        type: :integer
+        limit: 8
+        precision:
+        scale:
+      oid: 20
+      fmod: -1
+    'null': false
+    default:
+    default_function: nextval('categories_id_seq'::regclass)
+    collation:
+    comment:
+  - &6 !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: name
+    sql_type_metadata: *1
+    'null': false
+    default:
+    default_function:
+    collation:
+    comment:
+  - *3
+  - *4
+  cities:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial: true
+    identity:
+    generated: ''
+    name: id
+    sql_type_metadata: *5
+    'null': false
+    default:
+    default_function: nextval('cities_id_seq'::regclass)
+    collation:
+    comment:
+  - *6
+  - &8 !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: prefecture_id
+    sql_type_metadata: *5
+    'null': false
+    default:
+    default_function:
+    collation:
+    comment:
+  - *3
+  - *4
+  companions:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial: true
+    identity:
+    generated: ''
+    name: id
+    sql_type_metadata: *5
+    'null': false
+    default:
+    default_function: nextval('companions_id_seq'::regclass)
+    collation:
+    comment:
+  - *6
+  - *3
+  - *4
+  favorites:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial: true
+    identity:
+    generated: ''
+    name: id
+    sql_type_metadata: *5
+    'null': false
+    default:
+    default_function: nextval('favorites_id_seq'::regclass)
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: user_id
+    sql_type_metadata: &7 !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::TypeMetadata
+      delegate_dc_obj: !ruby/object:ActiveRecord::ConnectionAdapters::SqlTypeMetadata
+        sql_type: integer
+        type: :integer
+        limit: 4
+        precision:
+        scale:
+      oid: 23
+      fmod: -1
+    'null': true
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: post_id
+    sql_type_metadata: *7
+    'null': true
+    default:
+    default_function:
+    collation:
+    comment:
+  - *3
+  - *4
+  feelings:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial: true
+    identity:
+    generated: ''
+    name: id
+    sql_type_metadata: *5
+    'null': false
+    default:
+    default_function: nextval('feelings_id_seq'::regclass)
+    collation:
+    comment:
+  - *6
+  - *3
+  - *4
+  locations:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial: true
+    identity:
+    generated: ''
+    name: id
+    sql_type_metadata: *5
+    'null': false
+    default:
+    default_function: nextval('locations_id_seq'::regclass)
+    collation:
+    comment:
+  - *8
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: city_id
+    sql_type_metadata: *5
+    'null': false
+    default:
+    default_function:
+    collation:
+    comment:
+  - *3
+  - *4
+  posts:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial: true
+    identity:
+    generated: ''
+    name: id
+    sql_type_metadata: *5
+    'null': false
+    default:
+    default_function: nextval('posts_id_seq'::regclass)
+    collation:
+    comment:
+  - &9 !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: user_id
+    sql_type_metadata: *5
+    'null': false
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: category_id
+    sql_type_metadata: *5
+    'null': false
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: shop_id
+    sql_type_metadata: *5
+    'null': false
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: companion_id
+    sql_type_metadata: *5
+    'null': false
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: feeling_id
+    sql_type_metadata: *5
+    'null': false
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: visit_reason_id
+    sql_type_metadata: *5
+    'null': false
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: body
+    sql_type_metadata: !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::TypeMetadata
+      delegate_dc_obj: !ruby/object:ActiveRecord::ConnectionAdapters::SqlTypeMetadata
+        sql_type: text
+        type: :text
+        limit:
+        precision:
+        scale:
+      oid: 25
+      fmod: -1
+    'null': true
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: visit_date
+    sql_type_metadata: &10 !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::TypeMetadata
+      delegate_dc_obj: !ruby/object:ActiveRecord::ConnectionAdapters::SqlTypeMetadata
+        sql_type: date
+        type: :date
+        limit:
+        precision:
+        scale:
+      oid: 1082
+      fmod: -1
+    'null': false
+    default:
+    default_function:
+    collation:
+    comment:
+  - *3
+  - *4
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: post_image
+    sql_type_metadata: *1
+    'null': true
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: visits_count
+    sql_type_metadata: *7
+    'null': true
+    default:
+    default_function:
+    collation:
+    comment:
+  prefectures:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial: true
+    identity:
+    generated: ''
+    name: id
+    sql_type_metadata: *5
+    'null': false
+    default:
+    default_function: nextval('prefectures_id_seq'::regclass)
+    collation:
+    comment:
+  - *6
+  - *3
+  - *4
+  schema_migrations:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: version
+    sql_type_metadata: *1
+    'null': false
+    default:
+    default_function:
+    collation:
+    comment:
+  shops:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial: true
+    identity:
+    generated: ''
+    name: id
+    sql_type_metadata: *5
+    'null': false
+    default:
+    default_function: nextval('shops_id_seq'::regclass)
+    collation:
+    comment:
+  - *6
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: location_id
+    sql_type_metadata: *5
+    'null': false
+    default:
+    default_function:
+    collation:
+    comment:
+  - *3
+  - *4
+  users:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial: true
+    identity:
+    generated: ''
+    name: id
+    sql_type_metadata: *5
+    'null': false
+    default:
+    default_function: nextval('users_id_seq'::regclass)
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: email
+    sql_type_metadata: *1
+    'null': false
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: crypted_password
+    sql_type_metadata: *1
+    'null': true
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: salt
+    sql_type_metadata: *1
+    'null': true
+    default:
+    default_function:
+    collation:
+    comment:
+  - *3
+  - *4
+  visit_reasons:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial: true
+    identity:
+    generated: ''
+    name: id
+    sql_type_metadata: *5
+    'null': false
+    default:
+    default_function: nextval('visit_reasons_id_seq'::regclass)
+    collation:
+    comment:
+  - *6
+  - *3
+  - *4
+  visits:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial: true
+    identity:
+    generated: ''
+    name: id
+    sql_type_metadata: *5
+    'null': false
+    default:
+    default_function: nextval('visits_id_seq'::regclass)
+    collation:
+    comment:
+  - *9
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: visited_at
+    sql_type_metadata: *10
+    'null': true
+    default:
+    default_function:
+    collation:
+    comment:
+  - *3
+  - *4
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: count
+    sql_type_metadata: *7
+    'null': true
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: shop_id
+    sql_type_metadata: *5
+    'null': true
+    default:
+    default_function:
+    collation:
+    comment:
+primary_keys:
+  ar_internal_metadata: key
+  categories: id
+  cities: id
+  companions: id
+  favorites: id
+  feelings: id
+  locations: id
+  posts: id
+  prefectures: id
+  schema_migrations: version
+  shops: id
+  users: id
+  visit_reasons: id
+  visits: id
+data_sources:
+  ar_internal_metadata: true
+  categories: true
+  cities: true
+  companions: true
+  favorites: true
+  feelings: true
+  locations: true
+  posts: true
+  prefectures: true
+  schema_migrations: true
+  shops: true
+  users: true
+  visit_reasons: true
+  visits: true
+indexes:
+  ar_internal_metadata: []
+  categories:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
+    table: categories
+    name: index_categories_on_name
+    unique: true
+    columns:
+    - name
+    lengths: {}
+    orders: {}
+    opclasses: {}
+    where:
+    type:
+    using: :btree
+    include:
+    nulls_not_distinct: false
+    comment:
+    valid: true
+  cities:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
+    table: cities
+    name: index_cities_on_prefecture_id
+    unique: false
+    columns:
+    - prefecture_id
+    lengths: {}
+    orders: {}
+    opclasses: {}
+    where:
+    type:
+    using: :btree
+    include:
+    nulls_not_distinct: false
+    comment:
+    valid: true
+  - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
+    table: cities
+    name: index_cities_on_prefecture_id_and_name
+    unique: true
+    columns:
+    - prefecture_id
+    - name
+    lengths: {}
+    orders: {}
+    opclasses: {}
+    where:
+    type:
+    using: :btree
+    include:
+    nulls_not_distinct: false
+    comment:
+    valid: true
+  companions:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
+    table: companions
+    name: index_companions_on_name
+    unique: true
+    columns:
+    - name
+    lengths: {}
+    orders: {}
+    opclasses: {}
+    where:
+    type:
+    using: :btree
+    include:
+    nulls_not_distinct: false
+    comment:
+    valid: true
+  favorites: []
+  feelings:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
+    table: feelings
+    name: index_feelings_on_name
+    unique: true
+    columns:
+    - name
+    lengths: {}
+    orders: {}
+    opclasses: {}
+    where:
+    type:
+    using: :btree
+    include:
+    nulls_not_distinct: false
+    comment:
+    valid: true
+  locations:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
+    table: locations
+    name: index_locations_on_city_id
+    unique: false
+    columns:
+    - city_id
+    lengths: {}
+    orders: {}
+    opclasses: {}
+    where:
+    type:
+    using: :btree
+    include:
+    nulls_not_distinct: false
+    comment:
+    valid: true
+  - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
+    table: locations
+    name: index_locations_on_prefecture_id
+    unique: false
+    columns:
+    - prefecture_id
+    lengths: {}
+    orders: {}
+    opclasses: {}
+    where:
+    type:
+    using: :btree
+    include:
+    nulls_not_distinct: false
+    comment:
+    valid: true
+  posts:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
+    table: posts
+    name: index_posts_on_category_id
+    unique: false
+    columns:
+    - category_id
+    lengths: {}
+    orders: {}
+    opclasses: {}
+    where:
+    type:
+    using: :btree
+    include:
+    nulls_not_distinct: false
+    comment:
+    valid: true
+  - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
+    table: posts
+    name: index_posts_on_companion_id
+    unique: false
+    columns:
+    - companion_id
+    lengths: {}
+    orders: {}
+    opclasses: {}
+    where:
+    type:
+    using: :btree
+    include:
+    nulls_not_distinct: false
+    comment:
+    valid: true
+  - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
+    table: posts
+    name: index_posts_on_feeling_id
+    unique: false
+    columns:
+    - feeling_id
+    lengths: {}
+    orders: {}
+    opclasses: {}
+    where:
+    type:
+    using: :btree
+    include:
+    nulls_not_distinct: false
+    comment:
+    valid: true
+  - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
+    table: posts
+    name: index_posts_on_shop_id
+    unique: false
+    columns:
+    - shop_id
+    lengths: {}
+    orders: {}
+    opclasses: {}
+    where:
+    type:
+    using: :btree
+    include:
+    nulls_not_distinct: false
+    comment:
+    valid: true
+  - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
+    table: posts
+    name: index_posts_on_user_id
+    unique: false
+    columns:
+    - user_id
+    lengths: {}
+    orders: {}
+    opclasses: {}
+    where:
+    type:
+    using: :btree
+    include:
+    nulls_not_distinct: false
+    comment:
+    valid: true
+  - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
+    table: posts
+    name: index_posts_on_visit_reason_id
+    unique: false
+    columns:
+    - visit_reason_id
+    lengths: {}
+    orders: {}
+    opclasses: {}
+    where:
+    type:
+    using: :btree
+    include:
+    nulls_not_distinct: false
+    comment:
+    valid: true
+  prefectures:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
+    table: prefectures
+    name: index_prefectures_on_name
+    unique: true
+    columns:
+    - name
+    lengths: {}
+    orders: {}
+    opclasses: {}
+    where:
+    type:
+    using: :btree
+    include:
+    nulls_not_distinct: false
+    comment:
+    valid: true
+  schema_migrations: []
+  shops:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
+    table: shops
+    name: index_shops_on_location_id
+    unique: false
+    columns:
+    - location_id
+    lengths: {}
+    orders: {}
+    opclasses: {}
+    where:
+    type:
+    using: :btree
+    include:
+    nulls_not_distinct: false
+    comment:
+    valid: true
+  users:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
+    table: users
+    name: index_users_on_email
+    unique: true
+    columns:
+    - email
+    lengths: {}
+    orders: {}
+    opclasses: {}
+    where:
+    type:
+    using: :btree
+    include:
+    nulls_not_distinct: false
+    comment:
+    valid: true
+  visit_reasons:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
+    table: visit_reasons
+    name: index_visit_reasons_on_name
+    unique: true
+    columns:
+    - name
+    lengths: {}
+    orders: {}
+    opclasses: {}
+    where:
+    type:
+    using: :btree
+    include:
+    nulls_not_distinct: false
+    comment:
+    valid: true
+  visits:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
+    table: visits
+    name: index_visits_on_shop_id
+    unique: false
+    columns:
+    - shop_id
+    lengths: {}
+    orders: {}
+    opclasses: {}
+    where:
+    type:
+    using: :btree
+    include:
+    nulls_not_distinct: false
+    comment:
+    valid: true
+  - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
+    table: visits
+    name: index_visits_on_user_id
+    unique: false
+    columns:
+    - user_id
+    lengths: {}
+    orders: {}
+    opclasses: {}
+    where:
+    type:
+    using: :btree
+    include:
+    nulls_not_distinct: false
+    comment:
+    valid: true
+version: 20250617022840
+database_version: 170005

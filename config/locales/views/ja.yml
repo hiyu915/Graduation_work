@@ -8,6 +8,7 @@ ja:
       post: 投稿
       edit: 編集
       show: 詳細
+      history_visit: 来店履歴
       index: Myリピログ
       delete: 削除
       delete_confirm: 削除しますか？
@@ -138,8 +139,11 @@ ja:
         companion: 同行者
         feeling: 気分
         visit_reason: 来店動機
-        repeat_count: リピ
+        repeat: リピ
+        visit_count: 来店回数
         detail_edit: 詳細/編集
+    history:
+      title: "%{shop}  来店履歴"
 
   header:
     logo: リピログ

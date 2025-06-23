@@ -2,7 +2,11 @@ class PostsController < ApplicationController
   before_action :set_post, only: [ :show, :edit, :update, :destroy, :remove_image ]
 
   def index
-    @posts = current_user.posts.includes(:user, :category, :shop, :feeling, :companion, :visit_reason)
+    @posts = current_user.posts.latest_unique_by_shop_and_location
+                        .includes(:user, :category, :shop, :feeling, :companion, :visit_reason)
+
+    visits = Visit.where(user: current_user, shop_id: @posts.map(&:shop_id))
+    @visits_by_shop = visits.index_by(&:shop_id)
   end
 
   def new
@@ -46,6 +50,11 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params.merge(shop_id: shop.id))
 
     if @post.save
+      visit = Visit.find_or_initialize_by(user: current_user, shop: shop)
+      visit = Visit.find_or_initialize_by(user: current_user, shop: shop)
+      visit.count = visit.count.to_i + 1
+      visit.save!
+
       redirect_to posts_path, notice: t("defaults.flash_message.created", item: Post.model_name.human)
     else
       Rails.logger.debug @post.errors.full_messages
@@ -131,14 +140,39 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    shop = @post.shop
+    ActiveRecord::Base.transaction do
     @post.destroy!
+    visit = Visit.find_by(user: current_user, shop: shop)
+    if visit
+      visit.count -= 1
+      visit.count <= 0 ? visit.destroy! : visit.save!
+    end
+  end
+
     redirect_to posts_path, success: t("defaults.flash_message.deleted", item: Post.model_name.human)
   end
 
-  def remove_image
+    def remove_image
     @post.remove_post_image!
     @post.save
     redirect_to post_path(@post), notice: t("defaults.flash_message.image_removed")
+  end
+
+  def history
+    @post = current_user.posts.find_by(id: params[:id])
+    unless @post
+      redirect_to posts_path, alert: t("defaults.flash_message.not_authorized") and return
+    end
+
+    shop_id = @post.shop_id
+    location_id = @post.shop.location_id
+
+    @history_posts = Post.same_shop_and_location(shop_id, location_id)
+                       .includes(:category, :feeling, :companion, :visit_reason)
+
+    visits = Visit.where(user: current_user, shop_id: [ @post.shop_id ])  # もしくは history 投稿すべての shop_id を収集
+    @visits_by_shop = visits.index_by(&:shop_id)
   end
 
   private

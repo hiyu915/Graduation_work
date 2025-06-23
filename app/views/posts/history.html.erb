@@ -1,7 +1,7 @@
-<% content_for(:title, t('.title')) %>
+<% content_for(:title, t('.title', shop: @post.shop.name)) %>
 <div class="container my-4">
   <div class="d-flex justify-content-between align-items-center mb-3">
-    <h1><%= t('posts.index.title') %></h1>
+    <h1><%= t('posts.history.title', shop: @post.shop.name) %></h1>
     <div>
       <%= link_to t('posts.index.new_post'), new_post_path, class: 'btn btn-primary me-2' %>
       <div class="btn-group" role="group" aria-label="<%= t('posts.index.sort.by_visit_date') %>">
@@ -27,7 +27,7 @@
       </tr>
     </thead>
     <tbody>
-      <%= render partial: 'post', collection: @posts, as: :post, locals: { show_history_button: true } %>
+      <%= render partial: 'post', collection: @history_posts.compact, as: :post, locals: { show_history_button: false } %>
     </tbody>
   </table>
 </div>
