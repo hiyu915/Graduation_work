@@ -22,6 +22,7 @@ ja:
       deleted: "%{item}を削除しました"
       form_confirm: "%{item}を入力してください"
       not_authorized: "この操作を行う権限がありません。"
+    password_reset: パスワードリセット
 
   helpers:
     submit:
@@ -159,3 +160,14 @@ ja:
     inquiry: 問い合わせ
     user_agreement: 利用規約
     privacy_policy: プライバシーポリシー
+
+  password_resets:
+    new:
+      title: パスワードリセット申請
+      submit: 送信
+    edit:
+      title: パスワードリセット
+    create:
+      success: パスワードリセット手順を送信しました
+    update:
+      success: パスワードを変更しました

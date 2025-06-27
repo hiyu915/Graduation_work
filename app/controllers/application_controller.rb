@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include Sorcery::Controller
   before_action :require_login
 
   add_flash_types :success, :danger
