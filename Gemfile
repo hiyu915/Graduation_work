@@ -71,3 +71,4 @@ end
 gem "pg", ">= 1.1", "< 2.0"
 gem "csv"
 gem "carrierwave", "2.2.2"
+gem 'config'
