@@ -155,6 +155,15 @@ ja:
     repilog_index: Myリピログ
     howto_repilog: リピログの使い方
     help_page: ヘルプ
+    account: アカウント
+    account_info: アカウント情報
+  
+  account_info_page:
+    title: アカウント情報
+    email: メールアドレス
+    password_change: パスワードを変更
+    withdrawal: 退会する
+    withdrawal_confirm: 本当に退会しますか？
 
   footer:
     inquiry: 問い合わせ
@@ -171,3 +180,15 @@ ja:
       success: パスワードリセット手順を送信しました
     update:
       success: パスワードを変更しました
+
+  mail_address_reset:
+    edit_email:
+      title: メールアドレス変更
+      label: 新しいメールアドレス
+      submit: 確認メールを送信
+    request:
+      success: 新しいメールアドレスに確認メールを送信しました
+      duplicate: そのメールアドレスは既に使用されています
+    confirm:
+      success: メールアドレスを変更しました
+      failure: トークンが無効または期限切れです

@@ -1,0 +1,14 @@
+<h1 class="text-center mb-4 mt-5"><%= t("mail_address_reset.edit_email.title") %></h1>
+
+<div class="mx-auto w-50">
+  <%= form_with url: request_email_change_users_path, local: true do |f| %>
+    <div class="mb-3">
+      <%= label_tag :unconfirmed_email, t("mail_address_reset.edit_email.label"), class: "form-label" %>
+      <%= email_field_tag 'user[unconfirmed_email]', nil, class: "form-control" %>
+    </div>
+
+    <div class="d-flex justify-content-end">
+      <%= f.submit t("mail_address_reset.edit_email.submit"), class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

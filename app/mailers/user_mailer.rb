@@ -7,4 +7,11 @@ class UserMailer < ApplicationMailer
     mail(to: user.email,
          subject: t("defaults.password_reset"))
   end
+
+  def email_change_verification(user)
+    @user = user
+    @url = confirm_email_change_users_url(token: user.email_change_token)
+    mail(to: user.unconfirmed_email,
+         subject: t("defaults.email_change_verification"))
+  end
 end
