@@ -2,7 +2,14 @@ Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   root "static_pages#top"
 
-  resources :users, only: %i[new create]
+  resources :users do
+    collection do
+      get :edit_email
+      post :request_email_change
+      get :confirm_email_change
+      get :account_info 
+    end
+  end
 
   resources :posts, only: %i[index new create show edit update destroy] do
     resource :favorite, only: [ :create, :destroy ]
