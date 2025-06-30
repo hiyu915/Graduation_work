@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       get :edit_email
       post :request_email_change
       get :confirm_email_change
-      get :account_info 
+      get :account_info
     end
   end
 
