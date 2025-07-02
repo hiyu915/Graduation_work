@@ -5,8 +5,8 @@ class AccountsController < ApplicationController
   end
 
   def destroy
-	  current_user.destroy
-	  logout
-	  redirect_to root_path, notice: t("accounts.destroy.success")
-	end
+    current_user.destroy
+    logout
+    redirect_to root_path, notice: t("accounts.destroy.success")
+  end
 end
