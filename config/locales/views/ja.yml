@@ -192,3 +192,12 @@ ja:
     confirm:
       success: メールアドレスを変更しました
       failure: トークンが無効または期限切れです
+
+  accounts:
+    show:
+      title: 退会の確認
+      message: この操作は取り消せません。本当に退会しますか？
+      confirm_button: 退会する
+      cancel_button: キャンセル
+    destroy:
+      success: 退会が完了しました。ご利用ありがとうございました。
