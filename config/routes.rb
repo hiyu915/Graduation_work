@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   resources :password_resets, only: %i[new create edit update]
 
+  resource :account, only: [:show, :destroy], controller: "accounts"
+
   get "login", to: "user_sessions#new"
   post "login", to: "user_sessions#create"
   delete "logout", to: "user_sessions#destroy"
