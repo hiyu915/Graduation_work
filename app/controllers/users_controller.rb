@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: %i[new create]
+  skip_before_action :require_login, only: %i[new create activate]
   before_action :require_login, only: %i[edit_email request_email_change confirm_email_change]
 
   def new
@@ -9,11 +9,22 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      @user.reload
       auto_login(@user)
-      redirect_to posts_path, success: t("users.create.success")
+      UserMailer.activation_needed_email(@user).deliver_now
+      redirect_to root_path, success: t("users.activation.sent")
     else
       flash.now[:danger] = t("users.create.failure")
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def activate
+    @user = User.load_from_activation_token(params[:id])
+    if @user&.activate!
+      redirect_to posts_path, success: t("users.activation.success")
+    else
+      redirect_to root_path, danger: t("users.activation.failure")
     end
   end
 

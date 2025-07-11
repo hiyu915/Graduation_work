@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get "/activate/:id", to: "users#activate", as: :activate
+
   resources :posts, only: %i[index new create show edit update destroy] do
     resource :favorite, only: [ :create, :destroy ]
     resource :visit, only: [ :create, :destroy ]
