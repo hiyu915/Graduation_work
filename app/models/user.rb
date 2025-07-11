@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
+  before_create :setup_activation
+
   validates :email, presence: true, uniqueness: true
   validates :password, length: { minimum: 3 }, if: -> { new_record? || password.present? }
   validates :password, confirmation: true, if: -> { new_record? || password.present? }
@@ -13,6 +15,8 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorite_posts, through: :favorites, source: :post
   has_many :visits, dependent: :destroy
+
+  private
 
   def generate_email_change_token!(new_email)
     self.unconfirmed_email = new_email
