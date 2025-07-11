@@ -1,4 +1,4 @@
-Rails.application.config.sorcery.submodules = [:reset_password, :user_activation]
+Rails.application.config.sorcery.submodules = [ :reset_password, :user_activation ]
 
 Rails.application.config.sorcery.configure do |config|
   config.user_config do |user|
