@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   get "/activate/:id", to: "users#activate", as: :activate
 
+  get 'terms', to: 'pages#terms', as: :terms
+
   resources :posts, only: %i[index new create show edit update destroy] do
     resource :favorite, only: [ :create, :destroy ]
     resource :visit, only: [ :create, :destroy ]
