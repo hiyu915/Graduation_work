@@ -33,7 +33,7 @@ Rails.application.routes.draw do
 
   resource :account, only: [ :show, :destroy ], controller: "accounts"
 
-  resources :contacts, only: [:new, :create] do
+  resources :contacts, only: [ :new, :create ] do
     collection do
       post :confirm
     end

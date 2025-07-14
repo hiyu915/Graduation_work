@@ -1,5 +1,5 @@
 class ContactMailer < ApplicationMailer
-  default to: 'hiyuhiyu915@gmail.com'
+  default to: "hiyuhiyu915@gmail.com"
 
   def contact_email(contact_form)
     @category = contact_form.category
