@@ -184,7 +184,7 @@ ja:
     withdrawal_confirm: 本当に退会しますか？
 
   footer:
-    inquiry: 問い合わせ
+    inquiry: お問い合わせ
     user_agreement: 利用規約
     privacy_policy: プライバシーポリシー
 
@@ -219,3 +219,26 @@ ja:
       cancel_button: キャンセル
     destroy:
       success: 退会が完了しました。ご利用ありがとうございました。
+
+  contacts:
+      new:
+        title: お問い合わせ
+        description1: サービスの品質向上のため、皆様からのお問い合わせをお待ちしております。
+        description2: ご利用にあたって改善すべき点や欲しい機能などお気づきの点がございましたら、以下にご記入ください。
+      form:
+        email: メールアドレス
+        category: お問い合わせの種類
+        message: ご意見・ご要望（2000字以内）
+        select_prompt: 選択してください
+        confirm_button: 入力内容を確認する
+      categories:
+        service: サービスについて
+        repilog: リピログについて
+        user: ユーザーについて
+        other: その他
+      confirm:
+        title: 入力内容の確認
+        description: ご入力いただいた以下の内容で問題ない場合は、「送信する」ボタンを押してください。
+        message: ご意見・ご要望
+        back_button: 入力内容を編集しなおす
+        submit_button: 送信する
