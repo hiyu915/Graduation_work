@@ -1,0 +1,44 @@
+<h1 class="text-center fw-bold mt-5 mb-3"><%= t("contacts.new.title") %></h1>
+
+<p class="text-center mb-5 mx-auto w-75">
+  <%= t("contacts.new.description1") %><br>
+  <%= t("contacts.new.description2") %>
+</p>
+
+<div class="container">
+  <div class="col-md-8 col-lg-6 mx-auto">
+    <%= form_with model: @contact_form, url: confirm_contacts_path, local: true, data: { turbo: false } do |f| %>
+      <% if @contact_form.errors.any? %>
+        <div id="error_explanation">
+          <ul>
+            <% @contact_form.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="mb-3">
+        <%= f.label :email, t("contacts.form.email") %><br>
+        <%= f.email_field :email, class: "form-control", required: true %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :category, t("contacts.form.category") %><br>
+        <%= f.select :category,
+                     [t("contacts.categories.service"), t("contacts.categories.repilog"), t("contacts.categories.user"), t("contacts.categories.other")],
+                     { prompt: t("contacts.form.select_prompt") },
+                     { class: "form-select", required: true } %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :message, t("contacts.form.message") %><br>
+        <%= f.text_area :message, rows: 8, class: "form-control", maxlength: 2000, required: true %>
+      </div>
+
+      <div class="d-flex justify-content-end mt-4 mb-5">
+        <%= f.submit t("contacts.form.confirm_button"), class: "btn btn-success" %>
+      </div>
+    <% end %>
+  </div>
+</div>

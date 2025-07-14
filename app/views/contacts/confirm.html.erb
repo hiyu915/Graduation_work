@@ -1,0 +1,28 @@
+<h1 class="text-center mt-5 mb-3 fw-bold"><%= t("contacts.confirm.title") %></h1>
+
+<p class="text-center mb-5">
+  <%= t("contacts.confirm.description") %>
+</p>
+
+<div class="container">
+  <div class="col-md-8 col-lg-6 mx-auto">
+    <%= form_with model: @contact_form, url: contacts_path, local: true, data: { turbo: false } do |f| %>
+      <p><strong><%= t("contacts.form.email") %>：</strong><%= @contact_form.email %></p>
+      <p><strong><%= t("contacts.form.category") %>：</strong><%= @contact_form.category %></p>
+      <p><strong><%= t("contacts.confirm.message") %>：</strong></p>
+      <p><%= simple_format(@contact_form.message, {}, wrapper_tag: "span") %></p>
+
+
+      <%= hidden_field_tag "contact_form[email]", @contact_form.email %>
+      <%= hidden_field_tag "contact_form[category]", @contact_form.category %>
+      <%= hidden_field_tag "contact_form[message]", @contact_form.message %>
+
+      <div class="d-grid gap-2 col-12 mx-auto mt-4">
+        <%= submit_tag t("contacts.confirm.back_button"), name: "back", class: "btn btn-outline-secondary" %>
+        <%= f.submit t("contacts.confirm.submit_button"), class: "btn btn-success" %>
+      </div>
+
+      <div class="mb-5"></div>
+    <% end %>
+  </div>
+</div>
