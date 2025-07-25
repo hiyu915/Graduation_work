@@ -43,5 +43,5 @@ Rails.application.routes.draw do
   post "login", to: "user_sessions#create"
   delete "logout", to: "user_sessions#destroy"
 
-  get 'privacy', to: 'static_pages#privacy'
+  get "privacy", to: "static_pages#privacy"
 end
