@@ -89,7 +89,7 @@ GEM
     benchmark (0.4.0)
     bigdecimal (3.1.9)
     bindex (0.8.1)
-    brakeman (7.0.2)
+    brakeman (7.1.0)
       racc
     builder (3.3.0)
     capybara (3.40.0)
@@ -447,7 +447,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
-  brakeman
+  brakeman (~> 7.1.0)
   capybara
   carrierwave (= 2.2.2)
   config
