@@ -70,7 +70,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: "smtp.sendgrid.net", # or Mailgun のSMTP
     port: 587,
-    domain: "repilog.onrender.com",
+    domain: "repilog.com",
     user_name: "apikey", # SendGridの場合固定
     password: ENV["SENDGRID_API_KEY"], # 環境変数で設定
     authentication: :plain,
