@@ -7,7 +7,7 @@ class ContactMailer < ApplicationMailer
     @user_email = contact_form.email
 
     mail(
-      from: "hiyuhiyu915@gmail.com",
+      from: "contact@repilog.com",
       reply_to: @user_email,
       subject: "お問い合わせがありました"
     )
