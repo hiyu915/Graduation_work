@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   def index
     @posts = current_user.posts.latest_unique_by_shop_and_location
                         .includes(:user, :category, :shop, :feeling, :companion, :visit_reason)
+                        .page(params[:page]).per(10)
 
     visits = Visit.where(user: current_user, shop_id: @posts.map(&:shop_id))
     @visits_by_shop = visits.index_by(&:shop_id)
