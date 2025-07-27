@@ -242,3 +242,10 @@ ja:
         message: ご意見・ご要望
         back_button: 入力内容を編集しなおす
         submit_button: 送信する
+  views:
+    pagination:
+      first: "&laquo; 最初"
+      last: "最後 &raquo;"
+      previous: "&lsaquo; 前"
+      next: "次 &rsaquo;"
+      truncate: "..."

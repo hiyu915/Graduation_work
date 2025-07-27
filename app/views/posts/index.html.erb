@@ -30,4 +30,8 @@
       <%= render partial: 'post', collection: @posts, as: :post, locals: { show_history_button: true } %>
     </tbody>
   </table>
+
+  <div class="d-flex justify-content-center">
+    <%= paginate @posts, theme: 'bootstrap-5' %>
+  </div>
 </div>
