@@ -2,12 +2,18 @@ class PostsController < ApplicationController
   before_action :set_post, only: [ :show, :edit, :update, :destroy, :remove_image ]
 
   def index
-    @posts = current_user.posts.latest_unique_by_shop_and_location
-                        .includes(:user, :category, :shop, :feeling, :companion, :visit_reason)
-                        .page(params[:page]).per(10)
+    @q = Post.ransack(params[:q])
+    @posts = @q.result.includes(:shop).latest_unique_by_shop_and_location.page(params[:page]).per(10)
 
-    visits = Visit.where(user: current_user, shop_id: @posts.map(&:shop_id))
-    @visits_by_shop = visits.index_by(&:shop_id)
+    @prefectures = Prefecture.all
+
+    if params.dig(:q, :shop_location_prefecture_id_eq).present?
+      prefecture_id = params[:q][:shop_location_prefecture_id_eq]
+      city_ids = Location.where(prefecture_id: prefecture_id).pluck(:city_id).uniq
+      @cities = City.where(id: city_ids).order(:name)
+    else
+      @cities = City.none
+    end
   end
 
   def new

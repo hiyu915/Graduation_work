@@ -1,4 +1,5 @@
 <% content_for(:title, t('.title')) %>
+
 <div class="container my-4">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h1><%= t('posts.index.title') %></h1>
@@ -10,6 +11,62 @@
       </div>
     </div>
   </div>
+
+  <%= search_form_for @q, url: posts_path, method: :get do |f| %>
+    <table class="table table-bordered mb-4">
+      <tbody>
+        <tr>
+          <td>
+            <%= f.label :shop_name_cont, "お店の名前", class: "form-label d-block" %>
+            <%= f.search_field :shop_name_cont, class: "form-control form-control-sm" %>
+          </td>
+          <td>
+            <%= f.label :visit_date_gteq, "来店日（開始）", class: "form-label d-block" %>
+            <%= f.date_field :visit_date_gteq, class: "form-control form-control-sm" %>
+          </td>
+          <td>
+            <%= f.label :visit_date_lteq, "来店日（終了）", class: "form-label d-block" %>
+            <%= f.date_field :visit_date_lteq, class: "form-control form-control-sm" %>
+          </td>
+          <td>
+            <%= f.label :shop_location_prefecture_id_eq, "都道府県", class: "form-label d-block" %>
+            <%= f.collection_select :shop_location_prefecture_id_eq, Prefecture.all, :id, :name,
+                  { include_blank: "すべて" },
+                  { class: "form-select form-select-sm", id: "search-prefecture-select" } %>
+          </td>
+          <td>
+            <%= f.label :shop_location_id_eq, "市", class: "form-label d-block" %>
+            <%= f.select :shop_location_id_eq, [],
+                  { include_blank: "すべて" },
+                  {
+                    class: "form-select form-select-sm",
+                    id: "search-city-select",
+                    data: { placeholder: "すべて" }
+                  } %>
+          </td>
+          <td>
+            <%= f.label :category_id_eq, "カテゴリ", class: "form-label d-block" %>
+            <%= f.collection_select :category_id_eq, Category.all, :id, :name, { include_blank: "すべて" }, class: "form-select form-select-sm" %>
+          </td>
+          <td>
+            <%= f.label :companion_id_eq, "同行者", class: "form-label d-block" %>
+            <%= f.collection_select :companion_id_eq, Companion.all, :id, :name, { include_blank: "すべて" }, class: "form-select form-select-sm" %>
+          </td>
+          <td>
+            <%= f.label :feeling_id_eq, "気分", class: "form-label d-block" %>
+            <%= f.collection_select :feeling_id_eq, Feeling.all, :id, :name, { include_blank: "すべて" }, class: "form-select form-select-sm" %>
+          </td>
+          <td>
+            <%= f.label :visit_reason_id_eq, "来店動機", class: "form-label d-block" %>
+            <%= f.collection_select :visit_reason_id_eq, VisitReason.all, :id, :name, { include_blank: "すべて" }, class: "form-select form-select-sm" %>
+          </td>
+          <td class="align-middle text-center" style="width: 80px;">
+            <%= f.submit "検索", class: "btn btn-primary btn-sm w-100" %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>
 
   <table class="table table-hover align-middle table-bordered text-center">
     <thead class="table-light">
@@ -35,3 +92,37 @@
     <%= paginate @posts, theme: 'bootstrap-5' %>
   </div>
 </div>
+
+<script>
+  function handleSearchPrefectureChange() {
+    const prefectureSelect = document.getElementById('search-prefecture-select');
+    const citySelect = document.getElementById('search-city-select');
+    if (!prefectureSelect || !citySelect) return;
+
+    citySelect.innerHTML = '<option value="">すべて</option>';
+
+    const prefectureId = prefectureSelect.value;
+    if (!prefectureId) return;
+
+    fetch(`/posts/cities.json?prefecture_id=${encodeURIComponent(prefectureId)}`)
+      .then(response => response.json())
+      .then(json => {
+        const cities = json.data;
+        cities.forEach(city => {
+          const option = document.createElement('option');
+          option.value = city.id;
+          option.textContent = city.name;
+          citySelect.appendChild(option);
+        });
+      })
+      .catch(error => console.error("市区町村の取得に失敗しました", error));
+  }
+
+  document.addEventListener('turbo:load', () => {
+    const searchPrefectureSelect = document.getElementById('search-prefecture-select');
+    if (searchPrefectureSelect && !searchPrefectureSelect.dataset.listenerAttached) {
+      searchPrefectureSelect.addEventListener('change', handleSearchPrefectureChange);
+      searchPrefectureSelect.dataset.listenerAttached = 'true';
+    }
+  });
+</script>
