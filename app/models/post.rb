@@ -28,16 +28,16 @@ class Post < ApplicationRecord
     joins(:shop).where(shops: { id: shop_id, location_id: location_id }).order(visit_date: :desc)
   }
 
-  
+
   def self.ransackable_attributes(auth_object = nil)
     super + [
-      'visit_date', 'category_id', 'companion_id', 'feeling_id', 'visit_reason_id',
-      'body', 'shop_id', 'shop_location_prefecture_id', 'shop_location_id'
+      "visit_date", "category_id", "companion_id", "feeling_id", "visit_reason_id",
+      "body", "shop_id", "shop_location_prefecture_id", "shop_location_id"
     ]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    super + ['shop']
+    super + [ "shop" ]
   end
 
   # 仮想属性（ransacker）

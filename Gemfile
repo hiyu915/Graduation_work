@@ -74,4 +74,4 @@ gem "carrierwave", "2.2.2"
 gem "config"
 gem "kaminari", "1.2.2"
 gem "bootstrap5-kaminari-views"
-gem 'ransack'
+gem "ransack"

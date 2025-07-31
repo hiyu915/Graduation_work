@@ -7,6 +7,6 @@ class Location < ApplicationRecord
   validates :city_id, presence: true
 
   def self.ransackable_attributes(auth_object = nil)
-    super + ['name']
+    super + [ "name" ]
   end
 end
