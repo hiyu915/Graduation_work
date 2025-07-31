@@ -7,7 +7,7 @@
   <td><%= post.feeling&.name %></td>
   <td><%= post.visit_reason&.name %></td>
 
-  <% visit = @visits_by_shop[post.shop_id] %>
+  <% visit = @visits_by_shop&.[](post.shop_id) %>
   <td class="text-center visit-count" id="visit-count-<%= post.id %>">
     <%= visit&.count.to_i %>
     <% if show_history_button %>

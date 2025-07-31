@@ -5,4 +5,8 @@ class Location < ApplicationRecord
 
   validates :prefecture_id, presence: true
   validates :city_id, presence: true
+
+  def self.ransackable_attributes(auth_object = nil)
+    super + ['name']
+  end
 end
