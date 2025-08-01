@@ -45,6 +45,6 @@ Rails.application.routes.draw do
 
   get "privacy", to: "static_pages#privacy"
 
-  #一時的なルートを作成してメール送信をトリガー
+  # 一時的なルートを作成してメール送信をトリガー
   get "/test_mail", to: "test_mailer#send_test"
 end
