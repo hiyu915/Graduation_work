@@ -1,0 +1,47 @@
+<div class="text-end mb-2">
+  <%= render "repeat_toggle_button" %>
+</div>
+
+<% current_query = request.query_parameters.except(:page, :direction, :sort) %>
+<% current_sort = "visit_date" %> <%# 履歴一覧は来店日ソート固定 %>
+<% current_direction = params[:direction].presence || "desc" %>
+<% next_direction = current_direction == "desc" ? "asc" : "desc" %>
+<% by_visit_date = current_query.merge(sort: "visit_date", direction: next_direction) %>
+
+<turbo-frame id="history_posts">
+  <div class="btn-group mb-2" role="group" aria-label="<%= t('posts.index.sort.label') %>">
+    <%= link_to(
+          (t('posts.index.sort.by_visit_date') + (current_direction == "asc" ? " ▲" : " ▼")).html_safe,
+          history_post_path(@post, by_visit_date),
+          data: { turbo_frame: "history_posts" },
+          class: "btn btn-outline-secondary"
+        ) %>
+  </div>
+
+  <table class="table table-hover align-middle table-bordered text-center">
+    <thead class="table-light">
+      <tr>
+        <th class="w-10"><%= t('posts.index.table_header.visit_date') %></th>
+        <th class="w-20"><%= t('posts.index.table_header.shop_name') %></th>
+        <th class="w-10"><%= t('posts.index.table_header.category') %></th>
+        <th class="w-20"><%= t('posts.index.table_header.location') %></th>
+        <th class="w-10"><%= t('posts.index.table_header.companion') %></th>
+        <th class="w-10"><%= t('posts.index.table_header.feeling') %></th>
+        <th class="w-10"><%= t('posts.index.table_header.visit_reason') %></th>
+        <th class="w-5"><%= t('posts.index.table_header.visit_count') %></th>
+        <th class="w-5"><%= t('posts.index.table_header.repeat') %></th>
+        <th class="w-10"><%= t('posts.index.table_header.detail_edit') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'post',
+                 collection: posts,
+                 as: :post,
+                 locals: { visits_by_shop: visits_by_shop, show_history_button: false } %>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-center">
+    <%= paginate posts, theme: 'bootstrap-5' if posts.respond_to?(:current_page) %>
+  </div>
+</turbo-frame>

@@ -1,6 +1,7 @@
 ja:
   application:
     title: リピログ
+
   defaults:
     actions:
       create: 作成
@@ -76,7 +77,7 @@ ja:
         too_short: "パスワードは3文字以上で入力してください"
         confirmation: "パスワードと確認用パスワードが一致しません"
         password_confirmation:
-        blank: "パスワード確認を入力してください"
+          blank: "パスワード確認を入力してください"
     create:
       success: 会員登録が完了しました
       failure: 会員登録に失敗しました
@@ -149,7 +150,9 @@ ja:
       title: Myリピログ
       new_post: 記録する
       sort:
+        label: "並び替え"
         by_visit_date: 年月日順
+        by_visit_count: 来店回数順
       table_header:
         visit_date: 年月日
         shop_name: お店の名前
@@ -161,6 +164,13 @@ ja:
         repeat: リピ
         visit_count: 来店回数
         detail_edit: 詳細/編集
+      search:
+        start_date: "開始"
+        end_date: "終了"
+        submit: "検索"
+        all: "すべて"
+      error:
+        fetch_cities: "市区町村の取得に失敗しました"
     history:
       title: "%{shop}  来店履歴"
 
@@ -175,7 +185,7 @@ ja:
     help_page: ヘルプ
     account: アカウント
     account_info: アカウント情報
-  
+
   account_info_page:
     title: アカウント情報
     email: メールアドレス
@@ -221,27 +231,28 @@ ja:
       success: 退会が完了しました。ご利用ありがとうございました。
 
   contacts:
-      new:
-        title: お問い合わせ
-        description1: サービスの品質向上のため、皆様からのお問い合わせをお待ちしております。
-        description2: ご利用にあたって改善すべき点や欲しい機能などお気づきの点がございましたら、以下にご記入ください。
-      form:
-        email: メールアドレス
-        category: お問い合わせの種類
-        message: ご意見・ご要望（2000字以内）
-        select_prompt: 選択してください
-        confirm_button: 入力内容を確認する
-      categories:
-        service: サービスについて
-        repilog: リピログについて
-        user: ユーザーについて
-        other: その他
-      confirm:
-        title: 入力内容の確認
-        description: ご入力いただいた以下の内容で問題ない場合は、「送信する」ボタンを押してください。
-        message: ご意見・ご要望
-        back_button: 入力内容を編集しなおす
-        submit_button: 送信する
+    new:
+      title: お問い合わせ
+      description1: サービスの品質向上のため、皆様からのお問い合わせをお待ちしております。
+      description2: ご利用にあたって改善すべき点や欲しい機能などお気づきの点がございましたら、以下にご記入ください。
+    form:
+      email: メールアドレス
+      category: お問い合わせの種類
+      message: ご意見・ご要望（2000字以内）
+      select_prompt: 選択してください
+      confirm_button: 入力内容を確認する
+    categories:
+      service: サービスについて
+      repilog: リピログについて
+      user: ユーザーについて
+      other: その他
+    confirm:
+      title: 入力内容の確認
+      description: ご入力いただいた以下の内容で問題ない場合は、「送信する」ボタンを押してください。
+      message: ご意見・ご要望
+      back_button: 入力内容を編集しなおす
+      submit_button: 送信する
+
   views:
     pagination:
       first: "&laquo; 最初"
