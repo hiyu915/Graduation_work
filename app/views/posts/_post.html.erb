@@ -7,11 +7,14 @@
   <td><%= post.feeling&.name %></td>
   <td><%= post.visit_reason&.name %></td>
 
-  <% visit = @visits_by_shop&.[](post.shop_id) %>
+  <% visit = visits_by_shop&.[](post.shop_id) %>
   <td class="text-center visit-count" id="visit-count-<%= post.id %>">
     <%= visit&.count.to_i %>
     <% if show_history_button %>
-      <%= link_to t('defaults.actions.history_visit'), history_post_path(post), class: "btn btn-sm btn-outline-primary ms-2" %>
+      <%= link_to t('defaults.actions.history_visit'),
+                  history_post_path(post),
+                  class: "btn btn-sm btn-outline-primary ms-2",
+                  data: { turbo: false } %>
     <% end %>
   </td>
 
@@ -28,7 +31,13 @@
   </td>
 
   <td>
-    <%= link_to t('defaults.actions.show'), post_path(post), class: 'btn btn-sm btn-outline-primary me-1' %>
-    <%= link_to t('defaults.actions.edit'), edit_post_path(post), class: 'btn btn-sm btn-outline-secondary' %>
+    <%= link_to t('defaults.actions.show'),
+                post_path(post),
+                class: 'btn btn-sm btn-outline-primary me-1',
+                data: { turbo: false } %>
+    <%= link_to t('defaults.actions.edit'),
+                edit_post_path(post),
+                class: 'btn btn-sm btn-outline-secondary',
+                data: { turbo: false } %>
   </td>
 </tr>

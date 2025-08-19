@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "history_posts" do %>
+  <%= render partial: "history_posts_table", locals: { posts: @history_posts, visits_by_shop: @visits_by_shop } %>
+<% end %>

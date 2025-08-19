@@ -4,30 +4,93 @@
     <h1><%= t('posts.history.title', shop: @post.shop.name) %></h1>
     <div>
       <%= link_to t('posts.index.new_post'), new_post_path, class: 'btn btn-primary me-2' %>
-      <div class="btn-group" role="group" aria-label="<%= t('posts.index.sort.by_visit_date') %>">
-        <%#= link_to t('posts.index.sort.by_visit_date'), "#", class: "btn btn-outline-secondary" %>
-        <%#= link_to '訪問回数順', "#", class: "btn btn-outline-secondary" %>
-      </div>
     </div>
   </div>
 
-  <table class="table table-hover align-middle table-bordered text-center">
-    <thead class="table-light">
-      <tr>
-        <th class="w-10"><%= t('posts.index.table_header.visit_date') %></th>
-        <th class="w-20"><%= t('posts.index.table_header.shop_name') %></th>
-        <th class="w-10"><%= t('posts.index.table_header.category') %></th>
-        <th class="w-20"><%= t('posts.index.table_header.location') %></th>
-        <th class="w-10"><%= t('posts.index.table_header.companion') %></th>
-        <th class="w-10"><%= t('posts.index.table_header.feeling') %></th>
-        <th class="w-10"><%= t('posts.index.table_header.visit_reason') %></th>
-        <th class="w-5"><%= t('posts.index.table_header.visit_count') %></th>
-        <th class="w-5"><%= t('posts.index.table_header.repeat') %></th>
-        <th class="w-10"><%= t('posts.index.table_header.detail_edit') %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <%= render partial: 'post', collection: @history_posts.compact, as: :post, locals: { show_history_button: false } %>
-    </tbody>
-  </table>
+  <%= search_form_for @q, url: history_post_path(@post), method: :get do |f| %>
+    <table class="table table-bordered mb-4">
+      <tbody>
+        <tr>
+          <td style="width: 6rem;">
+            <%= f.label :visit_date_gteq, "#{t('helpers.label.post.visit_date')}（#{t('posts.index.search.start_date')}）", class: "form-label d-block" %>
+            <%= f.date_field :visit_date_gteq, class: "form-control form-control-sm" %>
+          </td>
+          <td style="width: 6rem;">
+            <%= f.label :visit_date_lteq, "#{t('helpers.label.post.visit_date')}（#{t('posts.index.search.end_date')}）", class: "form-label d-block" %>
+            <%= f.date_field :visit_date_lteq, class: "form-control form-control-sm" %>
+          </td>
+          <td style="width: 120px;">
+            <%= f.label :category_id_eq, t('helpers.label.post.category'), class: "form-label d-block" %>
+            <%= f.collection_select :category_id_eq, Category.all, :id, :name,
+                  { include_blank: t('posts.index.search.all') },
+                  class: "form-select form-select-sm w-100" %>
+          </td>
+          <td style="width: 120px;">
+            <%= f.label :companion_id_eq, t('helpers.label.post.companion'), class: "form-label d-block" %>
+            <%= f.collection_select :companion_id_eq, Companion.all, :id, :name,
+                  { include_blank: t('posts.index.search.all') },
+                  class: "form-select form-select-sm w-100" %>
+          </td>
+          <td style="width: 120px;">
+            <%= f.label :feeling_id_eq, t('helpers.label.post.feeling'), class: "form-label d-block" %>
+            <%= f.collection_select :feeling_id_eq, Feeling.all, :id, :name,
+                  { include_blank: t('posts.index.search.all') },
+                  class: "form-select form-select-sm w-100" %>
+          </td>
+          <td style="width: 120px;">
+            <%= f.label :visit_reason_id_eq, t('helpers.label.post.visit_reason'), class: "form-label d-block" %>
+            <%= f.collection_select :visit_reason_id_eq, VisitReason.all, :id, :name,
+                  { include_blank: t('posts.index.search.all') },
+                  class: "form-select form-select-sm w-100" %>
+          </td>
+          <td class="align-middle text-center" style="width: 80px;">
+            <%= f.submit t('posts.index.search.submit'), class: "btn btn-primary btn-sm w-100" %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>
+
+  <% current_query = request.query_parameters.except(:page, :direction, :sort) %>
+  <% current_sort = params[:sort].presence || "visit_date" %>
+  <% current_direction = params[:direction].presence || "desc" %>
+  <% next_direction = current_direction == "desc" ? "asc" : "desc" %>
+  <% by_visit_date = current_query.merge(sort: "visit_date", direction: next_direction) %>
+
+  <turbo-frame id="history_posts">
+    <%= render partial: 'history_posts_table', locals: { posts: @history_posts, visits_by_shop: @visits_by_shop } %>
+  </turbo-frame>
 </div>
+
+<script>
+  function handleSearchPrefectureChange() {
+    const prefectureSelect = document.getElementById('search-prefecture-select');
+    const citySelect = document.getElementById('search-city-select');
+    if (!prefectureSelect || !citySelect) return;
+
+    citySelect.innerHTML = `<option value="">${Rails.t('posts.index.search.all')}</option>`;
+    const prefectureId = prefectureSelect.value;
+    if (!prefectureId) return;
+
+    fetch(`/posts/cities.json?prefecture_id=${encodeURIComponent(prefectureId)}`)
+      .then(response => response.json())
+      .then(json => {
+        const cities = json.data;
+        cities.forEach(city => {
+          const option = document.createElement('option');
+          option.value = city.id;
+          option.textContent = city.name;
+          citySelect.appendChild(option);
+        });
+      })
+      .catch(error => console.error(Rails.t('posts.index.error.fetch_cities'), error));
+  }
+
+  document.addEventListener('turbo:load', () => {
+    const searchPrefectureSelect = document.getElementById('search-prefecture-select');
+    if (searchPrefectureSelect && !searchPrefectureSelect.dataset.listenerAttached) {
+      searchPrefectureSelect.addEventListener('change', handleSearchPrefectureChange);
+      searchPrefectureSelect.dataset.listenerAttached = 'true';
+    }
+  });
+</script>

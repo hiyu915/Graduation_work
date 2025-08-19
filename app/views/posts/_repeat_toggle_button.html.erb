@@ -1,0 +1,18 @@
+<% repeat_on = params[:repeat].present? %>
+<% current_query = request.query_parameters.except(:page) %>
+<% toggle_query = if repeat_on
+                   current_query.except(:repeat)
+                 else
+                   current_query.merge(repeat: "true")
+                 end %>
+
+<% path = defined?(@post) ? history_post_path(@post, toggle_query) : posts_path(toggle_query) %>
+<% turbo_frame_id = defined?(@post) ? "history_posts" : "posts" %>
+
+<%= link_to path, data: { turbo_frame: turbo_frame_id }, class: "btn btn-link p-0" do %>
+  <% if repeat_on %>
+    <i class="fas fa-heart text-danger fs-5"></i>
+  <% else %>
+    <i class="far fa-heart text-secondary fs-5"></i>
+  <% end %>
+<% end %>
