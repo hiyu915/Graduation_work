@@ -70,7 +70,7 @@ class PostsController < ApplicationController
       posts = posts.where(id: favorite_post_ids)
     end
 
-    # ソートは visit_date のみ
+    # ソート
     sort_column = params[:sort] || "visit_date"
     sort_direction = %w[asc desc].include?(params[:direction].to_s.downcase) ? params[:direction].to_s.downcase : "desc"
     posts = posts.order("posts.visit_date #{sort_direction.upcase}")
