@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :remove_image, :history]
+  before_action :set_post, only: [ :show, :edit, :update, :destroy, :remove_image, :history ]
 
   # 投稿一覧
   def index
@@ -204,7 +204,7 @@ class PostsController < ApplicationController
     shop.location = location
     shop.save!
 
-    [location, shop]
+    [ location, shop ]
   end
 
   # 訪問回数更新

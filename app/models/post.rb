@@ -39,7 +39,7 @@ class Post < ApplicationRecord
   end
 
   def self.ransackable_associations(auth_object = nil)
-    super + ["shop"]
+    super + [ "shop" ]
   end
 
   # 仮想属性（ransacker）
