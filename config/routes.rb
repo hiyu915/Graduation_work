@@ -44,7 +44,4 @@ Rails.application.routes.draw do
   delete "logout", to: "user_sessions#destroy"
 
   get "privacy", to: "static_pages#privacy"
-
-  # 一時的なルートを作成してメール送信をトリガー
-  get "/test_mail", to: "test_mailer#send_test"
 end
