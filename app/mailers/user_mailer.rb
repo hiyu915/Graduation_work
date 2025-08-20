@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  default from: "hiyuhiyu915@gmail.com"
+  default from: "no-reply@repilog.com"
 
   def activation_needed_email(user)
     @user = user

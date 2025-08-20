@@ -5,7 +5,7 @@ class TestMailerController < ApplicationController
     # ダミーユーザーを作成（DBには保存しない）
     user = User.new(
       id: 9999,
-      email: "test@example.com",
+      email: "hiyuhiyu915@gmail.com",
       activation_token: "dummy_token",
       crypted_password: "dummy"
     )
