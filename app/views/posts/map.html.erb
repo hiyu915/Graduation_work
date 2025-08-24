@@ -1,0 +1,35 @@
+<!-- Leaflet の CSS 読み込み -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<!-- Leaflet の JS 読み込み -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<h1><%= t("maps.title") %></h1>
+<div id="map" style="height: 500px;"></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var map = L.map('map').setView([36.2048, 138.2529], 5);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19
+  }).addTo(map);
+
+  <% @location_groups.each do |location, posts| %>
+    <% if location&.latitude.present? && location.longitude.present? %>
+      <% latest_posts = posts.group_by(&:shop).map { |shop, s_posts| s_posts.max_by(&:visit_date) } %>
+
+      var popupContent = "<strong><%= j(location.prefecture.name) %> <%= j(location.city.name) %></strong><br>" +
+        "<ul>" +
+        "<% latest_posts.each do |post| %>" +
+          "<li><%= l(post.visit_date, format: :long) %> <%= j(post.shop.name) %></li>" +
+        "<% end %>" +
+        "</ul>";
+
+      L.marker([<%= location.latitude %>, <%= location.longitude %>])
+        .addTo(map)
+        .bindPopup(popupContent);
+    <% end %>
+  <% end %>
+});
+</script>

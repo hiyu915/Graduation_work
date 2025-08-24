@@ -25,13 +25,13 @@
             <%= f.date_field :visit_date_lteq, class: "form-control form-control-sm" %>
           </td>
           <td>
-            <%= f.label :shop_location_prefecture_id_eq, t('helpers.label.post.prefecture_city'), class: "form-label d-block" %>
+            <%= f.label :shop_location_prefecture_id_eq, t('helpers.label.post.prefecture'), class: "form-label d-block" %>
             <%= f.collection_select :shop_location_prefecture_id_eq, Prefecture.all, :id, :name,
                   { include_blank: t('posts.index.search.all') },
                   { class: "form-select form-select-sm", id: "search-prefecture-select" } %>
           </td>
           <td>
-            <%= f.label :shop_location_id_eq, t('helpers.label.post.location'), class: "form-label d-block" %>
+            <%= f.label :shop_location_id_eq, t('helpers.label.post.city'), class: "form-label d-block" %>
             <%= f.select :shop_location_id_eq, [],
                   { include_blank: t('posts.index.search.all') },
                   {
@@ -72,6 +72,11 @@
     </table>
   <% end %>
 
+  <div class="d-flex justify-content-end mb-3">
+    <%= link_to t("posts.index.my_map"), map_posts_path,
+          class: "btn btn-success", data: { turbo: false } %>
+  </div>
+
   <turbo-frame id="posts">
     <%= render partial: "posts_table", locals: { posts: @posts, visits_by_shop: @visits_by_shop } %>
   </turbo-frame>
@@ -83,7 +88,7 @@
     const citySelect = document.getElementById('search-city-select');
     if (!prefectureSelect || !citySelect) return;
 
-    citySelect.innerHTML = `<option value="">${Rails.t('posts.index.search.all')}</option>`;
+    citySelect.innerHTML = '<option value="">すべて</option>';
 
     const prefectureId = prefectureSelect.value;
     if (!prefectureId) return;
@@ -99,7 +104,7 @@
           citySelect.appendChild(option);
         });
       })
-      .catch(error => console.error(Rails.t('posts.index.error.fetch_cities'), error));
+      .catch(error => console.error("市区町村の取得に失敗しました", error));
   }
 
   document.addEventListener('turbo:load', () => {

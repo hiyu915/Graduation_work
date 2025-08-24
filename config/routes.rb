@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resource :visit, only: [ :create, :destroy ]
     collection do
       get :cities
+      get :map
     end
     member do
       delete :remove_image
