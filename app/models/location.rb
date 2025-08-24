@@ -12,11 +12,11 @@ class Location < ApplicationRecord
 
   # 都道府県 + 市からフル住所を生成
   def full_address
-    [prefecture&.name, city&.name].compact.join
+    [ prefecture&.name, city&.name ].compact.join
   end
 
   # Ransack 検索対応
   def self.ransackable_attributes(auth_object = nil)
-    super + ["name"]
+    super + [ "name" ]
   end
 end

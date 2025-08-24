@@ -60,7 +60,7 @@ class PostsController < ApplicationController
 
   # マップ表示
   def map
-    posts = Post.includes(shop: { location: [:prefecture, :city] })
+    posts = Post.includes(shop: { location: [ :prefecture, :city ] })
                 .where.not(locations: { latitude: nil, longitude: nil })
 
     # Location ごとにグループ化
