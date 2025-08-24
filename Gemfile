@@ -75,3 +75,4 @@ gem "config"
 gem "kaminari", "1.2.2"
 gem "bootstrap5-kaminari-views"
 gem "ransack"
+gem 'geocoder'

@@ -9,16 +9,13 @@ class PostsController < ApplicationController
 
     posts = @q.result.includes(:shop, :category, :companion, :feeling, :visit_reason)
 
-    # リピート（お気に入り）絞り込み
     if params[:repeat].present? && current_user
       favorite_post_ids = current_user.favorites.pluck(:post_id)
       posts = posts.where(id: favorite_post_ids)
     end
 
-    # 店舗ごとの最新投稿のみ取得
     posts = posts.latest_unique_by_shop_and_location
 
-    # visit_count でのソート（ユーザーごと）
     if sort_column == "visit_count" && current_user
       visit_counts = Visit.where(user_id: current_user.id)
                           .group(:shop_id)
@@ -34,12 +31,9 @@ class PostsController < ApplicationController
     end
 
     @posts = posts.page(params[:page]).per(10)
-
-    # 現在ページの投稿に紐づく訪問情報を取得
     shop_ids = @posts.map(&:shop_id)
     @visits_by_shop = Visit.where(user: current_user, shop_id: shop_ids).index_by(&:shop_id)
 
-    # 都道府県・市の選択肢
     @prefectures = Prefecture.all
     if params.dig(:q, :shop_location_prefecture_id_eq).present?
       prefecture_id = params[:q][:shop_location_prefecture_id_eq]
@@ -55,10 +49,27 @@ class PostsController < ApplicationController
     end
   end
 
+  def cities
+    if params[:prefecture_id].present?
+      cities = City.where(prefecture_id: params[:prefecture_id]).order(:name)
+    else
+      cities = []
+    end
+    render json: { data: cities.map { |city| { id: city.id, name: city.name } } }
+  end
+
+  # マップ表示
+  def map
+    posts = Post.includes(shop: { location: [:prefecture, :city] })
+                .where.not(locations: { latitude: nil, longitude: nil })
+
+    # Location ごとにグループ化
+    @location_groups = posts.group_by { |p| p.shop.location }
+  end
+
   # 投稿履歴（同店舗）
   def history
     shop_id = @post.shop_id
-
     posts_scope = Post.where(shop_id: shop_id)
                       .includes(:category, :feeling, :companion, :visit_reason)
 
@@ -70,7 +81,6 @@ class PostsController < ApplicationController
       posts = posts.where(id: favorite_post_ids)
     end
 
-    # ソート
     sort_column = params[:sort] || "visit_date"
     sort_direction = %w[asc desc].include?(params[:direction].to_s.downcase) ? params[:direction].to_s.downcase : "desc"
     posts = posts.order("posts.visit_date #{sort_direction.upcase}")
@@ -84,13 +94,11 @@ class PostsController < ApplicationController
     end
   end
 
-  # 新規投稿フォーム
   def new
     @post = Post.new
     load_collections
   end
 
-  # 投稿作成
   def create
     location, shop = build_location_and_shop
     return unless location && shop
@@ -107,17 +115,14 @@ class PostsController < ApplicationController
     end
   end
 
-  # 投稿詳細
   def show; end
 
-  # 編集フォーム
   def edit
     load_collections
     @prefectures = Prefecture.order(:name)
     @cities = @post.shop&.location ? @post.shop.location.prefecture.locations.includes(:city).map(&:city).uniq.sort_by(&:name) : []
   end
 
-  # 投稿更新
   def update
     location, shop = build_location_and_shop
     return unless location && shop
@@ -132,7 +137,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # 投稿削除
   def destroy
     shop = @post.shop
     ActiveRecord::Base.transaction do
@@ -146,7 +150,6 @@ class PostsController < ApplicationController
     redirect_to posts_path, success: t("defaults.flash_message.deleted", item: Post.model_name.human)
   end
 
-  # 画像削除
   def remove_image
     @post.remove_post_image!
     @post.save
@@ -155,7 +158,6 @@ class PostsController < ApplicationController
 
   private
 
-  # Strong Parameters
   def post_params
     params.require(:post).permit(
       :visit_date, :category_id, :companion_id, :feeling_id, :visit_reason_id, :body,
@@ -163,7 +165,6 @@ class PostsController < ApplicationController
     )
   end
 
-  # 各種コレクションをロード
   def load_collections
     @categories    = Category.order(:name)
     @shops         = Shop.order(:name)
@@ -173,13 +174,11 @@ class PostsController < ApplicationController
     @prefectures   = Prefecture.order(:name)
   end
 
-  # 投稿取得
   def set_post
     @post = current_user.posts.find_by(id: params[:id])
     redirect_to posts_path, alert: t("defaults.flash_message.not_authorized") unless @post
   end
 
-  # 店舗・場所の作成/取得
   def build_location_and_shop
     prefecture_id = params[:post][:prefecture_id].to_i
     city_id       = params[:post][:city_id].to_i
@@ -199,7 +198,9 @@ class PostsController < ApplicationController
       return
     end
 
-    location = Location.find_or_create_by(prefecture_id: prefecture_id, city_id: city_id)
+    location = Location.find_or_initialize_by(prefecture_id: prefecture_id, city_id: city_id)
+    location.save! if location.new_record? || location.latitude.blank? || location.longitude.blank?
+
     shop = Shop.find_or_initialize_by(name: shop_name)
     shop.location = location
     shop.save!
@@ -207,14 +208,12 @@ class PostsController < ApplicationController
     [ location, shop ]
   end
 
-  # 訪問回数更新
   def update_visit_count(shop)
     visit = Visit.find_or_initialize_by(user: current_user, shop: shop)
     visit.count = visit.count.to_i + 1
     visit.save!
   end
 
-  # 画像削除チェック
   def remove_image_if_requested
     if params[:post][:remove_post_image] == "1"
       @post.remove_post_image!
