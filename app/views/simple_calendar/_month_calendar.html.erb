@@ -1,0 +1,48 @@
+<div class="simple-calendar card shadow-sm mb-4">
+  <div class="calendar-heading d-flex justify-content-between align-items-center p-3 border-bottom bg-light">
+    <time datetime="<%= start_date.strftime('%Y-%m') %>" class="calendar-title h5 mb-0 fw-bold">
+      <%= start_date.year %>年 <%= t('date.month_names')[start_date.month] %>
+    </time>
+
+    <nav class="d-flex gap-2">
+      <%= link_to calendar.url_for_previous_view, class: "btn btn-outline-secondary btn-sm" do %>
+        &laquo; <%= t('simple_calendar.previous', default: '前月') %>
+      <% end %>
+      <%= link_to calendar.url_for_today_view, class: "btn btn-outline-primary btn-sm" do %>
+        <%= t('simple_calendar.today', default: '今日') %>
+      <% end %>
+      <%= link_to calendar.url_for_next_view, class: "btn btn-outline-secondary btn-sm" do %>
+        <%= t('simple_calendar.next', default: '次月') %> &raquo;
+      <% end %>
+    </nav>
+  </div>
+
+  <table class="table table-bordered mb-0 text-center align-middle">
+    <thead class="table-light">
+      <tr>
+        <% date_range.slice(0, 7).each do |day| %>
+          <th class="small text-muted"><%= t('date.abbr_day_names')[day.wday] %></th>
+        <% end %>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% date_range.each_slice(7) do |week| %>
+        <tr>
+          <% week.each do |day| %>
+            <% is_today = day == Date.current %>
+            <%= content_tag :td, class: "calendar-day #{calendar.td_classes_for(day)} p-2 align-top" do %>
+              <div class="fw-bold <%= 'bg-danger text-white rounded-circle d-inline-block text-center' if is_today %>"
+                   style="<%= 'width:28px; height:28px; line-height:28px;' if is_today %>">
+                <%= day.day %>
+              </div>
+              <div class="small mt-1 text-start">
+                <% instance_exec(day, calendar.sorted_events_for(day), &passed_block) %>
+              </div>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

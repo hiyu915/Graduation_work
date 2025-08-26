@@ -156,6 +156,10 @@ class PostsController < ApplicationController
     redirect_to post_path(@post), notice: t("defaults.flash_message.image_removed")
   end
 
+  def calendar
+    @posts = current_user.posts.where.not(visit_date: nil).includes(:shop)
+  end
+
   private
 
   def post_params

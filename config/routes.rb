@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     collection do
       get :cities
       get :map
+      get :calendar
     end
     member do
       delete :remove_image
