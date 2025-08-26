@@ -1,0 +1,11 @@
+<div class="my-4"></div> <!-- 余白 -->
+<h2><%= t('posts.calendar.title', shop: @shop&.name || '') %></h2>
+<div class="my-4"></div> <!-- 余白 -->
+
+<%= month_calendar events: @posts, attribute: :visit_date do |date, posts| %>
+  <% posts.each do |post| %>
+    <div class="text-blue-600 text-xs">
+      <%= link_to post.shop.name, post_path(post), class: "underline" %>
+    </div>
+  <% end %>
+<% end %>

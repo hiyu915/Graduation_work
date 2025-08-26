@@ -72,9 +72,12 @@
     </table>
   <% end %>
 
-  <div class="d-flex justify-content-end mb-3">
-    <%= link_to t("posts.index.my_map"), map_posts_path,
+  <div class="d-flex justify-content-end mb-3 gap-2">
+    <%= link_to t("maps.title"), map_posts_path,
           class: "btn btn-success", data: { turbo: false } %>
+
+    <%= link_to t('posts.calendar.title'), calendar_posts_path,
+          class: "btn btn-info", data: { turbo: false } %>
   </div>
 
   <turbo-frame id="posts">
@@ -88,7 +91,7 @@
     const citySelect = document.getElementById('search-city-select');
     if (!prefectureSelect || !citySelect) return;
 
-    citySelect.innerHTML = '<option value="">すべて</option>';
+    citySelect.innerHTML = '<option value="">' + '<%= j t("posts.index.search.all") %>' + '</option>';
 
     const prefectureId = prefectureSelect.value;
     if (!prefectureId) return;
@@ -104,7 +107,7 @@
           citySelect.appendChild(option);
         });
       })
-      .catch(error => console.error("市区町村の取得に失敗しました", error));
+      .catch(error => console.error("<%= j t('posts.index.error.fetch_cities') %>", error));
   }
 
   document.addEventListener('turbo:load', () => {
