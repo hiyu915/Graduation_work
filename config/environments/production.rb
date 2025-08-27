@@ -62,8 +62,8 @@ Rails.application.configure do
   # Set host to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = {
     host: "repilog.onrender.com",
-  protocol: "https"
-}
+    protocol: "https"
+  }
 
   # メール送信手段を設定（SendGridやMailgunなどを使用する場合）
   config.action_mailer.delivery_method = :smtp
@@ -104,6 +104,10 @@ Rails.application.configure do
   #   "example.com",     # Allow requests from example.com
   #   /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
   # ]
+
+  # 独自ドメインを許可
+  config.hosts << "repilog.com"
+  config.hosts << "www.repilog.com"
 
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
