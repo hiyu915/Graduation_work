@@ -46,4 +46,6 @@ Rails.application.routes.draw do
   delete "logout", to: "user_sessions#destroy"
 
   get "privacy", to: "static_pages#privacy"
+
+  get "rankings/regional", to: "rankings#regional"
 end

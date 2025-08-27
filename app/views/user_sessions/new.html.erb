@@ -1,7 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-10 col-lg-8 mx-auto">
+    <div class="my-4"></div> <!-- 余白 -->
       <h1><%= t('user_sessions.new.title') %></h1>
+    <div class="my-4"></div> <!-- 余白 -->
 
       <% if @user && @user.errors.any? %>
         <div class="alert alert-danger">
