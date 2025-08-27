@@ -2,7 +2,7 @@
 
 ■　各種情報
 サービス名：リピログ
-サービスURL：https://repilog.onrender.com/
+サービスURL：https://repilog.com/
 
 ■サービス概要
  「また行きたい」と思ったお店を中心に記録・整理できるグルメ記録アプリです。
