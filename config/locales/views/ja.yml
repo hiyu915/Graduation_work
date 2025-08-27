@@ -177,10 +177,21 @@ ja:
 
   maps:
     title: Myマップ
+  
+  ranking:
+    title: Myランキング
+    top_shop: "1番リピってるお店"
+    top_month: "1番外食が多かった月"
+    top_region: "1番リピってる都道府県/市"
+    top_category: "1番リピってるカテゴリ"
+    top_companion: "1番リピってる同行者"
+    top_feeling: "1番リピってる気分"
+    top_visit_reason: "1番リピってる来店動機"
+    times: "%{count}回"
 
   header:
     logo: リピログ
-    ranking_search: 地域別ランキング検索
+    ranking: Myランキング
     login: ログイン
     logout: ログアウト
     to_register_page: 会員登録
@@ -189,6 +200,7 @@ ja:
     help_page: ヘルプ
     account: アカウント
     account_info: アカウント情報
+    message: "まずは会員登録/ログインをお願いします"
 
   account_info_page:
     title: アカウント情報

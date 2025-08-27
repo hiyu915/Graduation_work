@@ -9,15 +9,13 @@
 <!-- メインヘッダー -->
 <header class="bg-dark px-4 py-4">
   <div class="d-flex align-items-center justify-content-between">
-    <!-- 左端: ロゴ -->
     <h1 class="h4 fw-bold m-0">
       <%= link_to t('header.logo'), root_path, class: 'text-white text-decoration-none' %>
     </h1>
 
-    <!-- 中央: 地域別ランキング検索リンク -->
-    <a href="#" class="text-warning fw-semibold text-decoration-none">
-      <%= t('header.ranking_search') %>
-    </a>
+    <div class="text-center flex-grow-1">
+      <%= link_to t('header.message'), new_user_path, class: 'text-warning fw-semibold text-decoration-none' %>
+    </div>
 
     <!-- 右端: 空白（バランス用） -->
     <div style="width: 9rem;"></div>
