@@ -39,7 +39,7 @@ class RankingsController < ApplicationController
                              .first
 
     # 一番行っている都道府県＋市（トップ1件のみ）
-    top_region_hash = posts.joins(shop: { location: [:prefecture, :city] })
+    top_region_hash = posts.joins(shop: { location: [ :prefecture, :city ] })
                            .group("prefectures.name", "cities.name")
                            .order("COUNT(posts.id) DESC")
                            .count
