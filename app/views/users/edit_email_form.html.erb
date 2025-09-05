@@ -1,0 +1,17 @@
+<!--Twitter 認証でメールが返らなかったときの入力ページ-->
+<% content_for(:title, "メールアドレス入力") %>
+
+<div class="container my-5" style="max-width: 500px;">
+  <h1 class="mb-4">メールアドレスを入力してください</h1>
+
+  <%= form_with url: finish_oauth_users_path, method: :post, local: true do |f| %>
+    <div class="mb-3">
+      <%= f.label :email, "メールアドレス", class: "form-label" %>
+      <%= f.email_field :email, class: "form-control", required: true %>
+    </div>
+
+    <div class="d-grid">
+      <%= f.submit "登録する", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

@@ -36,7 +36,7 @@ Rails.application.configure do
   # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
 
   # Log to STDOUT with the current request id as a default log tag.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
   config.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
 
   # Change to "debug" to log everything (including potentially personally-identifiable information!)
@@ -68,23 +68,14 @@ Rails.application.configure do
   # メール送信手段を設定（SendGridやMailgunなどを使用する場合）
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: "smtp.sendgrid.net", # or Mailgun のSMTP
+    address: "smtp.sendgrid.net",
     port: 587,
     domain: "repilog.com",
-    user_name: "apikey", # SendGridの場合固定
-    password: ENV["SENDGRID_API_KEY"], # 環境変数で設定
+    user_name: "apikey",
+    password: ENV["SENDGRID_API_KEY"],
     authentication: :plain,
     enable_starttls_auto: true
   }
-
-  # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
-  # config.action_mailer.smtp_settings = {
-  #   user_name: Rails.application.credentials.dig(:smtp, :user_name),
-  #   password: Rails.application.credentials.dig(:smtp, :password),
-  #   address: "smtp.example.com",
-  #   port: 587,
-  #   authentication: :plain
-  # }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
@@ -93,22 +84,13 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  # cssbundling-rails に bun ではなく sass を使わせる
-  # config.cssbundling.compiler = :sass
-
-  # Only use :id for inspections in production.
-  # config.active_record.attributes_for_inspect = [:id]
-
-  # Enable DNS rebinding protection and other `Host` header attacks.
-  # config.hosts = [
-  #   "example.com",     # Allow requests from example.com
-  #   /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
-  # ]
-
   # 独自ドメインを許可
   config.hosts << "repilog.com"
   config.hosts << "www.repilog.com"
 
-  # Skip DNS rebinding protection for the default health check endpoint.
-  # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+  # --- Sorcery callback URLs for production ---
+  config.x.sorcery = {
+    google_callback_url: 'https://repilog.com/oauth/callback',
+    twitter_callback_url: 'https://repilog.com/oauth/callback?provider=twitter'
+  }
 end
