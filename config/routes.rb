@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
   resources :users do
     collection do
-      get :edit_email
+      get :edit_email       # メール変更用
+      get :edit_email_form  # Twitter認証でメールが返らなかったときの入力ページ
       post :request_email_change
       get :confirm_email_change
       get :account_info
@@ -30,9 +31,7 @@ Rails.application.routes.draw do
   end
 
   resources :cities, only: [ :index ]
-
   resources :password_resets, only: %i[new create edit update]
-
   resource :account, only: [ :show, :destroy ], controller: "accounts"
 
   resources :contacts, only: [ :new, :create ] do
@@ -46,6 +45,17 @@ Rails.application.routes.draw do
   delete "logout", to: "user_sessions#destroy"
 
   get "privacy", to: "static_pages#privacy"
-
   get "rankings/regional", to: "rankings#regional"
+
+  # --- OAuthルート ---
+  # OAuth認証開始
+  get "/auth/:provider", to: "oauths#oauth", as: :auth_at_provider
+
+  # Google / Twitter 共通コールバック
+  # providerパラメータを必ず渡すように defaults を指定
+  get "/auth/:provider/callback", to: "oauths#callback", as: :oauth_callback
+  get "/oauth/callback", to: "oauths#callback", defaults: { provider: "google" }
+
+  # Sorcery 未完了OAuth用
+  post "users/finish_oauth", to: "users#finish_oauth", as: :finish_oauth_users
 end

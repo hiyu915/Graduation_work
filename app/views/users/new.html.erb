@@ -14,7 +14,8 @@
           </ul>
         </div>
       <% end %>
-<div class="my-4"></div> <!-- 余白 -->
+
+      <div class="my-4"></div> <!-- 余白 -->
       <%= form_with model: @user do |f| %>
         <div class="mb-3">
           <%= f.label :email, t('helpers.label.email'), class: "form-label" %>
@@ -28,9 +29,16 @@
           <%= f.label :password_confirmation, t('helpers.label.password_confirmation'), class: "form-label" %>
           <%= f.password_field :password_confirmation, class: "form-control" %>
         </div>
-        <%= f.submit t('helpers.submit.create'), class: "btn btn-primary" %>
+        <%= f.submit t('helpers.submit.create'), class: "btn btn-primary w-100" %>
       <% end %>
-      <div class='text-center'>
+
+      <div class="my-4 text-center">
+        <p>またはソーシャルアカウントでログイン</p>
+        <%= link_to "Googleでログイン", auth_at_provider_path(:google), class: "btn btn-danger mb-2 w-100" %>
+        <%= link_to "X (Twitter)でログイン", auth_at_provider_path(:twitter), class: "btn btn-info text-white w-100" %>
+      </div>
+
+      <div class="text-center">
         <%= link_to t('users.new.to_login_page'), login_path %>
       </div>
     </div>

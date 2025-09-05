@@ -1,5 +1,7 @@
 class User < ApplicationRecord
-  authenticates_with_sorcery!
+  authenticates_with_sorcery! do |config|
+    config.external_providers = [ :google, :twitter ]
+  end
 
   before_create :setup_activation
 
@@ -15,6 +17,9 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorite_posts, through: :favorites, source: :post
   has_many :visits, dependent: :destroy
+
+  # 外部認証情報との関連付けを追加
+  has_many :authentications, dependent: :destroy
 
   private
 
