@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   authenticates_with_sorcery! do |config|
-    config.external_providers = [:google, :twitter]
+    config.external_providers = [ :google, :twitter ]
   end
 
   before_create :setup_activation

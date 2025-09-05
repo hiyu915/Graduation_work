@@ -17,8 +17,8 @@ Rails.application.routes.draw do
   get "terms", to: "pages#terms", as: :terms
 
   resources :posts, only: %i[index new create show edit update destroy] do
-    resource :favorite, only: [:create, :destroy]
-    resource :visit, only: [:create, :destroy]
+    resource :favorite, only: [ :create, :destroy ]
+    resource :visit, only: [ :create, :destroy ]
     collection do
       get :cities
       get :map
@@ -30,11 +30,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :cities, only: [:index]
+  resources :cities, only: [ :index ]
   resources :password_resets, only: %i[new create edit update]
-  resource :account, only: [:show, :destroy], controller: "accounts"
-  
-  resources :contacts, only: [:new, :create] do
+  resource :account, only: [ :show, :destroy ], controller: "accounts"
+
+  resources :contacts, only: [ :new, :create ] do
     collection do
       post :confirm
     end
@@ -54,8 +54,8 @@ Rails.application.routes.draw do
   # Google / Twitter 共通コールバック
   # providerパラメータを必ず渡すように defaults を指定
   get "/auth/:provider/callback", to: "oauths#callback", as: :oauth_callback
-  get "/oauth/callback", to: "oauths#callback", defaults: { provider: 'google' }
+  get "/oauth/callback", to: "oauths#callback", defaults: { provider: "google" }
 
   # Sorcery 未完了OAuth用
-  post 'users/finish_oauth', to: 'users#finish_oauth', as: :finish_oauth_users
+  post "users/finish_oauth", to: "users#finish_oauth", as: :finish_oauth_users
 end

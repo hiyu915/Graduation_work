@@ -6,7 +6,7 @@ class CreateAuthentications < ActiveRecord::Migration[7.1]
       t.string :uid, null: false
       t.timestamps
     end
-    add_index :authentications, [:provider, :uid], unique: true
+    add_index :authentications, [ :provider, :uid ], unique: true
 
     if column_exists?(:users, :provider) && column_exists?(:users, :uid)
       reversible do |dir|

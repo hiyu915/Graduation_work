@@ -36,7 +36,7 @@ Rails.application.configure do
   # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
 
   # Log to STDOUT with the current request id as a default log tag.
-  config.log_tags = [:request_id]
+  config.log_tags = [ :request_id ]
   config.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
 
   # Change to "debug" to log everything (including potentially personally-identifiable information!)
@@ -90,7 +90,7 @@ Rails.application.configure do
 
   # --- Sorcery callback URLs for production ---
   config.x.sorcery = {
-    google_callback_url: 'https://repilog.com/oauth/callback',
-    twitter_callback_url: 'https://repilog.com/oauth/callback?provider=twitter'
+    google_callback_url: "https://repilog.com/oauth/callback",
+    twitter_callback_url: "https://repilog.com/oauth/callback?provider=twitter"
   }
 end
