@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="ja">
   <head>
+
+    <%= yield :head %>
+
+    <%= favicon_link_tag '/favicon.ico' %>
+    <%= favicon_link_tag '/icon.png', rel: 'icon', type: 'image/png' %>
+    <%= favicon_link_tag '/icon.svg', rel: 'icon', type: 'image/svg+xml' %>
+    <%= favicon_link_tag '/icon.png', rel: 'apple-touch-icon' %>
+
     <title><%= page_title(yield(:title)) %></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,15 +16,6 @@
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= yield :head %>
-
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
