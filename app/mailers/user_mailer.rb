@@ -3,7 +3,7 @@ class UserMailer < ApplicationMailer
 
   def activation_needed_email(user)
     @user = user
-    @url = activate_url(id: user.activation_token)
+    @url = activate_user_url(@user.activation_token)
     mail(to: user.email, subject: t("defaults.activation_needed"))
   end
 
@@ -13,10 +13,9 @@ class UserMailer < ApplicationMailer
   end
 
   def reset_password_email(user)
-    @user = User.find user.id
-    @url  = edit_password_reset_url(@user.reset_password_token)
-    mail(to: user.email,
-         subject: t("defaults.password_reset"))
+    @user = user  # ← ここを修正
+    @url = edit_password_reset_url(@user.reset_password_token)
+    mail(to: user.email, subject: t("defaults.password_reset"))
   end
 
   def email_change_verification(user)

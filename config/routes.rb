@@ -47,15 +47,14 @@ Rails.application.routes.draw do
   get "privacy", to: "static_pages#privacy"
   get "rankings/regional", to: "rankings#regional"
 
-  # --- OAuthルート ---
+  # --- OAuthルート（修正版） ---
   # OAuth認証開始
   get "/auth/:provider", to: "oauths#oauth", as: :auth_at_provider
 
-  # Google / Twitter 共通コールバック
-  # providerパラメータを必ず渡すように defaults を指定
-  get "/auth/:provider/callback", to: "oauths#callback", as: :oauth_callback
-  get "/oauth/callback", to: "oauths#callback", defaults: { provider: "google" }
+  # OAuth共通コールバック
+  post "/oauth/callback", to: "oauths#callback"
+  get "/oauth/callback", to: "oauths#callback"
 
-  # Sorcery 未完了OAuth用
+  # Sorcery未完了OAuth用
   post "users/finish_oauth", to: "users#finish_oauth", as: :finish_oauth_users
 end
