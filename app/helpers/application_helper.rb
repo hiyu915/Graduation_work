@@ -6,27 +6,27 @@ module ApplicationHelper
 
   def default_meta_tags(page_title_text = nil)
     {
-      site: 'リピログ',
-      title: page_title_text || 'リピログ',
+      site: "リピログ",
+      title: page_title_text || "リピログ",
       reverse: true,
-      charset: 'utf-8',
-      description: 'リピログは、「また行きたい」と思ったお店を中心に記録・整理できるグルメ記録アプリです。',
-      keywords: 'グルメ, 記録, 食事, リピート',
+      charset: "utf-8",
+      description: "リピログは、「また行きたい」と思ったお店を中心に記録・整理できるグルメ記録アプリです。",
+      keywords: "グルメ, 記録, 食事, リピート",
       canonical: request.original_url,
-      separator: '|',
+      separator: "|",
       og: {
         site_name: :site,
-        title: page_title_text || 'リピログ',
+        title: page_title_text || "リピログ",
         description: :description,
-        type: 'website',
+        type: "website",
         url: request.original_url,
-        image: image_url('ogp.png'),
-        local: 'ja-JP'
+        image: image_url("ogp.png"),
+        local: "ja-JP"
       },
       twitter: {
-        card: 'summary_large_image',
-        site: '@hiyuRUNTEQ',
-        image: image_url('ogp.png')
+        card: "summary_large_image",
+        site: "@hiyuRUNTEQ",
+        image: image_url("ogp.png")
       }
     }
   end
