@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   resources :users do
     collection do
       get :edit_email
-      get :edit_email_form
       post :request_email_change
       get :confirm_email_change
       get :account_info
@@ -13,6 +12,7 @@ Rails.application.routes.draw do
   end
 
   get "/activate/:id", to: "users#activate", as: :activate
+
   get "terms", to: "pages#terms", as: :terms
 
   resources :posts, only: %i[index new create show edit update destroy] do
@@ -30,7 +30,9 @@ Rails.application.routes.draw do
   end
 
   resources :cities, only: [ :index ]
+
   resources :password_resets, only: %i[new create edit update]
+
   resource :account, only: [ :show, :destroy ], controller: "accounts"
 
   resources :contacts, only: [ :new, :create ] do
@@ -44,12 +46,10 @@ Rails.application.routes.draw do
   delete "logout", to: "user_sessions#destroy"
 
   get "privacy", to: "static_pages#privacy"
+
   get "rankings/regional", to: "rankings#regional"
 
-  # --- 修正されたOAuthルート ---
   post "oauth/callback" => "oauths#callback"
   get "oauth/callback" => "oauths#callback" 
   get "oauth/:provider" => "oauths#oauth", :as => :auth_at_provider
-
-  get "/auth/failure" => "oauths#failure"
 end
