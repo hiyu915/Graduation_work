@@ -1,4 +1,4 @@
-Rails.application.config.sorcery.submodules = [:reset_password, :user_activation, :external]
+Rails.application.config.sorcery.submodules = [ :reset_password, :user_activation, :external ]
 
 Rails.application.config.sorcery.configure do |config|
   # ----------------------
@@ -33,7 +33,7 @@ Rails.application.config.sorcery.configure do |config|
   config.google.callback_url = Rails.env.production? ?
                               "https://repilog.com/oauth/callback?provider=google" :
                               "http://localhost:3000/oauth/callback?provider=google"
-  config.google.user_info_mapping = { email: "email"}
+  config.google.user_info_mapping = { email: "email" }
 
   # ----------------------
   # Userクラスの指定は最後に
