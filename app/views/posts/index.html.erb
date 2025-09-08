@@ -82,7 +82,11 @@
             <%= t('posts.index.search.reset') %>
           </button>
         </div>
-
+      <% end %>
+      <%= link_to "https://twitter.com/intent/tweet?text=#{URI.encode_www_form_component('一緒にリピログを使おう')}&url=#{URI.encode_www_form_component(request.original_url)}", target: "_blank", rel: "noopener" do %>
+        <%= image_tag "chara.png", alt: "マイマップアイコン", size: "150x150",
+                      class: "position-absolute",
+                      style: "bottom: -20px; right: 0; z-index: 10; transform: translateX(100px);" %>
       <% end %>
     </div>
   </div>
