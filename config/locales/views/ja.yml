@@ -170,6 +170,7 @@ ja:
         end_date: "終了"
         submit: "検索"
         all: "すべて"
+        reset: "リセット"
       error:
         fetch_cities: "市区町村の取得に失敗しました"
     calendar:
