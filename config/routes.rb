@@ -4,8 +4,8 @@ Rails.application.routes.draw do
 
   resources :users do
     collection do
-      get :edit_email       # メール変更用
-      get :edit_email_form  # Twitter認証でメールが返らなかったときの入力ページ
+      get :edit_email
+      get :edit_email_form
       post :request_email_change
       get :confirm_email_change
       get :account_info
@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   end
 
   get "/activate/:id", to: "users#activate", as: :activate
-
   get "terms", to: "pages#terms", as: :terms
 
   resources :posts, only: %i[index new create show edit update destroy] do
@@ -47,13 +46,12 @@ Rails.application.routes.draw do
   get "privacy", to: "static_pages#privacy"
   get "rankings/regional", to: "rankings#regional"
 
-  # --- OAuthルート（修正版） ---
-  # OAuth認証開始
-  get "/auth/:provider", to: "oauths#oauth", as: :auth_at_provider
+  # --- 修正されたOAuthルート ---
+  # OAuth共通コールバック（具体的なルートを先に配置）
+  match "/oauth/callback", to: "oauths#callback", via: [ :get, :post ], as: :oauth_callback
 
-  # OAuth共通コールバック
-  post "/oauth/callback", to: "oauths#callback"
-  get "/oauth/callback", to: "oauths#callback"
+  # OAuth認証開始（汎用的なルートを後に配置）
+  get "/oauth/:provider", to: "oauths#oauth", as: :oauth  # ← 修正：oauth_index → oauth
 
   # Sorcery未完了OAuth用
   post "users/finish_oauth", to: "users#finish_oauth", as: :finish_oauth_users

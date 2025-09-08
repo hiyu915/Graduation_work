@@ -20,71 +20,38 @@ class OauthsController < ApplicationController
 
   # OAuth コールバック
   def callback
-    provider = params[:provider]&.to_sym
+    provider = map_provider(params[:provider])
 
-    Rails.logger.debug("=== ENHANCED OAUTH DEBUG ===")
-    Rails.logger.debug("Provider param: #{params[:provider]}")
-    Rails.logger.debug("Mapped provider: #{provider}")
-    Rails.logger.debug("Request path: #{request.path}")
-    Rails.logger.debug("Request method: #{request.method}")
-    Rails.logger.debug("All params: #{params.inspect}")
+    Rails.logger.debug("=== CALLBACK DEBUG START ===")
+    Rails.logger.debug("Provider: #{provider}")
+    Rails.logger.debug("Request URL: #{request.url}")
+    Rails.logger.debug("Params: #{params.inspect}")
+    Rails.logger.debug("Query String: #{request.query_string}")
+    Rails.logger.debug("Request env keys: #{request.env.keys.grep(/omni|auth/)}")
+    Rails.logger.debug("Auth hash present: #{request.env['omniauth.auth'].present?}")
 
-    # ★ 重要：Sorcery内部状態の詳細確認
-    Rails.logger.debug("Sorcery external_providers: #{Sorcery::Controller::Config.external_providers}")
-    Rails.logger.debug("Google callback_url: #{Sorcery::Controller::Config.google.callback_url}")
-    Rails.logger.debug("Google scope: #{Sorcery::Controller::Config.google.scope}")
-
-    # ★ 重要：request.envの詳細調査
-    omniauth_keys = request.env.keys.select { |k| k.to_s.match?(/omni|oauth|auth/) }
-    Rails.logger.debug("Auth-related env keys: #{omniauth_keys}")
-
-    omniauth_keys.each do |key|
-      value = request.env[key]
-      if value.is_a?(Hash)
-        Rails.logger.debug("  #{key}: #{value.keys}")
-      else
-        Rails.logger.debug("  #{key}: #{value.inspect}")
-      end
+    if request.env["omniauth.auth"]
+      Rails.logger.debug("✅ Auth hash found!")
+      Rails.logger.debug("Auth hash: #{request.env['omniauth.auth'].inspect}")
+    else
+      Rails.logger.debug("❌ No auth hash found in request.env")
+      Rails.logger.debug("Available env keys with 'auth': #{request.env.keys.select { |k| k.to_s.include?('auth') }}")
     end
 
-    # ★ 重要：failure情報の詳細確認
-    if request.env["omniauth.error"]
-      Rails.logger.error("Omniauth Error: #{request.env['omniauth.error']}")
-      Rails.logger.error("Error Type: #{request.env['omniauth.error.type']}")
-      Rails.logger.error("Error Strategy: #{request.env['omniauth.error.strategy']}")
-    end
+    Rails.logger.debug("=== CALLBACK DEBUG END ===")
 
-    Rails.logger.debug("=== END ENHANCED DEBUG ===")
-
-    # 既存のコールバック処理
     if (@user = login_from(provider))
       redirect_to root_path, notice: "#{provider.to_s.titleize}でログインしました"
     else
       begin
-        auth_hash = request.env["omniauth.auth"]
-
-        if auth_hash.nil?
-          Rails.logger.error("❌ auth_hash is still nil after configuration check!")
-          redirect_to login_path, alert: "OAuth認証に失敗しました（設定確認後もレスポンス未受信）"
-          return
-        end
-
-        Rails.logger.debug("✅ Auth Hash received!")
-        Rails.logger.debug("Auth Hash structure: #{auth_hash.to_hash}")
-
         @user = create_from(provider)
-
-        if @user
-          redirect_to root_path, notice: "#{provider.to_s.titleize}でアカウントを作成しました"
-        else
-          Rails.logger.error("User creation failed")
-          redirect_to login_path, alert: "ユーザー作成に失敗しました"
-        end
-
+        reset_session
+        auto_login(@user)
+        redirect_to root_path, notice: "#{provider.to_s.titleize}でログインしました"
       rescue StandardError => e
-        Rails.logger.error("[OAuth ERROR] #{e.class}: #{e.message}")
-        Rails.logger.error("Backtrace: #{e.backtrace.first(5)}")
-        redirect_to login_path, alert: "OAuth認証でエラーが発生しました"
+        Rails.logger.error("OAuth creation error: #{e.message}")
+        Rails.logger.error("Backtrace: #{e.backtrace}")
+        redirect_to login_path, alert: "#{provider.to_s.titleize}でのログインに失敗しました"
       end
     end
   end

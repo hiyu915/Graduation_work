@@ -3,6 +3,10 @@ source "https://rubygems.org"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3"
 gem "sorcery", "~> 0.16.5"
+gem "omniauth"
+gem "omniauth-google-oauth2"
+gem "omniauth-rails_csrf_protection"
+
 gem "meta-tags"
 
 gem "rails-i18n", "~> 7.0.0"
