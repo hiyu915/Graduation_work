@@ -1,5 +1,6 @@
 class OauthsController < ApplicationController
   skip_before_action :require_login, only: %i[oauth callback]
+  skip_before_action :verify_authenticity_token, only: [:callback, :oauth]
 
   # OAuth 認証開始
   def oauth
@@ -8,12 +9,39 @@ class OauthsController < ApplicationController
       redirect_to login_path, alert: "#{provider.to_s.titleize}はサポートされていません" and return
     end
 
+    Rails.logger.debug("=== MIDDLEWARE CHECK ===")
+    Rails.logger.debug("OmniAuth middleware loaded: #{Rails.application.middleware.include?(OmniAuth::Builder)}")
+    Rails.logger.debug("Available middleware: #{Rails.application.middleware.map(&:inspect).grep(/omni/i)}")
+    
+    Rails.logger.debug("=== PROVIDER CHECK ===")
+    Rails.logger.debug("Params provider: #{params[:provider]}")
+    Rails.logger.debug("Mapped provider: #{map_provider(params[:provider])}")
+    Rails.logger.debug("=== PROVIDER CHECK END ===")
+
     Rails.logger.debug("=== OAuth DEBUG START ===")
     Rails.logger.debug("Provider: #{provider}")
     Rails.logger.debug("Current environment: #{Rails.env}")
     Rails.logger.debug("Expected callback URL: #{url_for(controller: :oauths, action: :callback, provider: provider, only_path: false)}")
     Rails.logger.debug("Sorcery callback URL: #{Sorcery::Controller::Config.send(provider).callback_url}")
     Rails.logger.debug("=== OAuth DEBUG END ===")
+    
+    Rails.logger.debug("=== GOOGLE CONFIG CHECK ===")
+    Rails.logger.debug("Google Client ID present: #{Rails.application.credentials.google&.[](:client_id)&.present? ? 'YES' : 'NO'}")
+    Rails.logger.debug("Google Client Secret present: #{Rails.application.credentials.google&.[](:client_secret)&.present? ? 'YES' : 'NO'}")
+    Rails.logger.debug("=== GOOGLE CONFIG CHECK END ===")
+    
+    Rails.logger.debug("=== SORCERY DETAILED CONFIG ===")
+    Rails.logger.debug("Sorcery submodules: #{Rails.application.config.sorcery.submodules}")
+    Rails.logger.debug("External providers: #{Sorcery::Controller::Config.external_providers}")
+    
+    if provider == :google && Sorcery::Controller::Config.respond_to?(:google)
+      google_config = Sorcery::Controller::Config.google
+      Rails.logger.debug("Google config present: #{google_config.present?}")
+      Rails.logger.debug("Google key present: #{google_config&.key&.present?}")
+      Rails.logger.debug("Google secret present: #{google_config&.secret&.present?}")
+      Rails.logger.debug("Google callback URL: #{google_config&.callback_url}")
+    end
+    Rails.logger.debug("=== SORCERY DETAILED CONFIG END ===")
 
     login_at(provider) # Sorcery が Google にリダイレクト
   end
@@ -21,6 +49,20 @@ class OauthsController < ApplicationController
   # OAuth コールバック
   def callback
     provider = map_provider(params[:provider])
+
+    if params[:error]
+      Rails.logger.error("🚨 OAuth Error in URL params:")
+      Rails.logger.error("  Error: #{params[:error]}")
+      Rails.logger.error("  Error description: #{params[:error_description]}")
+      Rails.logger.error("  Error URI: #{params[:error_uri]}")
+      Rails.logger.error("  State: #{params[:state]}")
+    end
+
+    Rails.logger.debug("=== REQUEST ENV CHECK ===")
+    Rails.logger.debug("omniauth.auth present: #{request.env.key?('omniauth.auth')}")
+    Rails.logger.debug("omniauth.origin present: #{request.env.key?('omniauth.origin')}")
+    Rails.logger.debug("omniauth.strategy present: #{request.env.key?('omniauth.strategy')}")
+    Rails.logger.debug("omniauth.error present: #{request.env.key?('omniauth.error')}")
 
     Rails.logger.debug("=== CALLBACK DEBUG START ===")
     Rails.logger.debug("Provider: #{provider}")
@@ -36,6 +78,13 @@ class OauthsController < ApplicationController
     else
       Rails.logger.debug("❌ No auth hash found in request.env")
       Rails.logger.debug("Available env keys with 'auth': #{request.env.keys.select { |k| k.to_s.include?('auth') }}")
+    end
+
+     if request.env['omniauth.error']
+      Rails.logger.error("🚨 OmniAuth Error detected:")
+      Rails.logger.error("  Type: #{request.env['omniauth.error.type']}")
+      Rails.logger.error("  Strategy: #{request.env['omniauth.error.strategy']}")
+      Rails.logger.error("  Message: #{request.env['omniauth.error']}")
     end
 
     Rails.logger.debug("=== CALLBACK DEBUG END ===")
@@ -54,6 +103,16 @@ class OauthsController < ApplicationController
         redirect_to login_path, alert: "#{provider.to_s.titleize}でのログインに失敗しました"
       end
     end
+  end
+
+  def failure
+    Rails.logger.error("=== OAUTH FAILURE ===")
+    Rails.logger.error("Failure reason: #{params[:message]}")
+    Rails.logger.error("Strategy: #{params[:strategy]}")
+    Rails.logger.error("All params: #{params.inspect}")
+    Rails.logger.error("=== OAUTH FAILURE END ===")
+    
+    redirect_to login_path, alert: "認証に失敗しました: #{params[:message]}"
   end
 
   private

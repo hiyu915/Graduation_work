@@ -47,12 +47,9 @@ Rails.application.routes.draw do
   get "rankings/regional", to: "rankings#regional"
 
   # --- 修正されたOAuthルート ---
-  # OAuth共通コールバック（具体的なルートを先に配置）
-  match "/oauth/callback", to: "oauths#callback", via: [ :get, :post ], as: :oauth_callback
+  post "oauth/callback" => "oauths#callback"
+  get "oauth/callback" => "oauths#callback" 
+  get "oauth/:provider" => "oauths#oauth", :as => :auth_at_provider
 
-  # OAuth認証開始（汎用的なルートを後に配置）
-  get "/oauth/:provider", to: "oauths#oauth", as: :oauth  # ← 修正：oauth_index → oauth
-
-  # Sorcery未完了OAuth用
-  post "users/finish_oauth", to: "users#finish_oauth", as: :finish_oauth_users
+  get "/auth/failure" => "oauths#failure"
 end

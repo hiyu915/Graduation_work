@@ -73,7 +73,7 @@ Rails.application.configure do
 
   # --- Sorcery callback URLs for development ---
   config.x.sorcery = {
-    google_callback_url: "http://localhost:3000/oauth/callback",
+    google_callback_url: "http://localhost:3000/oauth/callback?provider=google",
     twitter_callback_url: "http://localhost:3000/oauth/callback?provider=twitter"
   }
 end
