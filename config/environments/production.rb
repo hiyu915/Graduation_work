@@ -90,7 +90,7 @@ Rails.application.configure do
 
   # --- Sorcery callback URLs for production ---
   config.x.sorcery = {
-    google_callback_url: "https://repilog.com/oauth/callback",
+    google_callback_url: "https://repilog.com/oauth/callback?provider=google",
     twitter_callback_url: "https://repilog.com/oauth/callback?provider=twitter"
   }
 end
