@@ -34,8 +34,8 @@
 
       <div class="my-4 text-center">
         <p>またはソーシャルアカウントでログイン</p>
-        <%= link_to "Googleでログイン", auth_at_provider_path(:google), class: "btn btn-danger mb-2 w-100" %>
-        <%= link_to "X (Twitter)でログイン", auth_at_provider_path(:twitter), class: "btn btn-info text-white w-100" %>
+        <%= link_to "Googleでログイン", oauth_path(:google), class: "btn btn-danger mb-2 w-100" %>
+        <%= link_to "X (Twitter)でログイン", oauth_path(:twitter), class: "btn btn-info text-white w-100" %>
       </div>
 
       <div class="text-center">

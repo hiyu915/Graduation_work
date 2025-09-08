@@ -2,35 +2,29 @@ require_relative "boot"
 
 require "rails/all"
 
-# Require the gems listed in Gemfile, including any gems
-# you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
 module Myapp
   class Application < Rails::Application
-    # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
-
-    # Please, add to the `ignore` list any other `lib` subdirectories that do
-    # not contain `.rb` files, or that should not be reloaded or eager loaded.
-    # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
 
-    # Configuration for the application, engines, and railties goes here.
-    #
-    # These settings can be overridden in specific environments using the files
-    # in config/environments, which are processed later.
-    #
-    # config.time_zone = "Central Time (US & Canada)"
-    # config.eager_load_paths << Rails.root.join("extras")
-
     config.generators do |g|
-      g.skip_routes true         # `rails generate` で routes.rb の自動更新をスキップ
-      g.helper false             # ヘルパーファイルの生成をスキップ
-      g.test_framework nil       # テストファイルの生成をスキップ
+      g.skip_routes true
+      g.helper false
+      g.test_framework nil
     end
 
     config.i18n.default_locale = :ja
     config.time_zone = "Tokyo"
+
+    # ★ 修正：OmniAuthミドルウェアの設定を削除
+    # config/initializers/omniauth.rbに統一するため、ここからは削除
+
+    # ★ 追加：OmniAuth全体設定のみ
+    config.after_initialize do
+      OmniAuth.config.allowed_request_methods = [:post, :get]
+      OmniAuth.config.silence_get_warning = true
+    end
   end
 end
