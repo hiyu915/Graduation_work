@@ -4,8 +4,8 @@ Rails.application.routes.draw do
 
   resources :users do
     collection do
-      get :edit_email       
-      get :edit_email_form  
+      get :edit_email
+      get :edit_email_form
       post :request_email_change
       get :confirm_email_change
       get :account_info
@@ -48,7 +48,7 @@ Rails.application.routes.draw do
 
   # --- 修正されたOAuthルート ---
   # OAuth共通コールバック（具体的なルートを先に配置）
-  match "/oauth/callback", to: "oauths#callback", via: [:get, :post], as: :oauth_callback
+  match "/oauth/callback", to: "oauths#callback", via: [ :get, :post ], as: :oauth_callback
 
   # OAuth認証開始（汎用的なルートを後に配置）
   get "/oauth/:provider", to: "oauths#oauth", as: :oauth  # ← 修正：oauth_index → oauth

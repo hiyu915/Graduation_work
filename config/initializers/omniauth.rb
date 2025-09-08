@@ -3,16 +3,16 @@ Rails.application.config.middleware.use OmniAuth::Builder do
            Rails.application.credentials.dig(:google, :client_id),
            Rails.application.credentials.dig(:google, :client_secret),
            {
-             scope: 'email,profile,openid',
-             access_type: 'online',
-             prompt: 'select_account',
+             scope: "email,profile,openid",
+             access_type: "online",
+             prompt: "select_account",
              skip_jwt: true,
-             name: 'google'  # Sorceryとの連携用
+             name: "google"  # Sorceryとの連携用
            }
 end
 
 # OmniAuth基本設定
-OmniAuth.config.allowed_request_methods = [:post, :get]
+OmniAuth.config.allowed_request_methods = [ :post, :get ]
 OmniAuth.config.silence_get_warning = true
 
 # エラーハンドリング（シンプル版）

@@ -13,7 +13,7 @@ Rails.application.config.sorcery.configure do |config|
   end
 
   # === 外部認証プロバイダ設定 ===
-  config.external_providers = [:google]  # ← まずはGoogleのみでテスト
+  config.external_providers = [ :google ]  # ← まずはGoogleのみでテスト
 
   # ★ 重要：Google OAuth設定
   config.google.key = Rails.application.credentials.dig(:google, :client_id)
@@ -21,12 +21,12 @@ Rails.application.config.sorcery.configure do |config|
   config.google.callback_url = Rails.env.production? ?
                               "https://repilog.com/oauth/callback?provider=google" :
                               "http://localhost:3000/oauth/callback?provider=google"
-  
+
   # ★ 重要：user_info_mapping
   config.google.user_info_mapping = {
     email: "email"
   }
-  
+
   # ★ 重要：Google API設定
   config.google.scope = "email profile openid"
   config.google.user_info_url = "https://www.googleapis.com/oauth2/v2/userinfo"

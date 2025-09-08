@@ -21,7 +21,7 @@ class OauthsController < ApplicationController
   # OAuth コールバック
   def callback
     provider = map_provider(params[:provider])
-    
+
     Rails.logger.debug("=== CALLBACK DEBUG START ===")
     Rails.logger.debug("Provider: #{provider}")
     Rails.logger.debug("Request URL: #{request.url}")
@@ -29,15 +29,15 @@ class OauthsController < ApplicationController
     Rails.logger.debug("Query String: #{request.query_string}")
     Rails.logger.debug("Request env keys: #{request.env.keys.grep(/omni|auth/)}")
     Rails.logger.debug("Auth hash present: #{request.env['omniauth.auth'].present?}")
-    
-    if request.env['omniauth.auth']
+
+    if request.env["omniauth.auth"]
       Rails.logger.debug("✅ Auth hash found!")
       Rails.logger.debug("Auth hash: #{request.env['omniauth.auth'].inspect}")
     else
       Rails.logger.debug("❌ No auth hash found in request.env")
       Rails.logger.debug("Available env keys with 'auth': #{request.env.keys.select { |k| k.to_s.include?('auth') }}")
     end
-    
+
     Rails.logger.debug("=== CALLBACK DEBUG END ===")
 
     if (@user = login_from(provider))
