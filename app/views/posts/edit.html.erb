@@ -22,7 +22,15 @@
       <label class="form-label"><%= t('helpers.label.post.shop_name') %></label>
       <div class="row">
         <div class="col-auto">
-          <%= text_field_tag 'post[shop_name]', @post.shop&.name, class: 'form-control' %>
+          <div data-controller="autocomplete" 
+              data-autocomplete-url-value="<%= autocomplete_posts_path %>" 
+              role="combobox">
+            <%= text_field_tag 'post[shop_name]', @post.shop&.name, 
+                  data: { autocomplete_target: 'input' }, 
+                  class: 'form-control' %>
+            <%= hidden_field_tag 'post[shop_id]', @post.shop&.id, data: { autocomplete_target: 'hidden' } %>
+            <ul class="list-group" data-autocomplete-target="results"></ul>
+          </div>
         </div>
       </div>
     </div>

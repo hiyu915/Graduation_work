@@ -16,7 +16,11 @@
         <!-- 店名 -->
         <div class="col-12 col-md-3">
           <%= f.label :shop_name_cont, t('helpers.label.post.shop_name'), class: "form-label fw-bold" %>
-          <%= f.search_field :shop_name_cont, class: "form-control" %>
+          <div data-controller="autocomplete" data-autocomplete-url-value="<%= autocomplete_posts_path %>" role="combobox">
+            <%= f.search_field :shop_name_cont, data: { autocomplete_target: 'input' }, class: "form-control" %>
+            <%= f.hidden_field :shop_name, data: { autocomplete_target: 'hidden' } %>
+            <ul class="list-group" data-autocomplete-target="results"></ul>
+          </div>
         </div>
 
         <!-- 訪問日 -->
@@ -82,11 +86,14 @@
             <%= t('posts.index.search.reset') %>
           </button>
         </div>
-      <% end %>
-      <%= link_to "https://twitter.com/intent/tweet?text=#{URI.encode_www_form_component('一緒にリピログを使おう')}&url=#{URI.encode_www_form_component(root_url)}", target: "_blank", rel: "noopener" do %>
-        <%= image_tag "chara.png", alt: "マイマップアイコン", size: "150x150",
-                      class: "position-absolute",
-                      style: "bottom: -20px; right: 0; z-index: 10; transform: translateX(100px);" %>
+
+        <!-- Twitter シェアリンク -->
+        <%= link_to "https://twitter.com/intent/tweet?text=#{URI.encode_www_form_component('一緒にリピログを使おう')}&url=#{URI.encode_www_form_component(root_url)}", target: "_blank", rel: "noopener" do %>
+          <%= image_tag "chara.png", alt: "マイマップアイコン", size: "150x150",
+                        class: "position-absolute",
+                        style: "bottom: -20px; right: 0; z-index: 10; transform: translateX(100px);" %>
+        <% end %>
+
       <% end %>
     </div>
   </div>
@@ -95,7 +102,6 @@
   <div class="d-flex justify-content-end mb-3 gap-2 flex-wrap">
     <%= link_to t("maps.title"), map_posts_path,
           class: "btn btn-success", data: { turbo: false } %>
-
     <%= link_to t('posts.calendar.title'), calendar_posts_path,
           class: "btn btn-info", data: { turbo: false } %>
   </div>

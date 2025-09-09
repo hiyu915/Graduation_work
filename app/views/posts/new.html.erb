@@ -16,10 +16,19 @@
       <label class="form-label"><%= t('posts.new.item.shop_name') %></label>
       <div class="row">
         <div class="col-auto">
-          <%= f.text_field :shop_name, class: 'form-control' %>
+          <div data-controller="autocomplete" 
+              data-autocomplete-url-value="<%= autocomplete_posts_path %>" 
+              role="combobox">
+            <%= f.search_field :shop_name, 
+                  data: { autocomplete_target: 'input' }, 
+                  class: 'form-control' %>
+            <%= f.hidden_field :shop_name_id, data: { autocomplete_target: 'hidden' } %>
+            <ul class="list-group" data-autocomplete-target="results"></ul>
+          </div>
         </div>
       </div>
     </div>
+
 
     <div class="mb-3">
       <label class="form-label"><%= t('posts.new.item.category') %></label>

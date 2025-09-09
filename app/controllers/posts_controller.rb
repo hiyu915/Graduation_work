@@ -160,6 +160,16 @@ class PostsController < ApplicationController
     @posts = current_user.posts.where.not(visit_date: nil).includes(:shop)
   end
 
+  def autocomplete
+    @posts = Post.joins(:shop)
+                .where("shops.name ILIKE ?", "%#{params[:q]}%")
+                .limit(10)
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def post_params
