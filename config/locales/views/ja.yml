@@ -66,6 +66,8 @@ ja:
     new:
       title: 会員登録
       to_login_page: ログインページへ
+      or_google_login: "またはGoogleアカウントでログイン"
+      google_login: "Googleでログイン"
     activation:
       sent: 確認メールを送信しました。メールをご確認ください。
       success: アカウントが有効化されました。
