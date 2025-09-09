@@ -4,8 +4,6 @@ source "https://rubygems.org"
 gem "rails", "~> 7.1.3"
 gem "sorcery", "~> 0.16.5"
 
-gem "meta-tags"
-
 gem "rails-i18n", "~> 7.0.0"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
@@ -56,6 +54,9 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  gem "rspec-rails"
+  gem "factory_bot_rails"
 end
 
 group :development do
@@ -79,3 +80,4 @@ gem "bootstrap5-kaminari-views"
 gem "ransack"
 gem "geocoder"
 gem "simple_calendar"
+gem "meta-tags"
