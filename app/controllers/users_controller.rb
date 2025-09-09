@@ -1,11 +1,13 @@
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: %i[new create activate]
-  before_action :require_login, only: %i[edit_email request_email_change confirm_email_change]
+  skip_before_action :require_login, only: %i[new create activate finish_oauth]
+  before_action :require_login, only: %i[edit_email request_email_change confirm_email_change account_info]
 
+  # 新規登録フォーム
   def new
     @user = User.new
   end
 
+  # ユーザー作成
   def create
     @user = User.new(user_params)
     if @user.save
@@ -19,6 +21,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # メール認証リンク経由
   def activate
     @user = User.load_from_activation_token(params[:id])
     if @user&.activate!
@@ -28,10 +31,12 @@ class UsersController < ApplicationController
     end
   end
 
+  # メールアドレス再設定用フォーム（ログイン中ユーザー）
   def edit_email
     @user = current_user
   end
 
+  # メールアドレス変更リクエスト
   def request_email_change
     @user = current_user
     new_email = params[:user][:unconfirmed_email]
@@ -46,6 +51,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # メールアドレス変更確認
   def confirm_email_change
     user = User.find_by(email_change_token: params[:token])
 
@@ -57,8 +63,31 @@ class UsersController < ApplicationController
     end
   end
 
+  # ユーザーアカウント情報
   def account_info
     @user = current_user
+  end
+
+  # --- OAuth でメール未取得時の処理 ---
+  def finish_oauth
+    data = session[:external_auth_data]
+
+    unless data.present? && data[:provider].present? && data[:uid].present?
+      redirect_to login_path, alert: "OAuth情報が見つかりません。再度ログインしてください。" and return
+    end
+
+    @user = User.new(email: params[:user][:email])
+    @user.authentications.build(provider: data[:provider], uid: data[:uid])
+
+    if @user.save
+      reset_session
+      auto_login(@user)
+      session.delete(:external_auth_data)
+      redirect_to root_path, notice: "#{data[:provider].to_s.titleize}でログインしました"
+    else
+      flash.now[:danger] = "ユーザー作成に失敗しました"
+      render :edit_email_form, status: :unprocessable_entity
+    end
   end
 
   private

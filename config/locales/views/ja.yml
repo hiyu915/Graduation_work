@@ -66,6 +66,8 @@ ja:
     new:
       title: 会員登録
       to_login_page: ログインページへ
+      or_google_login: "またはGoogleアカウントでログイン"
+      google_login: "Googleでログイン"
     activation:
       sent: 確認メールを送信しました。メールをご確認ください。
       success: アカウントが有効化されました。
@@ -170,6 +172,7 @@ ja:
         end_date: "終了"
         submit: "検索"
         all: "すべて"
+        reset: "リセット"
       error:
         fetch_cities: "市区町村の取得に失敗しました"
     calendar:
@@ -276,3 +279,8 @@ ja:
       previous: "&lsaquo; 前"
       next: "次 &rsaquo;"
       truncate: "..."
+
+  oauths:
+    callback:
+      success: "%{provider}アカウントでログインしました"
+      failure: "%{provider}アカウントでのログインに失敗しました"

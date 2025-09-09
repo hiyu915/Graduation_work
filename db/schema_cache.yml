@@ -31,7 +31,7 @@ columns:
     default_function:
     collation:
     comment:
-  - &3 !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+  - &4 !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
     serial:
     identity:
     generated: ''
@@ -50,7 +50,7 @@ columns:
     default_function:
     collation:
     comment:
-  - &4 !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+  - &5 !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
     serial:
     identity:
     generated: ''
@@ -61,13 +61,13 @@ columns:
     default_function:
     collation:
     comment:
-  categories:
+  authentications:
   - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
     serial: true
     identity:
     generated: ''
     name: id
-    sql_type_metadata: &5 !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::TypeMetadata
+    sql_type_metadata: &3 !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::TypeMetadata
       delegate_dc_obj: !ruby/object:ActiveRecord::ConnectionAdapters::SqlTypeMetadata
         sql_type: bigint
         type: :integer
@@ -76,6 +76,53 @@ columns:
         scale:
       oid: 20
       fmod: -1
+    'null': false
+    default:
+    default_function: nextval('authentications_id_seq'::regclass)
+    collation:
+    comment:
+  - &10 !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: user_id
+    sql_type_metadata: *3
+    'null': false
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: provider
+    sql_type_metadata: *1
+    'null': false
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: uid
+    sql_type_metadata: *1
+    'null': false
+    default:
+    default_function:
+    collation:
+    comment:
+  - *4
+  - *5
+  categories:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial: true
+    identity:
+    generated: ''
+    name: id
+    sql_type_metadata: *3
     'null': false
     default:
     default_function: nextval('categories_id_seq'::regclass)
@@ -92,15 +139,15 @@ columns:
     default_function:
     collation:
     comment:
-  - *3
   - *4
+  - *5
   cities:
   - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
     serial: true
     identity:
     generated: ''
     name: id
-    sql_type_metadata: *5
+    sql_type_metadata: *3
     'null': false
     default:
     default_function: nextval('cities_id_seq'::regclass)
@@ -112,36 +159,36 @@ columns:
     identity:
     generated: ''
     name: prefecture_id
-    sql_type_metadata: *5
+    sql_type_metadata: *3
     'null': false
     default:
     default_function:
     collation:
     comment:
-  - *3
   - *4
+  - *5
   companions:
   - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
     serial: true
     identity:
     generated: ''
     name: id
-    sql_type_metadata: *5
+    sql_type_metadata: *3
     'null': false
     default:
     default_function: nextval('companions_id_seq'::regclass)
     collation:
     comment:
   - *6
-  - *3
   - *4
+  - *5
   favorites:
   - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
     serial: true
     identity:
     generated: ''
     name: id
-    sql_type_metadata: *5
+    sql_type_metadata: *3
     'null': false
     default:
     default_function: nextval('favorites_id_seq'::regclass)
@@ -177,30 +224,30 @@ columns:
     default_function:
     collation:
     comment:
-  - *3
   - *4
+  - *5
   feelings:
   - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
     serial: true
     identity:
     generated: ''
     name: id
-    sql_type_metadata: *5
+    sql_type_metadata: *3
     'null': false
     default:
     default_function: nextval('feelings_id_seq'::regclass)
     collation:
     comment:
   - *6
-  - *3
   - *4
+  - *5
   locations:
   - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
     serial: true
     identity:
     generated: ''
     name: id
-    sql_type_metadata: *5
+    sql_type_metadata: *3
     'null': false
     default:
     default_function: nextval('locations_id_seq'::regclass)
@@ -212,43 +259,63 @@ columns:
     identity:
     generated: ''
     name: city_id
-    sql_type_metadata: *5
+    sql_type_metadata: *3
     'null': false
     default:
     default_function:
     collation:
     comment:
-  - *3
   - *4
+  - *5
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: latitude
+    sql_type_metadata: &9 !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::TypeMetadata
+      delegate_dc_obj: !ruby/object:ActiveRecord::ConnectionAdapters::SqlTypeMetadata
+        sql_type: double precision
+        type: :float
+        limit:
+        precision:
+        scale:
+      oid: 701
+      fmod: -1
+    'null': true
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: longitude
+    sql_type_metadata: *9
+    'null': true
+    default:
+    default_function:
+    collation:
+    comment:
   posts:
   - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
     serial: true
     identity:
     generated: ''
     name: id
-    sql_type_metadata: *5
+    sql_type_metadata: *3
     'null': false
     default:
     default_function: nextval('posts_id_seq'::regclass)
     collation:
     comment:
-  - &9 !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
-    serial:
-    identity:
-    generated: ''
-    name: user_id
-    sql_type_metadata: *5
-    'null': false
-    default:
-    default_function:
-    collation:
-    comment:
+  - *10
   - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
     serial:
     identity:
     generated: ''
     name: category_id
-    sql_type_metadata: *5
+    sql_type_metadata: *3
     'null': false
     default:
     default_function:
@@ -259,7 +326,7 @@ columns:
     identity:
     generated: ''
     name: shop_id
-    sql_type_metadata: *5
+    sql_type_metadata: *3
     'null': false
     default:
     default_function:
@@ -270,7 +337,7 @@ columns:
     identity:
     generated: ''
     name: companion_id
-    sql_type_metadata: *5
+    sql_type_metadata: *3
     'null': false
     default:
     default_function:
@@ -281,7 +348,7 @@ columns:
     identity:
     generated: ''
     name: feeling_id
-    sql_type_metadata: *5
+    sql_type_metadata: *3
     'null': false
     default:
     default_function:
@@ -292,7 +359,7 @@ columns:
     identity:
     generated: ''
     name: visit_reason_id
-    sql_type_metadata: *5
+    sql_type_metadata: *3
     'null': false
     default:
     default_function:
@@ -322,7 +389,7 @@ columns:
     identity:
     generated: ''
     name: visit_date
-    sql_type_metadata: &10 !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::TypeMetadata
+    sql_type_metadata: &11 !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::TypeMetadata
       delegate_dc_obj: !ruby/object:ActiveRecord::ConnectionAdapters::SqlTypeMetadata
         sql_type: date
         type: :date
@@ -336,8 +403,8 @@ columns:
     default_function:
     collation:
     comment:
-  - *3
   - *4
+  - *5
   - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
     serial:
     identity:
@@ -366,15 +433,15 @@ columns:
     identity:
     generated: ''
     name: id
-    sql_type_metadata: *5
+    sql_type_metadata: *3
     'null': false
     default:
     default_function: nextval('prefectures_id_seq'::regclass)
     collation:
     comment:
   - *6
-  - *3
   - *4
+  - *5
   schema_migrations:
   - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
     serial:
@@ -393,7 +460,7 @@ columns:
     identity:
     generated: ''
     name: id
-    sql_type_metadata: *5
+    sql_type_metadata: *3
     'null': false
     default:
     default_function: nextval('shops_id_seq'::regclass)
@@ -405,21 +472,21 @@ columns:
     identity:
     generated: ''
     name: location_id
-    sql_type_metadata: *5
+    sql_type_metadata: *3
     'null': false
     default:
     default_function:
     collation:
     comment:
-  - *3
   - *4
+  - *5
   users:
   - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
     serial: true
     identity:
     generated: ''
     name: id
-    sql_type_metadata: *5
+    sql_type_metadata: *3
     'null': false
     default:
     default_function: nextval('users_id_seq'::regclass)
@@ -458,49 +525,159 @@ columns:
     default_function:
     collation:
     comment:
-  - *3
   - *4
+  - *5
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: reset_password_token
+    sql_type_metadata: *1
+    'null': true
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: reset_password_token_expires_at
+    sql_type_metadata: *2
+    'null': true
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: reset_password_email_sent_at
+    sql_type_metadata: *2
+    'null': true
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: access_count_to_reset_password_page
+    sql_type_metadata: *7
+    'null': true
+    default: '0'
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: unconfirmed_email
+    sql_type_metadata: *1
+    'null': true
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: email_change_token
+    sql_type_metadata: *1
+    'null': true
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: email_change_token_expires_at
+    sql_type_metadata: *2
+    'null': true
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: activation_state
+    sql_type_metadata: *1
+    'null': true
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: activation_token
+    sql_type_metadata: *1
+    'null': true
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+    serial:
+    identity:
+    generated: ''
+    name: activation_token_expires_at
+    sql_type_metadata: *2
+    'null': true
+    default:
+    default_function:
+    collation:
+    comment:
   visit_reasons:
   - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
     serial: true
     identity:
     generated: ''
     name: id
-    sql_type_metadata: *5
+    sql_type_metadata: *3
     'null': false
     default:
     default_function: nextval('visit_reasons_id_seq'::regclass)
     collation:
     comment:
   - *6
-  - *3
   - *4
+  - *5
   visits:
   - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
     serial: true
     identity:
     generated: ''
     name: id
-    sql_type_metadata: *5
+    sql_type_metadata: *3
     'null': false
     default:
     default_function: nextval('visits_id_seq'::regclass)
     collation:
     comment:
-  - *9
+  - *10
   - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
     serial:
     identity:
     generated: ''
     name: visited_at
-    sql_type_metadata: *10
+    sql_type_metadata: *11
     'null': true
     default:
     default_function:
     collation:
     comment:
-  - *3
   - *4
+  - *5
   - !ruby/object:ActiveRecord::ConnectionAdapters::PostgreSQL::Column
     serial:
     identity:
@@ -517,7 +694,7 @@ columns:
     identity:
     generated: ''
     name: shop_id
-    sql_type_metadata: *5
+    sql_type_metadata: *3
     'null': true
     default:
     default_function:
@@ -525,6 +702,7 @@ columns:
     comment:
 primary_keys:
   ar_internal_metadata: key
+  authentications: id
   categories: id
   cities: id
   companions: id
@@ -540,6 +718,7 @@ primary_keys:
   visits: id
 data_sources:
   ar_internal_metadata: true
+  authentications: true
   categories: true
   cities: true
   companions: true
@@ -555,6 +734,40 @@ data_sources:
   visits: true
 indexes:
   ar_internal_metadata: []
+  authentications:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
+    table: authentications
+    name: index_authentications_on_provider_and_uid
+    unique: true
+    columns:
+    - provider
+    - uid
+    lengths: {}
+    orders: {}
+    opclasses: {}
+    where:
+    type:
+    using: :btree
+    include:
+    nulls_not_distinct: false
+    comment:
+    valid: true
+  - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
+    table: authentications
+    name: index_authentications_on_user_id
+    unique: false
+    columns:
+    - user_id
+    lengths: {}
+    orders: {}
+    opclasses: {}
+    where:
+    type:
+    using: :btree
+    include:
+    nulls_not_distinct: false
+    comment:
+    valid: true
   categories:
   - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
     table: categories
@@ -823,6 +1036,22 @@ indexes:
     nulls_not_distinct: false
     comment:
     valid: true
+  - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
+    table: users
+    name: index_users_on_reset_password_token
+    unique: true
+    columns:
+    - reset_password_token
+    lengths: {}
+    orders: {}
+    opclasses: {}
+    where:
+    type:
+    using: :btree
+    include:
+    nulls_not_distinct: false
+    comment:
+    valid: true
   visit_reasons:
   - !ruby/object:ActiveRecord::ConnectionAdapters::IndexDefinition
     table: visit_reasons
@@ -873,5 +1102,5 @@ indexes:
     nulls_not_distinct: false
     comment:
     valid: true
-version: 20250617022840
+version: 20250829174745
 database_version: 170005

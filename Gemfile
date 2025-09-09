@@ -4,6 +4,8 @@ source "https://rubygems.org"
 gem "rails", "~> 7.1.3"
 gem "sorcery", "~> 0.16.5"
 
+gem "meta-tags"
+
 gem "rails-i18n", "~> 7.0.0"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
