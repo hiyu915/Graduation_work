@@ -1,4 +1,4 @@
-#ファクトリで作成したオブジェクトが正しく生成されるか確認するテスト
+# ファクトリで作成したオブジェクトが正しく生成されるか確認するテスト
 require 'rails_helper'
 
 RSpec.describe "Factories" do

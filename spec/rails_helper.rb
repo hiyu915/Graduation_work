@@ -70,7 +70,7 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   # ===== ここから追加する設定 =====
-  
+
   # FactoryBotの省略記法を有効化
   config.include FactoryBot::Syntax::Methods
 

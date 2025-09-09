@@ -8,7 +8,7 @@ class Post < ApplicationRecord
   validates :feeling_id, presence: true
   validates :companion_id, presence: true
   validates :visit_reason_id, presence: true
-  validates :body, length: { maximum: 2000 } 
+  validates :body, length: { maximum: 2000 }
 
   belongs_to :user
   belongs_to :category

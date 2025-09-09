@@ -3,7 +3,7 @@ FactoryBot.define do
     association :user
     association :shop
 
-    shop_name { "テストショップ" } 
+    shop_name { "テストショップ" }
 
     visit_date { Date.new(2025, 9, 15) }
 
@@ -13,12 +13,12 @@ FactoryBot.define do
     visit_reason_id { VisitReason.first.id }
 
     body { "テスト投稿の本文です" }
-    
+
     # 異なるパターンのトレイト
     trait :with_custom_date do
       visit_date { 1.week.ago }
     end
-    
+
     trait :long_body do
       body { "これは長いテスト投稿の本文です。" * 10 }
     end
