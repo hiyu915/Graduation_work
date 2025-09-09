@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       get :cities
       get :map
       get :calendar
+      get :autocomplete
     end
     member do
       delete :remove_image
