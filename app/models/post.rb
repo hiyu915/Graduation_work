@@ -1,10 +1,14 @@
 class Post < ApplicationRecord
+  attr_accessor :shop_name
+
+  validates :shop_name, presence: true, length: { maximum: 100 }
   validates :shop_id, presence: true
   validates :visit_date, presence: true
   validates :category_id, presence: true
   validates :feeling_id, presence: true
   validates :companion_id, presence: true
   validates :visit_reason_id, presence: true
+  validates :body, length: { maximum: 2000 } 
 
   belongs_to :user
   belongs_to :category
@@ -65,5 +69,16 @@ class Post < ApplicationRecord
         LIMIT 1
       )
     SQL
+  end
+
+  before_validation :assign_shop_id_from_name
+
+  private
+
+  def assign_shop_id_from_name
+    if shop_name.present? && shop_id.blank?
+      shop = Shop.find_or_create_by(name: shop_name)
+      self.shop_id = shop.id
+    end
   end
 end
