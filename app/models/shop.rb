@@ -7,10 +7,10 @@ class Shop < ApplicationRecord
   validates :name, presence: true
 
   def self.ransackable_attributes(auth_object = nil)
-    super + [ "name" ]
+    authorizable_ransackable_attributes + [ "name" ]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    super + [ "location" ]
+    authorizable_ransackable_associations + [ "location" ]
   end
 end

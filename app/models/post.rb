@@ -48,7 +48,9 @@ class Post < ApplicationRecord
 
   def self.search(query)
     return all if query.blank?
+  end
 
+  ransacker :something do
     q = "%#{sanitize_sql_like(query)}%"
     left_joins(:shop)
       .where("posts.body ILIKE :q OR posts.shop_name ILIKE :q OR shops.name ILIKE :q", q: q)
@@ -59,14 +61,14 @@ class Post < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    super + [
+    authorizable_ransackable_attributes + [ 
       "visit_date", "category_id", "companion_id", "feeling_id", "visit_reason_id",
       "body", "shop_id", "shop_location_prefecture_id", "shop_location_city_id"
     ]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    super + [ "shop" ]
+    authorizable_ransackable_associations + [ "shop" ]
   end
 
   # 仮想属性（ransacker）
