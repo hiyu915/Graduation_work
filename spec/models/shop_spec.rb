@@ -8,7 +8,7 @@ RSpec.describe Shop, type: :model do
         expect(shop).to be_valid
       end
     end
-    
+
     context 'nameが空の場合' do
       it 'バリデーションエラーになること' do
         shop = build(:shop, name: '')
@@ -17,7 +17,7 @@ RSpec.describe Shop, type: :model do
       end
     end
   end
-  
+
   describe 'アソシエーション' do
     it 'locationと関連していること' do
       shop = create(:shop)

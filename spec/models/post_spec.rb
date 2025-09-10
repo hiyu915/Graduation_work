@@ -167,7 +167,7 @@ RSpec.describe Post, type: :model do
 
       it 'postが削除されるとfavoritesも削除されること' do
         create(:favorite, post: post)
-        
+
         expect { post.destroy }.to change { Favorite.count }.by(-1)
       end
     end
@@ -212,11 +212,11 @@ RSpec.describe Post, type: :model do
       context 'shop_idが既に設定されている場合' do
         it '新しいshopは作成されないこと' do
           existing_shop = create(:shop, name: '既存ショップ')
-          
+
           expect {
             create(:post, shop_name: '新しいショップ', shop_id: existing_shop.id)
           }.not_to change { Shop.count }
-          
+
           post = Post.last
           expect(post.shop_id).to eq(existing_shop.id)
         end
@@ -225,11 +225,11 @@ RSpec.describe Post, type: :model do
       context '同じ名前のshopが既に存在する場合' do
         it '既存のshopが使用されること' do
           existing_shop = create(:shop, name: '既存ショップ')
-          
+
           expect {
             create(:post, shop_name: '既存ショップ', shop_id: nil)
           }.not_to change { Shop.count }
-          
+
           post = Post.last
           expect(post.shop_id).to eq(existing_shop.id)
         end
@@ -243,14 +243,14 @@ RSpec.describe Post, type: :model do
       let(:osaka_location) { create(:location, :osaka) }
       let(:shop1) { create(:shop, location: tokyo_location) }
       let(:shop2) { create(:shop, location: osaka_location) }
-      
+
       let!(:old_post) { create(:post, shop: shop1, visit_date: 1.month.ago) }
       let!(:new_post) { create(:post, shop: shop1, visit_date: 1.week.ago) }
       let!(:osaka_post) { create(:post, shop: shop2, visit_date: 2.weeks.ago) }
-      
+
       it '店舗・場所ごとに最新の投稿のみが取得されること' do
         result = Post.latest_unique_by_shop_and_location
-        
+
         expect(result).to include(new_post)  # shop1の最新
         expect(result).to include(osaka_post) # shop2の最新
         expect(result).not_to include(old_post) # shop1の古い投稿は除外
@@ -265,7 +265,7 @@ RSpec.describe Post, type: :model do
 
       it '指定したカテゴリの投稿のみが取得されること' do
         result = Post.by_category(category1.id)
-        
+
         expect(result).to include(post1)
         expect(result).not_to include(post2)
       end
@@ -277,7 +277,7 @@ RSpec.describe Post, type: :model do
 
       it '訪問日が新しい順で取得されること' do
         result = Post.recent
-        
+
         expect(result.first).to eq(recent_post)
         expect(result.last).to eq(old_post)
       end
@@ -358,7 +358,7 @@ RSpec.describe Post, type: :model do
       context 'shop_nameで検索' do
         it '該当する投稿が取得されること' do
           result = Post.search('ラーメン')
-          
+
           expect(result).to include(post1)
           expect(result).not_to include(post2)
         end
@@ -367,7 +367,7 @@ RSpec.describe Post, type: :model do
       context 'bodyで検索' do
         it '該当する投稿が取得されること' do
           result = Post.search('おしゃれ')
-          
+
           expect(result).to include(post2)
           expect(result).not_to include(post1)
         end
@@ -376,7 +376,7 @@ RSpec.describe Post, type: :model do
       context '検索文字列が空の場合' do
         it '全ての投稿が取得されること' do
           result = Post.search('')
-          
+
           expect(result).to include(post1, post2)
         end
       end

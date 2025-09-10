@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-  #attr_accessor :shop_name
+  # attr_accessor :shop_name
 
   validates :shop_name, presence: true, length: { maximum: 100 }
   # validates :shop_id, presence: true
