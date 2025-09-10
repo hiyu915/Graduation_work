@@ -47,7 +47,7 @@ class Post < ApplicationRecord
   end
 
   def self.search(query)
-    return all if query.blank?
+    all if query.blank?
   end
 
   ransacker :something do
@@ -61,7 +61,7 @@ class Post < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    authorizable_ransackable_attributes + [ 
+    authorizable_ransackable_attributes + [
       "visit_date", "category_id", "companion_id", "feeling_id", "visit_reason_id",
       "body", "shop_id", "shop_location_prefecture_id", "shop_location_city_id"
     ]

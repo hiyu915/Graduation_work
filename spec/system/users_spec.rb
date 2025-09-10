@@ -28,7 +28,7 @@ RSpec.describe 'Users', type: :system do
           expect(page).to have_content "メールアドレスを入力してください"
           expect(current_path).to eq new_user_path
         end
-      end   
+      end
 
       context '登録済のメールアドレスを使用' do
         it 'ユーザーの新規作成が失敗する' do
@@ -38,7 +38,7 @@ RSpec.describe 'Users', type: :system do
           fill_in 'user_password', with: 'password'
           fill_in 'user_password_confirmation', with: 'password'
           find('input[type="submit"]').click
-          
+
           expect(page).to have_content '会員登録に失敗しました'
           expect(page).to have_content 'メールアドレスはすでに存在します'
           expect(current_path).to eq new_user_path
@@ -59,7 +59,7 @@ RSpec.describe 'Users', type: :system do
   end
 
   describe 'ログイン後' do
-    before { login(user) } 
+    before { login(user) }
 
     describe 'メールアドレス変更機能' do
       context 'フォームの入力値が正常' do
@@ -75,7 +75,7 @@ RSpec.describe 'Users', type: :system do
 
     describe 'アカウント情報表示' do
       it 'アカウント情報が表示される' do
-        visit account_info_users_path 
+        visit account_info_users_path
         expect(page).to have_content(user.email)
       end
     end
@@ -84,7 +84,7 @@ RSpec.describe 'Users', type: :system do
       context '投稿を作成' do
         it '作成した投稿がマイページに表示される' do
           post = create(:post, user: user)
-          
+
           visit posts_path
 
           expect(page).to have_content(post.visit_date.strftime('%Y-%m-%d'))
@@ -92,7 +92,7 @@ RSpec.describe 'Users', type: :system do
           expect(page).to have_content(post.category.name)
           expect(page).to have_content(post.shop.location.prefecture.name)
           expect(page).to have_content(post.shop.location.prefecture.name)
-          expect(page).to have_content(post.shop.location.city.name)        
+          expect(page).to have_content(post.shop.location.city.name)
           expect(page).to have_content(post.companion.name)
           expect(page).to have_content(post.feeling.name)
           expect(page).to have_content(post.visit_reason.name)
