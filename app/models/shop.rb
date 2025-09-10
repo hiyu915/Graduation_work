@@ -1,6 +1,6 @@
 class Shop < ApplicationRecord
   has_many :posts, dependent: :restrict_with_error
-  has_many :visits
+  has_many :visits, dependent: :destroy
   belongs_to :location
 
   validates :location_id, presence: true

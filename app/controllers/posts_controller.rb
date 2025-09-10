@@ -8,6 +8,7 @@ class PostsController < ApplicationController
     sort_direction = %w[asc desc].include?(params[:direction].to_s.downcase) ? params[:direction].to_s.downcase : "desc"
 
     posts = @q.result.includes(:shop, :category, :companion, :feeling, :visit_reason)
+    posts = posts.where(user: current_user) if current_user
 
     if params[:repeat].present? && current_user
       favorite_post_ids = current_user.favorites.pluck(:post_id)

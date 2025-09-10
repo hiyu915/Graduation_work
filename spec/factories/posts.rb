@@ -20,7 +20,25 @@ FactoryBot.define do
     end
 
     trait :long_body do
-      body { "これは長いテスト投稿の本文です。" * 10 }
+      body { 'a' * 2001 }
+    end
+
+    trait :max_body do
+      body { 'a' * 2000 }
+    end
+
+    trait :empty_body do
+      body { '' }
+    end
+
+    trait :nil_body do
+      body { nil }
+    end
+
+    trait :with_new_shop_name do
+      after(:build) do |post, evaluator|
+        post.shop_id = nil  # 既存のshop関連付けを無効化
+      end
     end
   end
 end
