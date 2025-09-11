@@ -23,20 +23,16 @@ RSpec.configure do |config|
 
   # ===== ここから追加する設定 =====
 
-  # FactoryBotの省略記法を有効化
   config.include FactoryBot::Syntax::Methods
 
-  # LoginMacrosをシステムスペックで使用可能にする
   config.include LoginMacros, type: :system
 
-  # テスト実行前にマスターデータをseed.rbから読み込み
   config.before(:suite) do
     Rails.application.load_seed if Category.count.zero?
   end
 
   # ===== CI環境用の設定 =====
-  
-  # CI環境でSystemテストをスキップ（推奨）
+
   if ENV['CI'] || ENV['GITHUB_ACTIONS']
     config.filter_run_excluding type: :system
     puts "CI環境: Systemテストをスキップしています"
