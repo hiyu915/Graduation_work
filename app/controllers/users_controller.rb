@@ -41,6 +41,21 @@ class UsersController < ApplicationController
     @user = current_user
     new_email = params[:user][:unconfirmed_email]
 
+    # 1. 空文字チェック
+    if new_email.blank?
+      flash.now[:danger] = 'メールアドレスを入力してください'
+      render :edit_email, status: :unprocessable_entity
+      return
+    end
+
+    # 2. メール形式チェック（ここが重要！）
+    unless valid_email_format?(new_email)
+      flash.now[:danger] = 'メールアドレスは不正な値です'
+      render :edit_email, status: :unprocessable_entity
+      return
+    end
+
+    # 3. 重複チェック
     if User.exists?(email: new_email)
       flash.now[:danger] = t("mail_address_reset.request.duplicate")
       render :edit_email, status: :unprocessable_entity
@@ -94,5 +109,10 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)
+  end
+
+  def valid_email_format?(email)
+    # シンプルで効果的なメール形式チェック
+    email.match?(/\A[^@\s]+@[^@\s]+\.[^@\s]+\z/)
   end
 end
