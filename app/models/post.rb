@@ -47,10 +47,8 @@ class Post < ApplicationRecord
   end
 
   def self.search(query)
-    all if query.blank?
-  end
+    return all if query.blank?
 
-  ransacker :something do
     q = "%#{sanitize_sql_like(query)}%"
     left_joins(:shop)
       .where("posts.body ILIKE :q OR posts.shop_name ILIKE :q OR shops.name ILIKE :q", q: q)
