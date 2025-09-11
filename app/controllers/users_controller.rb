@@ -43,14 +43,14 @@ class UsersController < ApplicationController
 
     # 1. 空文字チェック
     if new_email.blank?
-      flash.now[:danger] = 'メールアドレスを入力してください'
+      flash.now[:danger] = "メールアドレスを入力してください"
       render :edit_email, status: :unprocessable_entity
       return
     end
 
     # 2. メール形式チェック（ここが重要！）
     unless valid_email_format?(new_email)
-      flash.now[:danger] = 'メールアドレスは不正な値です'
+      flash.now[:danger] = "メールアドレスは不正な値です"
       render :edit_email, status: :unprocessable_entity
       return
     end
