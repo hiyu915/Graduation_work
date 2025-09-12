@@ -29,6 +29,12 @@ ja:
       email_change_verification: "メールアドレス変更確認"
     activation_needed: "アカウント有効化のご案内"
 
+  activerecord:
+    models:
+      post: 投稿
+      user: ユーザー
+      comment: コメント
+
   helpers:
     submit:
       create: 登録
