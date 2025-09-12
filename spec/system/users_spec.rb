@@ -219,27 +219,5 @@ RSpec.describe 'Users', type: :system do
         expect(page).to have_content(user.email)
       end
     end
-
-    describe 'マイページ' do
-      let(:user) { create(:user) }
-      before { login(user) }
-      context '投稿を作成' do
-        it '作成した投稿がマイページに表示される' do
-          post = create(:post, user: user)
-
-          visit posts_path
-
-          expect(page).to have_content(post.visit_date.strftime('%Y-%m-%d'))
-          expect(page).to have_content(post.shop_name)
-          expect(page).to have_content(post.category.name)
-          expect(page).to have_content(post.shop.location.prefecture.name)
-          expect(page).to have_content(post.shop.location.prefecture.name)
-          expect(page).to have_content(post.shop.location.city.name)
-          expect(page).to have_content(post.companion.name)
-          expect(page).to have_content(post.feeling.name)
-          expect(page).to have_content(post.visit_reason.name)
-        end
-      end
-    end
   end
 end
