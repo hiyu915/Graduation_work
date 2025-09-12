@@ -7,7 +7,7 @@ module LoginMacros
     click_button 'ログイン'
     expect(page).to have_content('ログアウト')
   end
-  
+
   # RequestSpec用のログインメソッド
   def login_as(user)
     post login_path, params: {
