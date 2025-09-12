@@ -1,12 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe "Posts", type: :system do
-
   describe 'マイページ' do
     let(:user) { create(:user) }
     let!(:post) { create(:post, user: user) }
     before { login(user) }
-    
+
     context '正常系' do
       it 'マイページにアクセスした際に投稿が表示される' do
         visit posts_path
@@ -29,7 +28,6 @@ RSpec.describe "Posts", type: :system do
 
     context '正常系' do
       it '新規投稿を作成できる/ 投稿内容が正しいか確認' do
-
         visit new_post_path
 
         fill_in 'post[shop_name]', with: '新規作成'
@@ -114,7 +112,7 @@ RSpec.describe "Posts", type: :system do
         visit post_path(post)
 
         click_button id: 'postMenuButton'
-        
+
         within '.dropdown-menu[aria-labelledby="postMenuButton"]' do
           click_link href: edit_post_path(post)
         end
@@ -141,7 +139,7 @@ RSpec.describe "Posts", type: :system do
         expect(find('#post_visit_reason_id').value).to eq post.visit_reason.id.to_s
         expect(find('#post_body').value).to eq post.body
       end
-      
+
       it '投稿を編集して保存した場合、詳細ページに編集した投稿が表示される' do
         visit edit_post_path(post)
 
@@ -225,9 +223,9 @@ RSpec.describe "Posts", type: :system do
     context '正常系' do
       it '詳細ページから投稿を削除できる' do
         visit post_path(post)
-        
+
         click_button id: 'postMenuButton'
-        
+
         within '.dropdown-menu[aria-labelledby="postMenuButton"]' do
         accept_confirm do
           click_link href: post_path(post)
