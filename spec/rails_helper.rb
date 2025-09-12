@@ -26,6 +26,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 
   config.include LoginMacros, type: :system
+  config.include LoginMacros, type: :request
 
   config.before(:suite) do
     Rails.application.load_seed if Category.count.zero?
