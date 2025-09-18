@@ -1,9 +1,5 @@
 ## プロジェクト名: 『リピログ』
-![image](
-
 <img width="1200" height="627" alt="Image" src="https://github.com/user-attachments/assets/7d880250-4e52-43e5-964f-2ab2ebf2d477" />
-
-)
 
 ■　各種情報
 サービス名：リピログ
