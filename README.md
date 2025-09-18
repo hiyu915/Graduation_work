@@ -39,3 +39,8 @@ https://repilog.com/
 【推しポイント】
 ・外食経験が蓄積するごとに、自分だけの“厳選された行きたい店リスト”が育つ。
 ・「再訪率の高い自分好みの傾向」も見えてくる楽しさがある。
+
+## ER図
+![ER図](https://i.gyazo.com/abcd1234efgh5678.png)
+## 画面遷移図
+Figma：https://www.figma.com/design/oMskWdMSFaOVDlgvv9odMP/%E3%83%AA%E3%83%94%E3%83%AD%E3%82%B0-%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=0-1&m=dev&t=jfNmJOiIM95OGody-1
