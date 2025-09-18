@@ -1,4 +1,5 @@
 ## プロジェクト名: 『リピログ』
+https://mail.google.com/mail/u/0?ui=2&ik=6638880f17&attid=0.1&permmsgid=msg-a:r739835232806287931&th=199202b3db31b0b0&view=att&disp=safe&realattid=f_mf8ke1bi0&zw
 
 ■　各種情報
 サービス名：リピログ
