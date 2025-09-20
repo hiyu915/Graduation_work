@@ -25,7 +25,7 @@ class PostsController < ApplicationController
       posts = posts
                 .joins("LEFT JOIN (#{visit_counts.to_sql}) AS visit_counts ON visit_counts.shop_id = posts.shop_id")
                 .select("posts.*, COALESCE(visit_counts.visit_count_sum, 0) AS visit_count")
-                .order(Arel.sql("visit_count #{sort_direction.upcase}, posts.visit_date DESC"))
+                .order("visit_count #{sort_direction.upcase}, posts.visit_date DESC")
     else
       order_clause = sort_column == "visit_date" ? "posts.visit_date #{sort_direction.upcase}" : "posts.visit_date DESC"
       posts = posts.order(order_clause)
