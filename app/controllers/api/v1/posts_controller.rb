@@ -1,9 +1,9 @@
 class Api::V1::PostsController < ApplicationController
   def index
     posts = Post.all
-    render json: { 
+    render json: {
       data: posts,
-      status: 'success'
+      status: "success"
     }
   end
 
@@ -18,57 +18,57 @@ class Api::V1::PostsController < ApplicationController
 
   def show
     post = Post.find(params[:id])
-    render json: { 
+    render json: {
       data: post,
-      status: 'success'
+      status: "success"
     }
   rescue ActiveRecord::RecordNotFound
-    render json: { 
-      error: 'Post not found',
-      status: 'error'
+    render json: {
+      error: "Post not found",
+      status: "error"
     }, status: :not_found
   end
 
   def update
     post = current_user.posts.find(params[:id])
-    
+
     if post.update(post_params)
-      render json: { 
+      render json: {
         data: post,
-        status: 'success',
-        message: 'Post updated successfully'
+        status: "success",
+        message: "Post updated successfully"
       }, status: :ok
     else
-      render json: { 
+      render json: {
         errors: post.errors,
-        status: 'error'
+        status: "error"
       }, status: :unprocessable_entity
     end
   rescue ActiveRecord::RecordNotFound
-    render json: { 
-      error: 'Post not found',
-      status: 'error'
+    render json: {
+      error: "Post not found",
+      status: "error"
     }, status: :not_found
   end
 
    def destroy
     post = current_user.posts.find(params[:id])
-    
+
     if post.destroy
-      render json: { 
-        status: 'success',
-        message: 'Post deleted successfully'
+      render json: {
+        status: "success",
+        message: "Post deleted successfully"
       }, status: :ok
     else
-      render json: { 
+      render json: {
         errors: post.errors,
-        status: 'error'
+        status: "error"
       }, status: :unprocessable_entity
     end
   rescue ActiveRecord::RecordNotFound
-    render json: { 
-      error: 'Post not found',
-      status: 'error'
+    render json: {
+      error: "Post not found",
+      status: "error"
     }, status: :not_found
   end
 

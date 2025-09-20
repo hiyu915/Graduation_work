@@ -24,32 +24,32 @@ RSpec.describe "PostAPI", type: :request do
 
     it '新しいpostを作成する' do
       valid_params = attributes_for(:post)
-      #データが作成されている事を確認
+      # データが作成されている事を確認
       expect {
       post '/api/v1/posts', params: { post: valid_params }
     }.to change(Post, :count).by(1)
       # リクエスト成功を表す200が返ってきたか確認する。
       expect(response.status).to eq(200)
     end
-    
+
     it 'postの編集を行う' do
       # 編集前の値を確認（デバッグ用）
       puts "編集前: shop_name=#{post_record.shop_name}, body=#{post_record.body}"
-      
-      put "/api/v1/posts/#{post_record.id}", 
-          params: { 
-            post: { 
+
+      put "/api/v1/posts/#{post_record.id}",
+          params: {
+            post: {
               shop_name: 'new-shop-name',
               body: 'updated content',
               visit_date: '2024-01-05',
               category_id: 2,
               companion_id: 2,
               feeling_id: 2,
-              visit_reason_id: 2,
+              visit_reason_id: 2
             }
           },
           as: :json
-      
+
       json = JSON.parse(response.body)
 
       # レスポンスの確認
@@ -62,7 +62,7 @@ RSpec.describe "PostAPI", type: :request do
       expect(json['data']['feeling_id']).to eq(2)
       expect(json['data']['visit_reason_id']).to eq(2)
       expect(json['status']).to eq('success')
-      
+
       # データベースでの更新確認
       post_record.reload
       expect(post_record.shop_name).to eq('new-shop-name')
@@ -73,7 +73,7 @@ RSpec.describe "PostAPI", type: :request do
       expect(json['data']['feeling_id']).to eq(2)
       expect(json['data']['visit_reason_id']).to eq(2)
       expect(json['status']).to eq('success')
-      
+
       # 編集後の値を確認（デバッグ用）
       puts "編集後: #{post_record.attributes.slice(
         'shop_name',
@@ -91,14 +91,14 @@ RSpec.describe "PostAPI", type: :request do
       expect {
         delete "/api/v1/posts/#{post_record.id}", as: :json
       }.to change(Post, :count).by(-1)
-      
+
       json = JSON.parse(response.body)
 
       # レスポンスの確認
       expect(response.status).to eq(200)
       expect(json['status']).to eq('success')
       expect(json['message']).to eq('Post deleted successfully')
-      
+
       # データベースから削除されていることを確認
       expect(Post.find_by(id: post_record.id)).to be_nil
     end
