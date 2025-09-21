@@ -61,18 +61,18 @@ Rails.application.configure do
 
   # Set host to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = {
-    host: "repilog.onrender.com",
+    host: "repilog.com",
     protocol: "https"
   }
 
   # メール送信手段を設定（SendGridやMailgunなどを使用する場合）
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: "smtp.sendgrid.net",
+    address: "smtp.mailgun.org",
     port: 587,
     domain: "repilog.com",
-    user_name: "apikey",
-    password: ENV["SENDGRID_API_KEY"],
+    user_name: "postmaster@repilog.com", # Mailgun管理画面で発行されるSMTPユーザー
+    password: ENV["MAILGUN_SMTP_PASSWORD"], # 環境変数に登録しておく
     authentication: :plain,
     enable_starttls_auto: true
   }
