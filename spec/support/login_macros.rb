@@ -3,7 +3,7 @@ module LoginMacros
   def login(user)
     visit login_path
     fill_in 'メールアドレス', with: user.email
-    fill_in 'パスワード', with: 'password'
+    fill_in 'パスワード', with: 'password000'
     click_button 'ログイン'
     expect(page).to have_content('ログアウト')
   end
@@ -12,7 +12,7 @@ module LoginMacros
   def login_as(user)
     post login_path, params: {
           email: user.email,
-          password: "password"
+          password: "password000"
         }
     expect(response).to have_http_status(302)
     expect(response.location).not_to include('login')

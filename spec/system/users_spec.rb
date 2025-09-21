@@ -9,8 +9,8 @@ RSpec.describe 'Users', type: :system do
         it 'ユーザーの新規作成が成功する' do
           visit new_user_path
           fill_in 'user_email', with: 'email@example.com'
-          fill_in 'user_password', with: 'password'
-          fill_in 'user_password_confirmation', with: 'password'
+          fill_in 'user_password', with: 'password000'
+          fill_in 'user_password_confirmation', with: 'password000'
           find('input[type="submit"]').click
           expect(page).to have_content '確認メールを送信しました。メールをご確認ください。'
           expect(current_path).to eq root_path
@@ -21,8 +21,8 @@ RSpec.describe 'Users', type: :system do
         it 'ユーザーの新規作成が失敗する' do
           visit new_user_path
           fill_in 'user_email', with: ''
-          fill_in 'user_password', with: 'password'
-          fill_in 'user_password_confirmation', with: 'password'
+          fill_in 'user_password', with: 'password000'
+          fill_in 'user_password_confirmation', with: 'password000'
           find('input[type="submit"]').click
           expect(page).to have_content '会員登録に失敗しました'
           expect(page).to have_content "メールアドレスを入力してください"
@@ -35,8 +35,8 @@ RSpec.describe 'Users', type: :system do
           existed_user = create(:user, email: 'test@example.com')
           visit new_user_path
           fill_in 'user_email', with: 'test@example.com'
-          fill_in 'user_password', with: 'password'
-          fill_in 'user_password_confirmation', with: 'password'
+          fill_in 'user_password', with: 'password000'
+          fill_in 'user_password_confirmation', with: 'password000'
           find('input[type="submit"]').click
 
           expect(page).to have_content '会員登録に失敗しました'
@@ -173,8 +173,8 @@ RSpec.describe 'Users', type: :system do
           visit edit_password_reset_path(reset_token)
           expect(page).to have_content('パスワードリセット')
 
-          fill_in 'user_password', with: 'new_password123'
-          fill_in 'user_password_confirmation', with: 'new_password123'
+          fill_in 'user_password', with: 'password123'
+          fill_in 'user_password_confirmation', with: 'password123'
           click_button '更新'
 
           expect(page).to have_content('パスワードを変更しました')
@@ -188,14 +188,14 @@ RSpec.describe 'Users', type: :system do
 
           visit edit_password_reset_path(reset_token)
 
-          fill_in 'user_password', with: 'new_password123'
-          fill_in 'user_password_confirmation', with: 'different_password'
+          fill_in 'user_password', with: 'newpassword123'
+          fill_in 'user_password_confirmation', with: 'differentpassword'
           click_button '更新'
 
           expect(page).to have_content('パスワード確認とパスワードの入力が一致しません')
         end
 
-        it '短すぎるパスワードの場合、変更に失敗する' do
+        it 'パスワードが規格に沿っていない場合、変更に失敗する' do
           user.deliver_reset_password_instructions!
           reset_token = user.reset_password_token
 
@@ -205,7 +205,9 @@ RSpec.describe 'Users', type: :system do
           fill_in 'user_password_confirmation', with: '12'
           click_button '更新'
 
-          expect(page).to have_content('パスワードは3文字以上で入力してください')
+          expect(page).to have_content('パスワードの変更に失敗しました')
+          expect(page).to have_content('パスワードは英字と数字を組み合わせてください')
+          expect(page).to have_content('パスワードは5文字以上で入力してください')
         end
       end
     end
