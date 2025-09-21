@@ -24,7 +24,8 @@ document.addEventListener("DOMContentLoaded", function() {
       var popupContent = "<strong><%= j(location.prefecture.name) %> <%= j(location.city.name) %></strong><br>" +
         "<ul>" +
         "<% latest_posts.each do |post| %>" +
-          "<li><%= l(post.visit_date, format: :long) %> <%= j(post.shop.name) %></li>" +
+          // ここでリンクを付与
+          "<li><a href='<%= post_path(post) %>'><%= l(post.visit_date, format: :long) %> <%= j(post.shop.name) %></a></li>" +
         "<% end %>" +
         "</ul>";
 
