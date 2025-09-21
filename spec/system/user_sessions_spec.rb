@@ -8,7 +8,7 @@ RSpec.describe 'UserSessions', type: :system do
       it 'ログイン処理が成功する' do
         visit login_path
         fill_in 'email', with: user.email
-        fill_in 'password', with: 'password'
+        fill_in 'password', with: 'password000'
         click_button 'ログイン'
 
         expect(page).to have_content('ログインしました')
@@ -33,7 +33,7 @@ RSpec.describe 'UserSessions', type: :system do
     before do
       visit login_path
       fill_in 'email', with: user.email
-      fill_in 'password', with: 'password'
+      fill_in 'password', with: 'password000'
       click_button 'ログイン'
     end
 

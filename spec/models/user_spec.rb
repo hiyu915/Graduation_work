@@ -25,10 +25,10 @@ RSpec.describe User, type: :model do
     end
 
     context 'passwordのバリデーション' do
-      it 'passwordが3文字未満の場合はバリデーションエラーになること' do
-        user = build(:user, password: 'ab', password_confirmation: 'ab')
+      it 'passwordが5文字未満の場合はバリデーションエラーになること' do
+        user = build(:user, password: 'ab00', password_confirmation: 'ab00')
         expect(user).to be_invalid
-        expect(user.errors[:password]).to include('は3文字以上で入力してください')
+        expect(user.errors[:password]).to include('は5文字以上で入力してください')
       end
 
       it 'password_confirmationが一致しない場合はバリデーションエラーになること' do

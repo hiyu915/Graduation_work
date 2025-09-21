@@ -34,6 +34,10 @@ ja:
       post: 投稿
       user: ユーザー
       comment: コメント
+    errors:
+      messages:
+        password_format: "は英字と数字を組み合わせてください"
+        password_too_short: "は5文字以上で入力してください"
 
   helpers:
     submit:
@@ -55,7 +59,7 @@ ja:
         prefecture: 都道府県
         city: 市
     placeholder:
-      password: "3文字以上で入力してください"
+      password: "英数字組み合わせて5文字以上で入力してください"
 
   user_sessions:
     new:
@@ -84,7 +88,7 @@ ja:
         blank: "メールアドレスを入力してください"
         taken: "このメールアドレスはすでに登録されています"
       password:
-        too_short: "パスワードは3文字以上で入力してください"
+        too_short: "パスワードは5文字以上で入力してください"
         confirmation: "パスワードと確認用パスワードが一致しません"
         password_confirmation:
           blank: "パスワード確認を入力してください"
@@ -234,6 +238,7 @@ ja:
       success: パスワードリセット手順を送信しました
     update:
       success: パスワードを変更しました
+      fail: "パスワードの変更に失敗しました"
 
   mail_address_reset:
     edit_email:
