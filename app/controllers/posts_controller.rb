@@ -61,10 +61,11 @@ class PostsController < ApplicationController
 
   # マップ表示
   def map
-    posts = Post.includes(shop: { location: [ :prefecture, :city ] })
-                .where.not(locations: { latitude: nil, longitude: nil })
+   posts = current_user.posts
+                      .includes(shop: { location: [ :prefecture, :city ] })
+                      .where.not(locations: { latitude: nil, longitude: nil })
+                      .order(visit_date: :desc)
 
-    # Location ごとにグループ化
     @location_groups = posts.group_by { |p| p.shop.location }
   end
 
