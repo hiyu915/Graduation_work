@@ -4,10 +4,10 @@ class User < ApplicationRecord
   # before_create :setup_activation
 
   validates :email, presence: true, uniqueness: true
-  validates :password, 
-          length: { minimum: 5, message: I18n.t('activerecord.errors.messages.password_too_short') },
+  validates :password,
+          length: { minimum: 5, message: I18n.t("activerecord.errors.messages.password_too_short") },
           format: { with: /\A(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+\z/,
-                    message: I18n.t('activerecord.errors.messages.password_format') },
+                    message: I18n.t("activerecord.errors.messages.password_format") },
           if: -> { new_record? || password.present? }
   validates :password, confirmation: true, if: -> { new_record? || password.present? }
   validates :password_confirmation, presence: true, if: -> { new_record? || password.present? }
