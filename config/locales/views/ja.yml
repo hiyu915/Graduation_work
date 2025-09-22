@@ -60,6 +60,8 @@ ja:
         city: 市
     placeholder:
       password: "英数字組み合わせて5文字以上で入力してください"
+      shop_name: "100字以内"
+      body: "2000字以内"
 
   user_sessions:
     new:
@@ -188,6 +190,8 @@ ja:
         fetch_cities: "市区町村の取得に失敗しました"
     calendar:
       title: "Myカレンダー"
+    messages:
+      required_fields: "年月日、お店の名前、カテゴリ、場所、同行者、気分、来店動機は入力が必須です。"
 
   maps:
     title: Myマップ

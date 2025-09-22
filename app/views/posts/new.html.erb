@@ -2,6 +2,11 @@
 <div class="container my-4">
   <h2 class="mb-4"><%= t('.title') %></h2>
 
+  <!-- 必須項目の注意文 -->
+  <div class="alert alert-warning d-inline-block p-2 mb-3" role="alert">
+    <%= t('posts.messages.required_fields') %>
+  </div>
+
   <%= form_with(model: @post, local: true) do |f| %>
     <div class="mb-3">
       <label class="form-label"><%= t('posts.new.item.visit_date') %></label>
@@ -20,8 +25,9 @@
               data-autocomplete-url-value="<%= autocomplete_posts_path %>" 
               role="combobox">
             <%= f.search_field :shop_name, 
-                  data: { autocomplete_target: 'input' }, 
-                  class: 'form-control' %>
+              data: { autocomplete_target: 'input' }, 
+              class: 'form-control',
+              placeholder: t('helpers.placeholder.shop_name') %>
             <%= f.hidden_field :shop_name_id, data: { autocomplete_target: 'hidden' } %>
             <ul class="list-group" data-autocomplete-target="results"></ul>
           </div>
@@ -91,7 +97,11 @@
       <label class="form-label"><%= t('posts.new.item.memo') %></label>
       <div class="row">
         <div class="col-auto">
-          <%= f.text_area :body, class: 'form-control', rows: 4, style: 'width: 400px;' %>
+          <%= f.text_area :body, 
+              class: 'form-control',
+              rows: 4,
+              style: 'width: 400px;',
+              placeholder: t('helpers.placeholder.body') %>
         </div>
       </div>
     </div>
