@@ -129,7 +129,25 @@ class PostsController < ApplicationController
     location, shop = build_location_and_shop
     return unless location && shop
 
+    old_shop = @post.shop
+
     if @post.update(post_params.merge(shop_id: shop.id))
+      if old_shop != shop
+        old_visit = Visit.find_by(user: current_user, shop: old_shop)
+        if old_visit
+          if old_visit.count.to_i > 1
+            old_visit.decrement!(:count)
+          else
+            old_visit.destroy
+          end
+        end
+
+        # 新しい店舗の visit を増やす
+        new_visit = Visit.find_or_initialize_by(user: current_user, shop: shop)
+        new_visit.count = new_visit.count.to_i + 1
+        new_visit.save!
+      end
+
       remove_image_if_requested
       redirect_to post_path(@post), notice: t("defaults.flash_message.updated", item: Post.model_name.human)
     else
