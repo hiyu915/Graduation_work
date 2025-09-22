@@ -164,6 +164,7 @@ class PostsController < ApplicationController
 
   def autocomplete
     @posts = Post.joins(:shop)
+                .where(user: current_user)
                 .where("shops.name ILIKE ?", "%#{params[:q]}%")
                 .limit(10)
 
