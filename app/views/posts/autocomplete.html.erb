@@ -1,8 +1,8 @@
-<% @posts.each do |post| %>
+<% @posts.map(&:shop).uniq { |shop| shop.name }.each do |shop| %>
   <li class="list-group-item list-group-item-action" 
       role="option" 
-      data-autocomplete-value="<%= post.id %>" 
-      data-autocomplete-label="<%= post.shop.name %>">
-    <%= post.shop.name %>
+      data-autocomplete-value="<%= shop.id %>" 
+      data-autocomplete-label="<%= shop.name %>">
+    <%= shop.name %>
   </li>
 <% end %>
