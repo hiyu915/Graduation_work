@@ -142,7 +142,6 @@ class PostsController < ApplicationController
           end
         end
 
-        # 新しい店舗の visit を増やす
         new_visit = Visit.find_or_initialize_by(user: current_user, shop: shop)
         new_visit.count = new_visit.count.to_i + 1
         new_visit.save!
@@ -236,9 +235,8 @@ class PostsController < ApplicationController
     location = Location.find_or_initialize_by(prefecture_id: prefecture_id, city_id: city_id)
     location.save! if location.new_record? || location.latitude.blank? || location.longitude.blank?
 
-    shop = Shop.find_or_initialize_by(name: shop_name)
-    shop.location = location
-    shop.save!
+    shop = Shop.find_or_initialize_by(name: shop_name, location: location)
+    shop.save! if shop.new_record?
 
     [ location, shop ]
   end
