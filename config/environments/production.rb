@@ -71,8 +71,8 @@ Rails.application.configure do
     address: "smtp.mailgun.org",
     port: 587,
     domain: "repilog.com",
-    user_name: "postmaster@repilog.com", # Mailgun管理画面で発行されるSMTPユーザー
-    password: ENV["MAILGUN_SMTP_PASSWORD"], # 環境変数に登録しておく
+    user_name: "postmaster@repilog.com",
+    password: ENV["MAILGUN_SMTP_PASSWORD"],
     authentication: :plain,
     enable_starttls_auto: true
   }
