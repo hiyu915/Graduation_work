@@ -41,7 +41,7 @@ Rails.application.configure do
 
   # Change to "debug" to log everything (including potentially personally-identifiable information!)
   config.log_level = :debug
-  config.action_mailer.perform_deliveries = true #一時的に追加
+  config.action_mailer.perform_deliveries = true # 一時的に追加
 
   # Prevent health checks from clogging up the logs.
   config.silence_healthcheck_path = "/up"
