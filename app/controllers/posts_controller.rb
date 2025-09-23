@@ -275,7 +275,7 @@ class PostsController < ApplicationController
     shop = Shop.find_or_initialize_by(name: shop_name, location: location)
     shop.save! if shop.new_record?
 
-    [location, shop]
+    [ location, shop ]
   end
 
   def update_visit_count(shop)
