@@ -25,7 +25,7 @@ ja:
       password_reset: パスワードリセット
       activation_needed: "アカウント有効化のご案内"
       activation_success: "アカウントが有効化されました"
-      password_reset: "パスワード再設定のご案内"
+      password_reset_instruction: "パスワード再設定のご案内"
       email_change_verification: "メールアドレス変更確認"
     activation_needed: "アカウント有効化のご案内"
 
@@ -38,7 +38,6 @@ ja:
       messages:
         password_format: "は英字と数字を組み合わせてください"
         password_too_short: "は5文字以上で入力してください"
-
   helpers:
     submit:
       create: 登録
@@ -58,6 +57,7 @@ ja:
         visit_reason: 来店動機
         prefecture: 都道府県
         city: 市
+        prefecture_city: 都道府県と市
     placeholder:
       password: "英数字組み合わせて5文字以上で入力してください"
       shop_name: "100字以内"

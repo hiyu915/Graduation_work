@@ -99,6 +99,7 @@ RSpec.describe Post, type: :model do
         post = build(:post, category_id: nil)
         expect(post).to be_invalid
         expect(post.errors[:category_id]).to include('を入力してください')
+        p post.errors[:category_id]
       end
 
       it 'feeling_idが存在しない場合はバリデーションエラーになること' do
