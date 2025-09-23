@@ -20,9 +20,6 @@ Rails.application.configure do
     "cache-control" => "public, max-age=#{1.year.to_i}"
   }
 
-  # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  # config.asset_host = "http://assets.example.com"
-
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
@@ -32,16 +29,12 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
 
-  # Skip http-to-https redirect for the default health check endpoint.
-  # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
-
   # Log to STDOUT with the current request id as a default log tag.
   config.log_tags = [ :request_id ]
   config.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
 
   # Change to "debug" to log everything (including potentially personally-identifiable information!)
   config.log_level = :debug
-  config.action_mailer.perform_deliveries = true # 一時的に追加
 
   # Prevent health checks from clogging up the logs.
   config.silence_healthcheck_path = "/up"
@@ -52,12 +45,9 @@ Rails.application.configure do
   # Replace the default in-process memory cache store with a durable alternative.
   config.cache_store = :solid_cache_store
 
-  # Replace the default in-process and non-durable queuing backend for Active Job.
-  # config.active_job.queue_adapter = :solid_queue
-  # config.solid_queue.connects_to = { database: { writing: :queue } }
-
-  # Ignore bad email addresses and do not raise email delivery errors.
-  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
+  # === Mailgun メール送信設定（重複を整理） ===
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 
   # Set host to be used by links generated in mailer templates.
@@ -66,8 +56,7 @@ Rails.application.configure do
     protocol: "https"
   }
 
-  # メール送信手段を設定（SendGridやMailgunなどを使用する場合）
-  config.action_mailer.delivery_method = :smtp
+  # Mailgun SMTP設定
   config.action_mailer.smtp_settings = {
     address: "smtp.mailgun.org",
     port: 587,
