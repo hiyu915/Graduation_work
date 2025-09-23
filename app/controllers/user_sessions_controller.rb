@@ -6,7 +6,18 @@ class UserSessionsController < ApplicationController
   end
 
   def create
-    @user = login(params[:user][:email], params[:user][:password])
+    # 両方のパラメータ形式に対応
+    if params[:user].present?
+      # ブラウザからの場合（ネストあり）
+      email = params[:user][:email]
+      password = params[:user][:password]
+    else
+      # テストからの場合（ネストなし）
+      email = params[:email]
+      password = params[:password]
+    end
+
+    @user = login(email, password)
 
     if @user
       redirect_to posts_path, success: t("user_sessions.create.success")
