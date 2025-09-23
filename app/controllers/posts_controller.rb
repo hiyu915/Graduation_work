@@ -195,7 +195,7 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(
       :visit_date, :category_id, :companion_id, :feeling_id, :visit_reason_id, :body,
-      :post_image, :post_image_cache, :remove_post_image, :shop_name
+      :post_image, :post_image_cache, :remove_post_image, :shop_name,
     )
   end
 
@@ -214,31 +214,68 @@ class PostsController < ApplicationController
   end
 
   def build_location_and_shop
+    visit_date   = params[:post][:visit_date]
     prefecture_id = params[:post][:prefecture_id].to_i
     city_id       = params[:post][:city_id].to_i
     shop_name     = params[:post][:shop_name].to_s.strip
+    category_id   = params[:post][:category_id]
+    companion_id  = params[:post][:companion_id]
+    feeling_id    = params[:post][:feeling_id]
+    visit_reason_id = params[:post][:visit_reason_id]
 
-    if prefecture_id.zero? || city_id.zero?
-      load_collections
-      flash.now[:danger] = t("defaults.flash_message.form_confirm", item: t("helpers.label.post.prefecture_city"))
+    load_collections
+
+    # 個別チェック
+    if visit_date.blank?
+      flash.now[:danger] = t("defaults.flash_message.form_confirm", item: t("helpers.label.post.visit_date"))
       render params[:action] == "create" ? :new : :edit, status: :unprocessable_entity
       return
     end
 
     if shop_name.blank?
-      load_collections
       flash.now[:danger] = t("defaults.flash_message.form_confirm", item: t("helpers.label.post.shop_name"))
       render params[:action] == "create" ? :new : :edit, status: :unprocessable_entity
       return
     end
 
+    if category_id.blank?
+      flash.now[:danger] = t("defaults.flash_message.form_confirm", item: t("helpers.label.post.category"))
+      render params[:action] == "create" ? :new : :edit, status: :unprocessable_entity
+      return
+    end
+
+    if prefecture_id.zero? || city_id.zero?
+      flash.now[:danger] = t("defaults.flash_message.form_confirm", item: t("helpers.label.post.prefecture_city"))
+      render params[:action] == "create" ? :new : :edit, status: :unprocessable_entity
+      return
+    end
+
+    if companion_id.blank?
+      flash.now[:danger] = t("defaults.flash_message.form_confirm", item: t("helpers.label.post.companion"))
+      render params[:action] == "create" ? :new : :edit, status: :unprocessable_entity
+      return
+    end
+
+    if feeling_id.blank?
+      flash.now[:danger] = t("defaults.flash_message.form_confirm", item: t("helpers.label.post.feeling"))
+      render params[:action] == "create" ? :new : :edit, status: :unprocessable_entity
+      return
+    end
+
+    if visit_reason_id.blank?
+      flash.now[:danger] = t("defaults.flash_message.form_confirm", item: t("helpers.label.post.visit_reason"))
+      render params[:action] == "create" ? :new : :edit, status: :unprocessable_entity
+      return
+    end
+
+    # Location & Shop の作成
     location = Location.find_or_initialize_by(prefecture_id: prefecture_id, city_id: city_id)
     location.save! if location.new_record? || location.latitude.blank? || location.longitude.blank?
 
     shop = Shop.find_or_initialize_by(name: shop_name, location: location)
     shop.save! if shop.new_record?
 
-    [ location, shop ]
+    [location, shop]
   end
 
   def update_visit_count(shop)

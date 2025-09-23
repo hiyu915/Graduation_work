@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   validates :shop_name, presence: true, length: { maximum: 100 }
   # validates :shop_id, presence: true
   validates :visit_date, presence: true
-  validates :category_id, presence: true
+  validates :category_id, presence: { message: I18n.t("posts.new.select.category") }
   validates :feeling_id, presence: true
   validates :companion_id, presence: true
   validates :visit_reason_id, presence: true
