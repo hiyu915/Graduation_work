@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     if @user.save
       @user.reload
       auto_login(@user)
-      UserMailer.activation_needed_email(@user).deliver_now
+      UserMailer.activation_needed_email(@user).deliver_later
       redirect_to root_path, success: t("users.activation.sent")
     else
       flash.now[:danger] = t("users.create.failure")
@@ -61,7 +61,7 @@ class UsersController < ApplicationController
       render :edit_email, status: :unprocessable_entity
     else
       @user.generate_email_change_token!(new_email)
-      UserMailer.email_change_verification(@user).deliver_now
+      UserMailer.email_change_verification(@user).deliver_later
       redirect_to root_path, success: t("mail_address_reset.request.success")
     end
   end
