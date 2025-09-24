@@ -4,7 +4,7 @@ class UserMailer < ApplicationMailer
   def activation_needed_email(user)
     @user = user
     @url  = activate_url(id: @user.activation_token)
-    mail(to: user.email, subject: t("defaults.mailer.activation_needed"))
+    mail(to: user.email, subject: t("defaults.flash_message.activation_needed"))
   end
 
   def activation_success_email(user)
