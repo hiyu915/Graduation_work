@@ -27,7 +27,7 @@ ja:
       activation_success: "アカウントが有効化されました"
       password_reset_instruction: "パスワード再設定のご案内"
       email_change_verification: "メールアドレス変更確認"
-    activation_needed: "アカウント有効化のご案内"
+      activation_needed: "アカウント有効化のご案内"
 
   activerecord:
     models:
