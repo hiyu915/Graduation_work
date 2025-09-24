@@ -11,8 +11,6 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      @user.reload
-      auto_login(@user)
       UserMailer.activation_needed_email(@user).deliver_later
       redirect_to root_path, success: t("users.activation.sent")
     else
@@ -25,6 +23,7 @@ class UsersController < ApplicationController
   def activate
     @user = User.load_from_activation_token(params[:id])
     if @user&.activate!
+      auto_login(@user)
       redirect_to posts_path, success: t("users.activation.success")
     else
       redirect_to root_path, danger: t("users.activation.failure")
