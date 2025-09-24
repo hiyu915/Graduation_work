@@ -59,7 +59,7 @@ Rails.application.configure do
   # Mailgun SMTP設定
   config.action_mailer.smtp_settings = {
     address: "smtp.mailgun.org",
-    port: 587,
+    port: 2525,
     domain: "repilog.com",
     user_name: "postmaster@repilog.com",
     password: ENV["MAILGUN_SMTP_PASSWORD"],
