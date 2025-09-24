@@ -48,7 +48,7 @@ class UsersController < ApplicationController
       return
     end
 
-    # 2. メール形式チェック（ここが重要！）
+    # 2. メール形式チェック
     unless valid_email_format?(new_email)
       flash.now[:danger] = "メールアドレスは不正な値です"
       render :edit_email, status: :unprocessable_entity
