@@ -2,9 +2,10 @@
   <h1 class="mb-4 text-center">お知らせ</h1>
 
   <% news_items = [
+    { date: "", content: "今後のお知らせをここに追加予定です。" },
+    # 必要に応じて以下に追加
+    { date: "2025年9月26日", content: "よくある質問ページを公開しました。" },
     { date: "2025年9月26日", content: "ヘルプページを公開しました。" },
-    { date: "今後", content: "今後のお知らせをここに追加予定です。" },
-    # 必要に応じて追加
   ] %>
 
   <% paginated_news = Kaminari.paginate_array(news_items).page(params[:page]).per(10) %>
