@@ -15,6 +15,10 @@ Rails.application.routes.draw do
 
   get "terms", to: "pages#terms", as: :terms
 
+  get "help", to: "static_pages#help", as: :help
+  get "news", to: "static_pages#news", as: :news
+  get "faq",  to: "static_pages#faq",  as: :faq
+
   resources :posts, only: %i[index new create show edit update destroy] do
     resource :favorite, only: [ :create, :destroy ]
     resource :visit, only: [ :create, :destroy ]
