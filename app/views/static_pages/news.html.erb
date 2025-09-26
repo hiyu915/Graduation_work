@@ -1,8 +1,40 @@
-<h1>お知らせ</h1>
+<div class="container my-5">
+  <h1 class="mb-4 text-center">お知らせ</h1>
 
-<ul>
-  <li>2025年9月24日 ヘルプページを公開しました。</li>
-  <li>今後のお知らせをここに追加予定です。</li>
-</ul>
+  <% news_items = [
+    { date: "2025年9月26日", content: "ヘルプページを公開しました。" },
+    { date: "今後", content: "今後のお知らせをここに追加予定です。" },
+    # 必要に応じて追加
+  ] %>
 
-<p><%= link_to "ヘルプページに戻る", help_path %></p>
+  <% paginated_news = Kaminari.paginate_array(news_items).page(params[:page]).per(10) %>
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-body p-0">
+      <table class="table table-bordered mb-0">
+        <thead class="table-light">
+          <tr>
+            <th class="text-center" style="width: 150px;">日付</th>
+            <th>内容</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% paginated_news.each do |news| %>
+            <tr>
+              <td class="text-center"><strong><%= news[:date] %></strong></td>
+              <td><%= news[:content] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end mb-3">
+    <%= link_to "ヘルプページに戻る", help_path, class: "btn btn-primary" %>
+  </div>
+
+  <div class="d-flex justify-content-center mt-4">
+    <%= paginate paginated_news, theme: 'bootstrap-5' %>
+  </div>
+</div>
