@@ -1,7 +1,7 @@
 <!-- トップバー -->
 <div class="bg-light text-muted small px-4 py-2 d-flex justify-content-end gap-3">
   <!-- <a href="#" class="text-muted text-decoration-none"><%= t('header.howto_repilog') %></a>　-->
-  <!-- <a href="#" class="text-muted text-decoration-none"><%= t('header.help_page') %></a> -->
+  <%= link_to t('header.help_page'), help_path, class: "text-muted text-decoration-none" %>
   <%= link_to t('header.to_register_page'), new_user_path, class: 'text-muted text-decoration-none' %>
   <%= link_to t('header.login'), login_path, class: 'text-muted text-decoration-none' %>
 </div>

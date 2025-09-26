@@ -1,0 +1,75 @@
+<div class="container my-5">
+  <h1 class="mb-5 text-center">ヘルプ</h1>
+
+  <div class="row g-4 justify-content-center">
+    <!-- お知らせ -->
+    <div class="col-12 col-md-4 d-flex">
+      <div class="card cursor-pointer p-4 flex-fill text-center" data-url="<%= news_path %>">
+        <div class="card-body d-flex flex-column justify-content-center h-100">
+          <h5 class="card-title mb-3">お知らせ</h5>
+          <p class="card-text">最新情報やアップデートを確認できます。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- よくある質問 -->
+    <div class="col-12 col-md-4 d-flex">
+      <div class="card cursor-pointer p-4 flex-fill text-center" data-url="<%= faq_path %>">
+        <div class="card-body d-flex flex-column justify-content-center h-100">
+          <h5 class="card-title mb-3">よくある質問</h5>
+          <p class="card-text">よくある質問をまとめています。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- リピログの使い方 -->
+    <div class="col-12 col-md-4 d-flex">
+      <div class="card cursor-pointer p-4 flex-fill text-center" data-url="<%= root_path %>">
+        <div class="card-body d-flex flex-column justify-content-center h-100">
+          <h5 class="card-title mb-3">リピログの使い方</h5>
+          <p class="card-text">リピログの使い方を確認できます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .card.cursor-pointer {
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+
+  .card.cursor-pointer:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0.75rem 1.5rem rgba(0,0,0,0.35);
+  }
+
+  .card.selected {
+    border: 2px solid #0d6efd;
+    box-shadow: 0 0.75rem 2rem rgba(0,0,0,0.4);
+  }
+
+  .card-title {
+    font-weight: 600;
+  }
+
+  .card-text {
+    line-height: 1.5;
+    font-size: 0.95rem;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".card.cursor-pointer").forEach(card => {
+      card.addEventListener("click", () => {
+        document.querySelectorAll(".card").forEach(c => c.classList.remove("selected"))
+        card.classList.add("selected")
+
+        const url = card.dataset.url
+        if (url) Turbo.visit(url)
+      })
+    })
+  })
+</script>
