@@ -288,6 +288,26 @@ ja:
       back_button: 入力内容を編集しなおす
       submit_button: 送信する
 
+  help_cards:
+    news:
+      title: お知らせ
+      description: 最新情報やアップデートを確認できます。
+    faq:
+      title: よくある質問
+      description: よくある質問をまとめています。
+    howto:
+      title: リピログの使い方
+      description: リピログの使い方を確認できます
+    back: ヘルプページに戻る
+
+  news_table:
+    date: 日付
+    content: 内容
+
+  faq:
+    title: よくある質問
+    back: ヘルプページに戻る
+
   views:
     pagination:
       first: "&laquo; 最初"
