@@ -4,50 +4,114 @@
     <%= image_tag "ogp.png", alt: "リピログ OGP画像", width: 800, height: 420, style: "margin: 2rem 0;" %>
 
     <div style="max-width: 750px; margin: 2rem auto; padding: 2rem; background-color: #111; border-radius: 12px; box-shadow: 0 0 20px rgba(255,255,255,0.1); text-align: center;">
-      <h2 class="mb-4" style="font-weight: bold; color: #fff; text-align: center;">リピログとは？</h2>
-      <p style="line-height: 1.8; color: #fff; margin: 0;">
+      <h2 class="mb-4" style="font-weight: bold; color: #fff;">リピログとは？</h2>
+      <p style="line-height: 1.8; color: #fff; margin: 0 auto; max-width:600px;">
         リピログは、「また行きたい」と思ったお店だけを記録・整理できる、あなただけのグルメアプリです。
         記録の基準は点数でもジャンルでもなく、“自分がもう一度行きたいと思えるかどうか”。
         日々の外食体験を、あなたの「行動指針」として活かせる形で残せます。
       </p>
     </div>
 
-    <!-- ボックス外の使い方リスト -->
     <div class="container my-5">
       <div class="card bg-dark text-white shadow-lg mx-auto" style="max-width: 750px; border-radius: 15px;">
         <div class="card-body p-4">
           <h3 class="card-title mb-4 text-center" style="font-weight: bold;">使い方</h3>
-          <ol class="list-unstyled mb-0">
-            <% steps = [
-              { title: "会員登録", description: "会員登録すると、「お店の記録」、「投稿したお店を検索」などをすることができます。" },
-              { title: "お店を記録", description: "行ったお店の情報や感想を簡単に記録できます。" },
-              { title: "リピ", description: "もう一度行きたいお店にはリピマークを付けられます。" },
-              { title: "検索", description: "記録したお店を名前やジャンルで検索できます。" },
-              { title: "リピで絞り込む", description: "リピマークを付けたお店だけを一覧表示できます。" },
-              { title: "Myマップ", description: "訪れたお店を地図上で確認できます。" },
-              { title: "Myカレンダー", description: "来店日をカレンダー形式で管理できます。" }
-            ] %>
 
+          <% steps = [
+            { title: "会員登録", description: "会員登録すると、「お店の記録」、「投稿したお店を検索」などをすることができます。" },
+            { title: "お店を記録", description: "", steps: [
+                "Myリピログから「記録する」ボタンを選択。",
+                "「お店を記録する」から年月日、お店の名前、カテゴリ、場所、同行者、気分、来店動機を選択し、お店を記録。必要に応じてメモや写真も追加できます。",
+                "マイページにお店が記録されます。",
+                "マイページから各お店の詳細が見れます。詳細ページではお店の編集/削除ができます。"
+              ]
+            },
+            { title: "リピ", description: "もう一度行きたいお店にはリピマークを付けられます。" },
+            { title: "検索", description: "記録したお店を名前やジャンルで検索できます。" },
+            { title: "リピで絞り込む", description: "リピマークを付けたお店だけを一覧表示できます。" },
+            { title: "Myマップ", description: "訪れたお店を地図上で確認できます。" },
+            { title: "Myカレンダー", description: "来店日をカレンダー形式で管理できます。" },
+            { title: "Myランキング", description: "リピログ内での自分の様々なランキングを確認できます。" }
+          ] %>
+
+          <ol class="list-unstyled mb-0" style="padding-left:0;">
             <% steps.each_with_index do |step, index| %>
-              <li class="mb-4">
-                <div class="d-flex align-items-center mb-1">
+              <li class="mb-0"> <!-- liの上下マージンリセット -->
+
+                <div class="d-flex align-items-center mb-2 justify-content-start">
                   <div class="d-flex align-items-center justify-content-center rounded-circle bg-white text-dark me-3" style="width: 2rem; height: 2rem; font-weight: bold; font-size: 1rem;">
                     <%= index + 1 %>
                   </div>
                   <strong style="font-size: 1.1rem;"><%= step[:title] %></strong>
                 </div>
-                <p class="text-secondary mb-2 ms-5" style="line-height: 1.6;">
+
+                <p class="mb-2" style="line-height:1.6; text-align:center; color:#ddd;">
                   <%= step[:description].html_safe %>
                 </p>
 
-                <% if step[:title] == "会員登録" %>
-                  <div class="text-center mt-3 mb-3">
-                    <%= link_to "会員登録はこちら", new_user_path, class: "btn btn-primary btn-sm" %>
-                  </div>
+                <% if step[:steps] %>
+                  <ol class="mt-2" style="line-height:1.6; text-align:center; padding-left:0; color:#ddd; list-style:none;"> 
+                    <% step[:steps].each_with_index do |s, i| %>
+                      <li style="margin:0; padding:0;">
+                        <p style="margin:0; color:#ddd; text-align:center;"><%= s %></p> <!-- 中央揃え -->
+
+                        <% if step[:title] == "お店を記録" %>
+                          <% if i <= 1 %>
+                            <div style="width:600px; margin:1rem auto;">
+                              <video width="600" style="border-radius:8px;" autoplay muted loop playsinline>
+                                <source src="/assets/videos/repilog_post<%= i==1 ? '2' : '' %>.mp4" type="video/mp4">
+                              </video>
+                            </div>
+                          <% elsif i == 2 %>
+                            <div style="width:600px; margin:1rem auto;">
+                              <%= image_tag "repilog_posts.png", alt: "マイページ記録サンプル", style: "width:600px; border-radius:8px;" %>
+                            </div>
+                          <% elsif i == 3 %>
+                            <div style="width:600px; margin:1rem auto;">
+                              <%= image_tag "repilog_show.png", alt: "詳細ページサンプル", style: "width:600px; border-radius:8px;" %>
+                            </div>
+                          <% end %>
+                        <% end %>
+                      </li>
+                    <% end %>
+                  </ol>
                 <% end %>
-              </li>
-            <% end %>
+
+              <% if ["リピ","リピで絞り込む","検索","Myマップ","Myカレンダー"].include?(step[:title]) %>
+                <% video_path = case step[:title]
+                  when "リピ" then "/assets/videos/repilog_repi.mp4"
+                  when "リピで絞り込む" then "/assets/videos/repilog_repi2.mp4"
+                  when "検索" then "/assets/videos/repilog_search.mp4"
+                  when "Myマップ" then "/assets/videos/repilog_mymap.mp4"
+                  when "Myカレンダー" then "/assets/videos/repilog_mycalendar.mp4"
+                end %>
+                <div style="width:600px; margin:0 auto; margin-top:0.5rem; margin-bottom:0.5rem;">
+                  <video width="600" style="border-radius:8px;" autoplay muted loop playsinline>
+                    <source src="<%= video_path %>" type="video/mp4">
+                  </video>
+                </div>
+              <% end %>
+
+              <% if step[:title] == "Myランキング" %>
+                <div style="width:600px; margin:0 auto; margin-top:0.5rem; margin-bottom:0.5rem;">
+                  <%= image_tag "repilog_myranking.png", alt: "Myランキングサンプル", style: "width:600px; border-radius:8px;" %>
+                </div>
+              <% end %>
+
+              <% if step[:title] == "会員登録" %>
+                <div class="text-center mt-3 mb-3">
+                  <%= link_to "会員登録はこちら", new_user_path, class: "btn btn-primary btn-sm" %>
+                </div>
+              <% end %>
+
+            </li>
+          <% end %>
           </ol>
+
+          <div class="text-center mt-4 mb-5">
+            <%= link_to "会員登録をしてリピログをはじめる", new_user_path, class: "btn btn-primary btn-lg" %>
+          </div>
+
         </div>
       </div>
     </div>
