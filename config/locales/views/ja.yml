@@ -197,7 +197,7 @@ ja:
     title: Myマップ
   
   ranking:
-    title: Myランキング
+    title: Myベスト
     top_shop: "1番リピってるお店"
     top_month: "1番外食が多かった月"
     top_region: "1番リピってる都道府県/市"
@@ -209,7 +209,7 @@ ja:
 
   header:
     logo: リピログ
-    ranking: Myランキング
+    ranking: Myベスト
     login: ログイン
     logout: ログアウト
     to_register_page: 会員登録
@@ -320,3 +320,52 @@ ja:
     callback:
       success: "%{provider}アカウントでログインしました"
       failure: "%{provider}アカウントでのログインに失敗しました"
+
+  howto_repilog:
+    title: "リピログとは？"
+    description: >
+      リピログは、「また行きたい」と思ったお店だけを記録・整理できる、あなただけのグルメアプリです。
+      記録の基準は点数でもジャンルでもなく、“自分がもう一度行きたいと思えるかどうか”。
+      日々の外食体験を、あなたの「行動指針」として活かせる形で残せます。
+
+    usage_title: "使い方"
+
+    steps:
+      register:
+        title: "会員登録"
+        description: "会員登録すると、「お店の記録」、「投稿したお店を検索」などをすることができます。"
+        button: "会員登録はこちら"
+
+      post:
+        title: "お店を記録"
+        steps:
+          - "Myリピログから「記録する」ボタンを選択。"
+          - "「お店を記録する」から年月日、お店の名前、カテゴリ、場所、同行者、気分、来店動機を選択し、お店を記録。必要に応じてメモや写真も追加できます。"
+          - "マイページにお店が記録されます。"
+          - "マイページから各お店の詳細が見れます。詳細ページではお店の編集/削除ができます。"
+
+      repi:
+        title: "リピ"
+        description: "もう一度行きたいお店にはリピマークを付けられます。"
+
+      search:
+        title: "検索"
+        description: "記録したお店を名前やジャンルで検索できます。"
+
+      repi_filter:
+        title: "リピで絞り込む"
+        description: "リピマークを付けたお店だけを一覧表示できます。"
+
+      mymap:
+        title: "Myマップ"
+        description: "訪れたお店を地図上で確認できます。"
+
+      mycalendar:
+        title: "Myカレンダー"
+        description: "来店日をカレンダー形式で管理できます。"
+
+      myranking:
+        title: "Myベスト"
+        description: "リピログ内で使用する自分の様々なベストを確認できます。"
+
+    cta: "会員登録をしてリピログをはじめる"
