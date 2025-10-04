@@ -79,6 +79,13 @@ https://repilog.com/
           <img src="https://github.com/user-attachments/assets/5408b4bb-03ce-4f04-811d-f956eeb3b91b"
                width="100%" style="max-width: 1200px;" alt="お店を記録詳細画面">
         </p>
+        <p>
+          マイページにお店が記録されます。
+        </p>
+        <p>
+          <img src="https://github.com/user-attachments/assets/c722892a-97b9-4470-b9d2-cebb01b33b95"
+               width="100%" style="max-width: 1200px;" alt="マイページ画面">
+        </p>
       </td>
     </tr>
   </tbody>
