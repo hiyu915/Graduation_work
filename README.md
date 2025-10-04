@@ -150,7 +150,20 @@ https://repilog.com/
            来店日をカレンダー形式で管理できます。
          </p>
          <p>
-           
+           <img src="https://github.com/user-attachments/assets/9de7db39-8f58-4012-8784-e05f6da9e1b8"
+              width="100%" style="max-width: 1200px;" alt="Myカレンダー画面">
+         </p>
+       </td>
+    </tr>
+    <tr>
+      <td align="center" style="padding: 20px 0;">
+         <strong>Myベスト</strong>
+         <p>
+           リピログ内で使用する自分の様々なベストを確認できます。
+         </p>
+         <p>
+           <img src="https://github.com/user-attachments/assets/31392b9d-c142-4633-9708-1cedf3aa41e2"
+             width="100%" style="max-width: 1200px;" alt="Myベスト画面">
          </p>
        </td>
     </tr>
