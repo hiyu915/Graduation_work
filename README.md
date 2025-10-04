@@ -52,9 +52,6 @@ https://repilog.com/
       <td align="center" style="padding: 20px 0;">
         <strong>会員登録</strong>
         <p>
-          Myリピログから「記録する」ボタンを選択。
-        </p>
-        <p>
           <img src="https://github.com/user-attachments/assets/e3ef9331-27ac-4c04-9372-164a8aac6a68"
                width="100%" style="max-width: 1200px;" alt="会員登録画面">
         </p>
@@ -67,6 +64,9 @@ https://repilog.com/
     <tr>
       <td align="center" style="padding: 20px 0;">
         <strong>お店を記録する</strong>
+        <p>
+          Myリピログから「記録する」ボタンを選択。
+        </p>
         <p>
           <img src="https://github.com/user-attachments/assets/66a1b076-c348-4b45-b09c-c955ca088b9f"
                width="100%" style="max-width: 1200px;" alt="お店を記録する画面">
