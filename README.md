@@ -44,9 +44,8 @@ https://repilog.com/
 <img width="1698" height="723" alt="Image" src="https://github.com/user-attachments/assets/e3ef9331-27ac-4c04-9372-164a8aac6a68" />
 『メールアドレス』『パスワード』『パスワード確認』を入力して会員登録を行います。Googleアカウントを用いてGoogleログインを行う事も可能です
 
-<img src="https://github.com/user-attachments/assets/e3ef9331-27ac-4c04-9372-164a8aac6a68" width="1698" alt="Image">
-
-
+<img src="https://github.com/user-attachments/assets/ecb31a0a-4a8c-4eb9-aba7-be5e081cf844" width="1698" alt="Image">
+「お店を記録する」から年月日、お店の名前、カテゴリ、場所、同行者、気分、来店動機を選択し、お店を記録。必要に応じてメモや写真も追加できます。
 
 ## ER図
 <img width="1050" height="780" alt="Image" src="https://github.com/user-attachments/assets/0c6e0753-ed7f-4045-b916-7e571146d5d3" />
