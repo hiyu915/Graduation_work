@@ -57,8 +57,11 @@ https://repilog.com/
           『メールアドレス』『パスワード』『パスワード確認』を入力して会員登録を行います。<br>
           Googleアカウントを用いてGoogleログインを行う事も可能です。
         </p>
+        <!-- 空白 -->
+        <div style="margin-bottom: 40px;"></div>
       </td>
     </tr>
+
     <tr>
       <td align="center" style="padding: 20px 0;">
         <strong>お店を記録する</strong>
