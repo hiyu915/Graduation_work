@@ -42,18 +42,19 @@ https://repilog.com/
 
 ## 機能紹介
 
-<div align="center" style="max-width: 1200px; margin: auto;">
+<div style="max-width: 1200px; margin: auto;">
 
-<table>
+<table style="width: 100%; border-collapse: collapse;">
   <tbody>
+    <!-- ユーザー登録 / ログイン -->
     <tr>
-      <td style="padding: 20px 0;">
+      <td style="padding: 20px 0; text-align: left;">
         <!-- タイトル中央揃え -->
         <div style="text-align: center;">
           <strong>ユーザー登録 / ログイン</strong>
         </div>
         <!-- 本文左揃え -->
-        <div style="text-align: left; margin-top: 20px;">
+        <div style="margin-top: 20px;">
           <img src="https://github.com/user-attachments/assets/e3ef9331-27ac-4c04-9372-164a8aac6a68"
                width="100%" style="max-width: 1200px;" alt="ユーザー登録画面">
           <p style="margin-top: 10px;">
@@ -64,14 +65,20 @@ https://repilog.com/
       </td>
     </tr>
 
+    <!-- 空白行 -->
     <tr>
-      <td style="padding: 40px 0;">
+      <td style="padding: 40px 0;"></td>
+    </tr>
+
+    <!-- お店を記録する -->
+    <tr>
+      <td style="padding: 20px 0; text-align: left;">
         <!-- タイトル中央揃え -->
         <div style="text-align: center;">
           <strong>お店を記録する</strong>
         </div>
         <!-- 本文左揃え -->
-        <div style="text-align: left; margin-top: 20px;">
+        <div style="margin-top: 20px;">
           <img src="https://github.com/user-attachments/assets/fb87bce1-e5ab-49c4-a9a7-9e6c1b8fcdc6"
                width="100%" style="max-width: 1200px;" alt="お店を記録する画面">
           <p style="margin-top: 10px;">
