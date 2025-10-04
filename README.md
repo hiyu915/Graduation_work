@@ -41,9 +41,6 @@ https://repilog.com/
 ・「再訪率の高い自分好みの傾向」も見えてくる楽しさがある。
 
 ## 機能紹介
-
-## 機能紹介
-
 <div align="center" style="max-width: 1200px; margin: auto;">
 
 <table>
