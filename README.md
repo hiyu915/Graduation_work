@@ -83,7 +83,7 @@ https://repilog.com/
           マイページにお店が記録されます。
         </p>
         <p>
-          <img src="https://github.com/user-attachments/assets/c722892a-97b9-4470-b9d2-cebb01b33b95"
+          <img src="https://github.com/user-attachments/assets/6370b52a-9f00-4492-9c2b-f6ef267f23b8"
                width="100%" style="max-width: 1200px;" alt="マイページ画面">
         </p>
         <p>
@@ -94,6 +94,8 @@ https://repilog.com/
                width="100%" style="max-width: 1200px;" alt="詳細画面">
         </p>
       </td>
+    </tr>
+    <tr>
       <td align="center" style="padding: 20px 0;">
          <strong>リピ</strong>
          <p>
