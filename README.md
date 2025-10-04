@@ -86,6 +86,13 @@ https://repilog.com/
           <img src="https://github.com/user-attachments/assets/c722892a-97b9-4470-b9d2-cebb01b33b95"
                width="100%" style="max-width: 1200px;" alt="マイページ画面">
         </p>
+        <p>
+          マイページから各お店の詳細が見れます。詳細ページではお店の編集/削除ができます。
+        </p>
+        <p>
+          <img src="https://github.com/user-attachments/assets/b3bddaa7-a64d-4dcd-ac98-fa0794874661"
+               width="100%" style="max-width: 1200px;" alt="詳細画面">
+        </p>
       </td>
     </tr>
   </tbody>
