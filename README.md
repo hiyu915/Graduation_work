@@ -59,10 +59,6 @@ https://repilog.com/
         </p>
       </td>
     </tr>
-
-    <tr>
-      <td style="padding: 30px 0;">&nbsp;</td>
-    </tr>
     
     <tr>
       <td align="center" style="padding: 20px 0;">
