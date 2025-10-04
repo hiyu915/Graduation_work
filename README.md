@@ -47,26 +47,32 @@ https://repilog.com/
 <table>
   <tbody>
     <tr>
-      <td align="center" style="padding: 20px 0;">
+      <td style="padding: 40px 0; text-align: center;">
         <strong>ユーザー登録 / ログイン</strong>
-        <p>
+        <p style="text-align: left; margin-top: 20px;">
           <img src="https://github.com/user-attachments/assets/e3ef9331-27ac-4c04-9372-164a8aac6a68"
                width="100%" style="max-width: 1200px;" alt="ユーザー登録画面">
         </p>
-        <p>
+        <p style="text-align: left; margin-top: 10px;">
           『メールアドレス』『パスワード』『パスワード確認』を入力して会員登録を行います。<br>
           Googleアカウントを用いてGoogleログインを行う事も可能です。
         </p>
       </td>
     </tr>
+
+    <!-- 空白行 -->
     <tr>
-      <td align="center" style="padding: 20px 0;">
+      <td style="padding: 40px 0;"></td>
+    </tr>
+
+    <tr>
+      <td style="padding: 40px 0; text-align: center;">
         <strong>お店を記録する</strong>
-        <p>
+        <p style="text-align: left; margin-top: 20px;">
           <img src="https://github.com/user-attachments/assets/fb87bce1-e5ab-49c4-a9a7-9e6c1b8fcdc6"
                width="100%" style="max-width: 1200px;" alt="お店を記録する画面">
         </p>
-        <p>
+        <p style="text-align: left; margin-top: 10px;">
           「お店を記録する」から年月日、お店の名前、カテゴリ、場所、同行者、気分、来店動機を選択し、<br>
           お店を記録。必要に応じてメモや写真も追加できます。
         </p>
