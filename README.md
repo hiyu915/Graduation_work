@@ -46,28 +46,20 @@ https://repilog.com/
   <tbody>
     <tr>
       <td align="center">
-        <strong>ユーザー登録 / ログイン</strong>
-        <p>
-          <img src="https://github.com/user-attachments/assets/e3ef9331-27ac-4c04-9372-164a8aac6a68"
-               width="600" alt="ユーザー登録画面">
-        </p>
-        <p>
-          『メールアドレス』『パスワード』『パスワード確認』を入力して会員登録を行います。<br>
-          Googleアカウントを用いてGoogleログインを行う事も可能です。
-        </p>
+        <strong>ユーザー登録 / ログイン</strong><br>
+        <img src="https://github.com/user-attachments/assets/e3ef9331-27ac-4c04-9372-164a8aac6a68"
+             width="1200" alt="ユーザー登録画面"><br>
+        『メールアドレス』『パスワード』『パスワード確認』を入力して会員登録を行います。<br>
+        Googleアカウントを用いてGoogleログインを行う事も可能です。
       </td>
     </tr>
     <tr>
       <td align="center">
-        <strong>お店を記録する</strong>
-        <p>
-          <img src="https://github.com/user-attachments/assets/fb87bce1-e5ab-49c4-a9a7-9e6c1b8fcdc6"
-               width="600" alt="お店を記録する画面">
-        </p>
-        <p>
-          「お店を記録する」から年月日、お店の名前、カテゴリ、場所、同行者、気分、来店動機を選択し、<br>
-          お店を記録。必要に応じてメモや写真も追加できます。
-        </p>
+        <strong>お店を記録する</strong><br>
+        <img src="https://github.com/user-attachments/assets/fb87bce1-e5ab-49c4-a9a7-9e6c1b8fcdc6"
+             width="1200" alt="お店を記録する画面"><br>
+        「お店を記録する」から年月日、お店の名前、カテゴリ、場所、同行者、気分、来店動機を選択し、<br>
+        お店を記録。必要に応じてメモや写真も追加できます。
       </td>
     </tr>
   </tbody>
