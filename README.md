@@ -63,12 +63,16 @@ https://repilog.com/
       <td align="center" style="padding: 20px 0;">
         <strong>お店を記録する</strong>
         <p>
-         <img src="https://github.com/user-attachments/assets/66a1b076-c348-4b45-b09c-c955ca088b9f"
+          <img src="https://github.com/user-attachments/assets/66a1b076-c348-4b45-b09c-c955ca088b9f"
                width="100%" style="max-width: 1200px;" alt="お店を記録する画面">
         </p>
         <p>
           「お店を記録する」から年月日、お店の名前、カテゴリ、場所、同行者、気分、来店動機を選択し、<br>
           お店を記録。必要に応じてメモや写真も追加できます。
+        </p>
+        <p>
+          <img src="https://github.com/user-attachments/assets/5408b4bb-03ce-4f04-811d-f956eeb3b91b"
+               width="100%" style="max-width: 1200px;" alt="お店を記録詳細画面">
         </p>
       </td>
     </tr>
