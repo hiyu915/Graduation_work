@@ -46,7 +46,7 @@ https://repilog.com/
 
 <img width="1698" height="723" alt="Image" src="https://github.com/user-attachments/assets/e19bb70a-4aa7-4fa2-bb64-6c0969a2beae" />
 
-<img src="https://github.com/user-attachments/assets/73857bc7-1ee3-4899-8d71-6bf1cf87c9fc" width="600">
+<img width="1698" height="723" alt="Image" src="https://github.com/user-attachments/assets/73857bc7-1ee3-4899-8d71-6bf1cf87c9fc" />
 
 
 ## ER図
