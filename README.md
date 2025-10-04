@@ -2,7 +2,6 @@
 <img width="1200" height="627" alt="Image" src="https://github.com/user-attachments/assets/7d880250-4e52-43e5-964f-2ab2ebf2d477" />
 
 ## 目次
-- [プロジェクト名](#プロジェクト名-リピログ)
 - [サービス概要](#サービス概要)
 - [サービスURL](#サービスurl)
 - [サービス開発の背景](#サービス開発の背景)
