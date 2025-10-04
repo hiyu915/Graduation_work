@@ -94,6 +94,16 @@ https://repilog.com/
                width="100%" style="max-width: 1200px;" alt="詳細画面">
         </p>
       </td>
+      <td align="center" style="padding: 20px 0;">
+         <strong>リピ</strong>
+         <p>
+           もう一度行きたいお店にはリピマークを付けられます。
+         </p>
+         <p>
+           <img src="https://github.com/user-attachments/assets/503dcc12-ee0d-4f6d-814f-a54afba1788c"
+              width="100%" style="max-width: 1200px;" alt="お店を記録する画面">
+         </p>
+       </td>
     </tr>
   </tbody>
 </table>
