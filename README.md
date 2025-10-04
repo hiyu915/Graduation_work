@@ -49,6 +49,9 @@ https://repilog.com/
       <td align="center" style="padding: 20px 0;">
         <strong>会員登録</strong>
         <p>
+          会員登録すると、「お店の記録」、「投稿したお店を検索」などをすることができます。
+        </p>
+        <p>
           <img src="https://github.com/user-attachments/assets/e3ef9331-27ac-4c04-9372-164a8aac6a68"
                width="100%" style="max-width: 1200px;" alt="会員登録画面">
         </p>
