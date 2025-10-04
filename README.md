@@ -42,6 +42,8 @@ https://repilog.com/
 
 ## 機能紹介
 
+## 機能紹介
+
 <div align="center" style="max-width: 1200px; margin: auto;">
 
 <table>
@@ -49,6 +51,9 @@ https://repilog.com/
     <tr>
       <td align="center" style="padding: 20px 0;">
         <strong>会員登録</strong>
+        <p>
+          Myリピログから「記録する」ボタンを選択。
+        </p>
         <p>
           <img src="https://github.com/user-attachments/assets/e3ef9331-27ac-4c04-9372-164a8aac6a68"
                width="100%" style="max-width: 1200px;" alt="会員登録画面">
@@ -62,9 +67,6 @@ https://repilog.com/
     <tr>
       <td align="center" style="padding: 20px 0;">
         <strong>お店を記録する</strong>
-
-        <p>
-          Myリピログから「記録する」ボタンを選択。
         <p>
           <img src="https://github.com/user-attachments/assets/66a1b076-c348-4b45-b09c-c955ca088b9f"
                width="100%" style="max-width: 1200px;" alt="お店を記録する画面">
@@ -83,6 +85,7 @@ https://repilog.com/
 </table>
 
 </div>
+
 
 ## ER図
 <img width="1050" height="780" alt="Image" src="https://github.com/user-attachments/assets/0c6e0753-ed7f-4045-b916-7e571146d5d3" />
