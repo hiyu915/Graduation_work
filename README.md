@@ -48,10 +48,10 @@ https://repilog.com/
   <tbody>
     <tr>
       <td align="center" style="padding: 20px 0;">
-        <strong>ユーザー登録 / ログイン</strong>
+        <strong>会員登録</strong>
         <p>
           <img src="https://github.com/user-attachments/assets/e3ef9331-27ac-4c04-9372-164a8aac6a68"
-               width="100%" style="max-width: 1200px;" alt="ユーザー登録画面">
+               width="100%" style="max-width: 1200px;" alt="会員登録画面">
         </p>
         <p>
           『メールアドレス』『パスワード』『パスワード確認』を入力して会員登録を行います。<br>
@@ -59,6 +59,11 @@ https://repilog.com/
         </p>
       </td>
     </tr>
+
+    <tr>
+      <td style="padding: 30px 0;">&nbsp;</td>
+    </tr>
+    
     <tr>
       <td align="center" style="padding: 20px 0;">
         <strong>お店を記録する</strong>
