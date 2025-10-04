@@ -107,6 +107,18 @@ https://repilog.com/
          </p>
        </td>
     </tr>
+    <tr>
+      <td align="center" style="padding: 20px 0;">
+         <strong>検索</strong>
+         <p>
+           記録したお店を名前やジャンルで検索できます。
+         </p>
+         <p>
+           <img src="https://github.com/user-attachments/assets/bc9e5334-9697-4dd3-8425-a55b4542c4e8"
+              width="100%" style="max-width: 1200px;" alt="検索画面">
+         </p>
+       </td>
+    </tr>
   </tbody>
 </table>
 
