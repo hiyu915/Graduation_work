@@ -119,6 +119,41 @@ https://repilog.com/
          </p>
        </td>
     </tr>
+    <tr>
+      <td align="center" style="padding: 20px 0;">
+         <strong>リピで絞り込む</strong>
+         <p>
+           リピマークを付けたお店だけを一覧表示できます。
+         </p>
+         <p>
+           <img src="https://github.com/user-attachments/assets/db8ed4ae-ce6a-460c-b14e-ffc22399c5b0"
+              width="100%" style="max-width: 1200px;" alt="リピ絞り込み画面">
+         </p>
+       </td>
+    </tr>
+    <tr>
+      <td align="center" style="padding: 20px 0;">
+         <strong>Myマップ</strong>
+         <p>
+           訪れたお店を地図上で確認できます。
+         </p>
+         <p>
+           <img src="https://github.com/user-attachments/assets/7ab120c0-f18c-48a6-84e0-f85a115d210e"
+              width="100%" style="max-width: 1200px;" alt="Myマップ画面">
+         </p>
+       </td>
+    </tr>
+    <tr>
+      <td align="center" style="padding: 20px 0;">
+         <strong>Myカレンダー</strong>
+         <p>
+           来店日をカレンダー形式で管理できます。
+         </p>
+         <p>
+           
+         </p>
+       </td>
+    </tr>
   </tbody>
 </table>
 
