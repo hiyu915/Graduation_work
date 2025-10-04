@@ -42,6 +42,8 @@ https://repilog.com/
 
 ## 機能紹介
 
+## 機能紹介
+
 <div align="center" style="max-width: 1200px; margin: auto;">
 
 <table>
@@ -79,6 +81,7 @@ https://repilog.com/
 </table>
 
 </div>
+
 
 ## ER図
 <img width="1050" height="780" alt="Image" src="https://github.com/user-attachments/assets/0c6e0753-ed7f-4045-b916-7e571146d5d3" />
