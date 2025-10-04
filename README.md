@@ -42,50 +42,34 @@ https://repilog.com/
 
 ## 機能紹介
 
-<div style="max-width: 1200px; margin: auto;">
+<div align="center" style="max-width: 1200px; margin: auto;">
 
-<table style="width: 100%; border-collapse: collapse;">
+<table>
   <tbody>
-    <!-- ユーザー登録 / ログイン -->
     <tr>
-      <td style="padding: 20px 0; text-align: left;">
-        <!-- タイトル中央揃え -->
-        <div style="text-align: center;">
-          <strong>ユーザー登録 / ログイン</strong>
-        </div>
-        <!-- 本文左揃え -->
-        <div style="margin-top: 20px;">
+      <td align="center" style="padding: 20px 0;">
+        <strong>ユーザー登録 / ログイン</strong>
+        <p>
           <img src="https://github.com/user-attachments/assets/e3ef9331-27ac-4c04-9372-164a8aac6a68"
                width="100%" style="max-width: 1200px;" alt="ユーザー登録画面">
-          <p style="margin-top: 10px;">
-            『メールアドレス』『パスワード』『パスワード確認』を入力して会員登録を行います。<br>
-            Googleアカウントを用いてGoogleログインを行う事も可能です。
-          </p>
-        </div>
+        </p>
+        <p>
+          『メールアドレス』『パスワード』『パスワード確認』を入力して会員登録を行います。<br>
+          Googleアカウントを用いてGoogleログインを行う事も可能です。
+        </p>
       </td>
     </tr>
-
-    <!-- 空白行 -->
     <tr>
-      <td style="padding: 40px 0;"></td>
-    </tr>
-
-    <!-- お店を記録する -->
-    <tr>
-      <td style="padding: 20px 0; text-align: left;">
-        <!-- タイトル中央揃え -->
-        <div style="text-align: center;">
-          <strong>お店を記録する</strong>
-        </div>
-        <!-- 本文左揃え -->
-        <div style="margin-top: 20px;">
+      <td align="center" style="padding: 20px 0;">
+        <strong>お店を記録する</strong>
+        <p>
           <img src="https://github.com/user-attachments/assets/fb87bce1-e5ab-49c4-a9a7-9e6c1b8fcdc6"
                width="100%" style="max-width: 1200px;" alt="お店を記録する画面">
-          <p style="margin-top: 10px;">
-            「お店を記録する」から年月日、お店の名前、カテゴリ、場所、同行者、気分、来店動機を選択し、<br>
-            お店を記録。必要に応じてメモや写真も追加できます。
-          </p>
-        </div>
+        </p>
+        <p>
+          「お店を記録する」から年月日、お店の名前、カテゴリ、場所、同行者、気分、来店動機を選択し、<br>
+          お店を記録。必要に応じてメモや写真も追加できます。
+        </p>
       </td>
     </tr>
   </tbody>
