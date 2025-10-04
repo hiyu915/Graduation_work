@@ -101,7 +101,7 @@ https://repilog.com/
          </p>
          <p>
            <img src="https://github.com/user-attachments/assets/503dcc12-ee0d-4f6d-814f-a54afba1788c"
-              width="100%" style="max-width: 1200px;" alt="お店を記録する画面">
+              width="100%" style="max-width: 1200px;" alt="リピ操作画面">
          </p>
        </td>
     </tr>
