@@ -59,11 +59,6 @@ https://repilog.com/
         </p>
       </td>
     </tr>
-
-    <tr>
-      <td style="padding: 30px 0;">&nbsp;</td>
-    </tr>
-    
     <tr>
       <td align="center" style="padding: 20px 0;">
         <strong>お店を記録する</strong>
@@ -81,6 +76,7 @@ https://repilog.com/
 </table>
 
 </div>
+
 
 ## ER図
 <img width="1050" height="780" alt="Image" src="https://github.com/user-attachments/assets/0c6e0753-ed7f-4045-b916-7e571146d5d3" />
