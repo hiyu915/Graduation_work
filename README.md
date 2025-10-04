@@ -62,6 +62,9 @@ https://repilog.com/
     <tr>
       <td align="center" style="padding: 20px 0;">
         <strong>お店を記録する</strong>
+
+        <p>
+          Myリピログから「記録する」ボタンを選択。
         <p>
           <img src="https://github.com/user-attachments/assets/66a1b076-c348-4b45-b09c-c955ca088b9f"
                width="100%" style="max-width: 1200px;" alt="お店を記録する画面">
