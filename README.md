@@ -44,7 +44,7 @@ https://repilog.com/
 <img width="1698" height="723" alt="Image" src="https://github.com/user-attachments/assets/e3ef9331-27ac-4c04-9372-164a8aac6a68" />
 『メールアドレス』『パスワード』『パスワード確認』を入力して会員登録を行います。Googleアカウントを用いてGoogleログインを行う事も可能です。
 
-<img width="1698" height="723" alt="Image" src="https://github.com/user-attachments/assets/ae52d824-9e6e-4e8c-b937-f5ccd140bf07" />
+<img width="1698" height="723" alt="Image" src="https://github.com/user-attachments/assets/e19bb70a-4aa7-4fa2-bb64-6c0969a2beae" />
 
 
 ## ER図
