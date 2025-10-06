@@ -1,7 +1,7 @@
 ## プロジェクト名: 『リピログ』
 <img width="1200" height="627" alt="Image" src="https://github.com/user-attachments/assets/7d880250-4e52-43e5-964f-2ab2ebf2d477" />
 
-###【ゲストユーザーアカウント情報】
+##【ゲストユーザーアカウント情報】
 メールアドレス：hiyu.guestuser@gmail.com
 パスワード：password000
 
