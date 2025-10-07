@@ -16,7 +16,7 @@ services:
       retries: 5
   
   web:
-    build:
+    build:  # ← インデントを修正
       context: .
       dockerfile: Dockerfile.dev
     command: bash -c "bundle install && bundle exec rails db:prepare && rm -f tmp/pids/server.pid && ./bin/dev"
@@ -29,6 +29,10 @@ services:
     environment:
       TZ: Asia/Tokyo
       SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_REGION: ${AWS_REGION}
+      AWS_S3_BUCKET: ${AWS_S3_BUCKET}
     ports:
       - "3000:3000"
     depends_on:
@@ -36,6 +40,8 @@ services:
         condition: service_healthy
       chrome:
         condition: service_started
+    env_file:
+      - .env
   
   chrome:
     image: seleniarm/standalone-chromium:latest
