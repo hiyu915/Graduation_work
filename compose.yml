@@ -16,7 +16,7 @@ services:
       retries: 5
   
   web:
-    build:  # ← インデントを修正
+    build:
       context: .
       dockerfile: Dockerfile.dev
     command: bash -c "bundle install && bundle exec rails db:prepare && rm -f tmp/pids/server.pid && ./bin/dev"
@@ -29,10 +29,10 @@ services:
     environment:
       TZ: Asia/Tokyo
       SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub
-      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
-      AWS_REGION: ${AWS_REGION}
-      AWS_S3_BUCKET: ${AWS_S3_BUCKET}
+      AWS_ACCESS_KEY_ID: ${S3_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${S3_SECRET_ACCESS_KEY}
+      AWS_REGION: ${S3_REGION}
+      AWS_S3_BUCKET: ${S3_BUCKET_NAME}
     ports:
       - "3000:3000"
     depends_on:
