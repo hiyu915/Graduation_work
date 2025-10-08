@@ -29,7 +29,7 @@ Rails.application.configure do
   config.cache_store = :memory_store
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  config.active_storage.service = :amazon
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
@@ -76,6 +76,4 @@ Rails.application.configure do
     google_callback_url: "http://localhost:3000/oauth/callback?provider=google",
     twitter_callback_url: "http://localhost:3000/oauth/callback?provider=twitter"
   }
-
-  config.active_storage.service = :amazon
 end

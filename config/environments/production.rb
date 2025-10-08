@@ -21,7 +21,7 @@ Rails.application.configure do
   }
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  config.active_storage.service = :amazon
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   config.assume_ssl = true
@@ -85,5 +85,4 @@ Rails.application.configure do
     google_callback_url: "https://repilog.com/oauth/callback?provider=google",
     twitter_callback_url: "https://repilog.com/oauth/callback?provider=twitter"
   }
-  config.active_storage.service = :amazon
 end
