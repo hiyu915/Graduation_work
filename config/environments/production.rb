@@ -85,4 +85,5 @@ Rails.application.configure do
     google_callback_url: "https://repilog.com/oauth/callback?provider=google",
     twitter_callback_url: "https://repilog.com/oauth/callback?provider=twitter"
   }
+  config.active_storage.service = :amazon
 end
