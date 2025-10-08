@@ -83,3 +83,4 @@ gem "geocoder"
 gem "simple_calendar"
 gem "meta-tags"
 gem "fog-aws"
+gem "aws-sdk-s3", require: false

@@ -76,4 +76,6 @@ Rails.application.configure do
     google_callback_url: "http://localhost:3000/oauth/callback?provider=google",
     twitter_callback_url: "http://localhost:3000/oauth/callback?provider=twitter"
   }
+
+  config.active_storage.service = :amazon
 end
