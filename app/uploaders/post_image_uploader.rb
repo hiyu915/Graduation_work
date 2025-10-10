@@ -1,6 +1,5 @@
 class PostImageUploader < CarrierWave::Uploader::Base
-  # S3を使用するための設定に変更
-  storage :fog  # ← file から fog に変更
+  storage :fog
 
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
