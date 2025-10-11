@@ -109,11 +109,11 @@
 
                 <!-- 会員登録リンク -->
                 <% if step[:key] == "register" %>
-                  <div class="text-center mt-3 mb-3">
+                  <div class="text-center mt-3 mb-3" id="register-btn-wrapper">
                     <%= link_to t("howto_repilog.steps.register.button"),
                                 new_user_path,
-                                class: "btn btn-sm howto-register-btn",
-                                style: "background-color:#ffeb99; color:#333; border:none; font-weight:bold;" %>
+                                class: "btn howto-register-btn",
+                                style: "background-color:#ffeb99; color:#333; border:none; font-weight:bold; font-size:1rem; padding:0.5rem 1rem;" %>
                   </div>
                 <% end %>
 
@@ -137,7 +137,7 @@
   <!-- スマホ用ボタン調整 -->
   <style>
     @media (max-width: 768px) {
-      a.howto-register-btn.btn.btn-sm {
+      #register-btn-wrapper a.howto-register-btn {
         font-size: 0.8rem !important;
         padding: 0.3rem 0.6rem !important;
       }
