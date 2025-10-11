@@ -1,21 +1,27 @@
 <body style="background-color: #000; color: #fff; margin:0;">
   <div class="text-center">
 
-    <%= image_tag "ogp.png", alt: t("application.title"), width: 800, height: 420, style: "margin: 2rem 0;" %>
+    <%= image_tag "ogp.png",
+      alt: t("application.title"),
+      style: "max-width: 100%; height: auto; margin: 2rem 0; border-radius:8px;" %>
 
     <!-- リピログとは -->
-    <div style="max-width: 750px; margin: 2rem auto; padding: 2rem; background-color: #111; border-radius: 12px; box-shadow: 0 0 20px rgba(255,255,255,0.1); text-align: center;">
-      <h2 class="mb-4" style="font-weight: bold; color: #fff;"><%= t("howto_repilog.title") %></h2>
-      <p style="line-height: 1.8; color: #fff; margin: 0 auto; max-width:600px;">
+    <div style="max-width: 750px; width: 90%; margin: 2rem auto; padding: 2rem; background-color: #111; border-radius: 12px; box-shadow: 0 0 20px rgba(255,255,255,0.1); text-align: center;">
+      <h2 class="mb-4" style="font-weight: bold; color: #fff; font-size: clamp(1.2rem, 2vw, 1.8rem);">
+        <%= t("howto_repilog.title") %>
+      </h2>
+      <p style="line-height: 1.8; color: #fff; margin: 0 auto; max-width:600px; font-size: clamp(0.9rem, 1.5vw, 1rem);">
         <%= simple_format(t("howto_repilog.description")) %>
       </p>
     </div>
 
     <!-- 使い方 -->
     <div class="container my-5">
-      <div class="card bg-dark text-white shadow-lg mx-auto" style="max-width: 750px; border-radius: 15px;">
+      <div class="card bg-dark text-white shadow-lg mx-auto" style="max-width: 750px; width: 90%; border-radius: 15px;">
         <div class="card-body p-4">
-          <h3 class="card-title mb-4 text-center" style="font-weight: bold;"><%= t("howto_repilog.usage_title") %></h3>
+          <h3 class="card-title mb-4 text-center" style="font-weight: bold; font-size: clamp(1.2rem, 2vw, 1.6rem);">
+            <%= t("howto_repilog.usage_title") %>
+          </h3>
 
           <% steps = [
             { key: "register", title: t("howto_repilog.steps.register.title"), description: t("howto_repilog.steps.register.description") },
@@ -33,17 +39,17 @@
               <li class="mb-0">
 
                 <!-- ステップタイトル -->
-                <div class="d-flex align-items-center mb-2 justify-content-start">
-                  <div class="d-flex align-items-center justify-content-center rounded-circle bg-white text-dark me-3"
-                       style="width: 2rem; height: 2rem; font-weight: bold; font-size: 1rem;">
+                <div class="d-flex align-items-center mb-2 justify-content-start" style="flex-wrap: wrap; text-align: left;">
+                  <div class="d-flex align-items-center justify-content-center rounded-circle bg-white text-dark me-3 mb-2"
+                       style="width: 2rem; height: 2rem; font-weight: bold; font-size: 1rem; flex-shrink: 0;">
                     <%= index + 1 %>
                   </div>
-                  <strong style="font-size: 1.1rem;"><%= step[:title] %></strong>
+                  <strong style="font-size: clamp(1rem, 2vw, 1.1rem);"><%= step[:title] %></strong>
                 </div>
 
                 <!-- ステップ説明 -->
                 <% if step[:description].present? %>
-                  <p class="mb-2" style="line-height:1.6; text-align:center; color:#ddd;">
+                  <p class="mb-2" style="line-height:1.6; text-align:center; color:#ddd; font-size: clamp(0.9rem, 1.5vw, 1rem);">
                     <%= step[:description].html_safe %>
                   </p>
                 <% end %>
@@ -53,21 +59,21 @@
                   <ol class="mt-2" style="line-height:1.6; text-align:center; padding-left:0; color:#ddd; list-style:none;">
                     <% step[:steps].each_with_index do |s, i| %>
                       <li style="margin:0; padding:0;">
-                        <p style="margin:0; color:#ddd; text-align:center;"><%= s %></p>
+                        <p style="margin:0; color:#ddd; text-align:center; font-size: clamp(0.9rem, 1.5vw, 1rem);"><%= s %></p>
                         <% if step[:key] == "post" %>
                           <% if i <= 1 %>
-                            <div style="width:600px; margin:1rem auto;">
-                              <video width="600" style="border-radius:8px;" autoplay muted loop playsinline>
+                            <div style="max-width:600px; width:100%; margin:1rem auto;">
+                              <video class="w-100" style="border-radius:8px;" autoplay muted loop playsinline>
                                 <source src="/videos/repilog_post<%= i==1 ? '2' : '' %>.mp4" type="video/mp4">
                               </video>
                             </div>
                           <% elsif i == 2 %>
-                            <div style="width:600px; margin:1rem auto;">
-                              <%= image_tag "repilog_posts.png", alt: "マイページ記録サンプル", style: "width:600px; border-radius:8px;" %>
+                            <div style="max-width:600px; width:100%; margin:1rem auto;">
+                              <%= image_tag "repilog_posts.png", alt: "マイページ記録サンプル", style: "max-width:100%; height:auto; border-radius:8px;" %>
                             </div>
                           <% elsif i == 3 %>
-                            <div style="width:600px; margin:1rem auto;">
-                              <%= image_tag "repilog_show.png", alt: "詳細ページサンプル", style: "width:600px; border-radius:8px;" %>
+                            <div style="max-width:600px; width:100%; margin:1rem auto;">
+                              <%= image_tag "repilog_show.png", alt: "詳細ページサンプル", style: "max-width:100%; height:auto; border-radius:8px;" %>
                             </div>
                           <% end %>
                         <% end %>
@@ -85,8 +91,8 @@
                     when "mymap" then "/videos/repilog_mymap.mp4"
                     when "mycalendar" then "/videos/repilog_mycalendar.mp4"
                   end %>
-                  <div style="width:600px; margin:0 auto; margin-top:0.5rem; margin-bottom:0.5rem;">
-                    <video width="600" style="border-radius:8px;" autoplay muted loop playsinline>
+                  <div style="max-width:600px; width:100%; margin:0.5rem auto;">
+                    <video class="w-100" style="border-radius:8px;" autoplay muted loop playsinline>
                       <source src="<%= video_path %>" type="video/mp4">
                     </video>
                   </div>
@@ -94,8 +100,8 @@
 
                 <!-- Myランキングだけ画像 -->
                 <% if step[:key] == "myranking" %>
-                  <div style="width:600px; margin:0 auto; margin-top:0.5rem; margin-bottom:0.5rem;">
-                    <%= image_tag "repilog_myranking.png", alt: "Myランキングサンプル", style: "width:600px; border-radius:8px;" %>
+                  <div style="max-width:600px; width:100%; margin:0.5rem auto;">
+                    <%= image_tag "repilog_myranking.png", alt: "Myランキングサンプル", style: "max-width:100%; height:auto; border-radius:8px;" %>
                   </div>
                 <% end %>
 
