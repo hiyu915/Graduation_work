@@ -1,6 +1,7 @@
 <body style="background-color: #000; color: #fff; margin:0;">
   <div class="text-center">
 
+    <!-- メイン画像 -->
     <%= image_tag "ogp.png",
       alt: t("application.title"),
       style: "max-width: 100%; height: auto; margin: 2rem 0; border-radius:8px;" %>
@@ -60,6 +61,7 @@
                     <% step[:steps].each_with_index do |s, i| %>
                       <li style="margin:0; padding:0;">
                         <p style="margin:0; color:#ddd; text-align:center; font-size: clamp(0.9rem, 1.5vw, 1rem);"><%= s %></p>
+
                         <% if step[:key] == "post" %>
                           <% if i <= 1 %>
                             <div style="max-width:600px; width:100%; margin:1rem auto;">
@@ -110,7 +112,7 @@
                   <div class="text-center mt-3 mb-3">
                     <%= link_to t("howto_repilog.steps.register.button"),
                                 new_user_path,
-                                class: "btn btn-sm",
+                                class: "btn btn-sm howto-register-btn",
                                 style: "background-color:#ffeb99; color:#333; border:none; font-weight:bold;" %>
                   </div>
                 <% end %>
@@ -130,4 +132,15 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- スマホ用ボタン調整 -->
+  <style>
+    @media (max-width: 768px) {
+      .howto-register-btn {
+        font-size: 0.85rem !important;
+        padding: 0.4rem 0.8rem !important;
+      }
+    }
+  </style>
 </body>
