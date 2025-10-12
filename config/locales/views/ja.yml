@@ -192,6 +192,8 @@ ja:
       title: "Myカレンダー"
     messages:
       required_fields: "年月日、お店の名前、カテゴリ、場所、同行者、気分、来店動機は入力が必須です。"
+    history:
+      title: "%{shop} の来店履歴"
 
   maps:
     title: Myマップ

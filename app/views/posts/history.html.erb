@@ -1,61 +1,70 @@
+<!-- 来店履歴ページ -->
 <% content_for(:title, t('.title', shop: @post.shop.name)) %>
+
 <div class="container my-4">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h1><%= t('posts.history.title', shop: @post.shop.name) %></h1>
+
+  <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+    <h1 class="mb-2 mb-md-0"><%= t('posts.history.title', shop: @post.shop.name) %></h1>
     <div>
-      <%= link_to t('posts.index.new_post'), new_post_path, class: 'btn btn-primary me-2' %>
+      <%= link_to t('posts.index.new_post'), new_post_path, class: 'btn btn-primary' %>
     </div>
   </div>
 
-  <%= search_form_for @q, url: history_post_path(@post), method: :get do |f| %>
-    <table class="table table-bordered mb-4">
-      <tbody>
-        <tr>
-          <td style="width: 6rem;">
-            <%= f.label :visit_date_gteq, "#{t('helpers.label.post.visit_date')}（#{t('posts.index.search.start_date')}）", class: "form-label d-block" %>
-            <%= f.date_field :visit_date_gteq, class: "form-control form-control-sm" %>
-          </td>
-          <td style="width: 6rem;">
-            <%= f.label :visit_date_lteq, "#{t('helpers.label.post.visit_date')}（#{t('posts.index.search.end_date')}）", class: "form-label d-block" %>
-            <%= f.date_field :visit_date_lteq, class: "form-control form-control-sm" %>
-          </td>
-          <td style="width: 120px;">
-            <%= f.label :category_id_eq, t('helpers.label.post.category'), class: "form-label d-block" %>
-            <%= f.collection_select :category_id_eq, Category.all, :id, :name,
-                  { include_blank: t('posts.index.search.all') },
-                  class: "form-select form-select-sm w-100" %>
-          </td>
-          <td style="width: 120px;">
-            <%= f.label :companion_id_eq, t('helpers.label.post.companion'), class: "form-label d-block" %>
-            <%= f.collection_select :companion_id_eq, Companion.all, :id, :name,
-                  { include_blank: t('posts.index.search.all') },
-                  class: "form-select form-select-sm w-100" %>
-          </td>
-          <td style="width: 120px;">
-            <%= f.label :feeling_id_eq, t('helpers.label.post.feeling'), class: "form-label d-block" %>
-            <%= f.collection_select :feeling_id_eq, Feeling.all, :id, :name,
-                  { include_blank: t('posts.index.search.all') },
-                  class: "form-select form-select-sm w-100" %>
-          </td>
-          <td style="width: 120px;">
-            <%= f.label :visit_reason_id_eq, t('helpers.label.post.visit_reason'), class: "form-label d-block" %>
-            <%= f.collection_select :visit_reason_id_eq, VisitReason.all, :id, :name,
-                  { include_blank: t('posts.index.search.all') },
-                  class: "form-select form-select-sm w-100" %>
-          </td>
-          <td class="align-middle text-center" style="width: 80px;">
-            <%= f.submit t('posts.index.search.submit'), class: "btn btn-primary btn-sm w-100" %>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  <% end %>
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+      <%= search_form_for @q, url: history_post_path(@post), method: :get, html: { class: "row g-3", id: "search-form" } do |f| %>
 
-  <% current_query = request.query_parameters.except(:page, :direction, :sort) %>
-  <% current_sort = params[:sort].presence || "visit_date" %>
-  <% current_direction = params[:direction].presence || "desc" %>
-  <% next_direction = current_direction == "desc" ? "asc" : "desc" %>
-  <% by_visit_date = current_query.merge(sort: "visit_date", direction: next_direction) %>
+        <!-- 訪問日 -->
+        <div class="col-6 col-md-2">
+          <%= f.label :visit_date_gteq, t('posts.index.search.start_date'), class: "form-label fw-bold" %>
+          <%= f.date_field :visit_date_gteq, class: "form-control" %>
+        </div>
+
+        <div class="col-6 col-md-2">
+          <%= f.label :visit_date_lteq, t('posts.index.search.end_date'), class: "form-label fw-bold" %>
+          <%= f.date_field :visit_date_lteq, class: "form-control" %>
+        </div>
+
+        <!-- カテゴリ・同行者・気分・来店理由 -->
+        <div class="col-6 col-md-2">
+          <%= f.label :category_id_eq, t('helpers.label.post.category'), class: "form-label fw-bold" %>
+          <%= f.collection_select :category_id_eq, Category.all, :id, :name,
+                { include_blank: t('posts.index.search.all') },
+                class: "form-select" %>
+        </div>
+
+        <div class="col-6 col-md-2">
+          <%= f.label :companion_id_eq, t('helpers.label.post.companion'), class: "form-label fw-bold" %>
+          <%= f.collection_select :companion_id_eq, Companion.all, :id, :name,
+                { include_blank: t('posts.index.search.all') },
+                class: "form-select" %>
+        </div>
+
+        <div class="col-6 col-md-2">
+          <%= f.label :feeling_id_eq, t('helpers.label.post.feeling'), class: "form-label fw-bold" %>
+          <%= f.collection_select :feeling_id_eq, Feeling.all, :id, :name,
+                { include_blank: t('posts.index.search.all') },
+                class: "form-select" %>
+        </div>
+
+        <div class="col-6 col-md-2">
+          <%= f.label :visit_reason_id_eq, t('helpers.label.post.visit_reason'), class: "form-label fw-bold" %>
+          <%= f.collection_select :visit_reason_id_eq, VisitReason.all, :id, :name,
+                { include_blank: t('posts.index.search.all') },
+                class: "form-select" %>
+        </div>
+
+        <!-- 検索ボタン・リセットボタン -->
+        <div class="col-12 d-flex justify-content-end gap-2">
+          <%= f.submit t('posts.index.search.submit'), class: "btn btn-primary", style: "width: 120px;" %>
+          <button type="button" class="btn btn-secondary" style="width: 120px;" onclick="resetSearchForm()">
+            <%= t('posts.index.search.reset') %>
+          </button>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
 
   <turbo-frame id="history_posts">
     <%= render partial: 'history_posts_table', locals: { posts: @history_posts, visits_by_shop: @visits_by_shop } %>
@@ -68,7 +77,7 @@
     const citySelect = document.getElementById('search-city-select');
     if (!prefectureSelect || !citySelect) return;
 
-    citySelect.innerHTML = `<option value="">${Rails.t('posts.index.search.all')}</option>`;
+    citySelect.innerHTML = '<option value="">' + '<%= j t("posts.index.search.all") %>' + '</option>';
     const prefectureId = prefectureSelect.value;
     if (!prefectureId) return;
 
@@ -83,7 +92,25 @@
           citySelect.appendChild(option);
         });
       })
-      .catch(error => console.error(Rails.t('posts.index.error.fetch_cities'), error));
+      .catch(error => console.error("<%= j t('posts.index.error.fetch_cities') %>", error));
+  }
+
+  function resetSearchForm() {
+    const form = document.getElementById('search-form');
+    if (!form) return;
+
+    form.querySelectorAll('input, select').forEach(el => {
+      if (el.tagName === 'SELECT') {
+        el.selectedIndex = 0;
+      } else if (el.type !== 'submit' && el.type !== 'button') {
+        el.value = '';
+      }
+    });
+
+    const citySelect = document.getElementById('search-city-select');
+    if (citySelect) {
+      citySelect.innerHTML = '<option value="">' + '<%= j t("posts.index.search.all") %>' + '</option>';
+    }
   }
 
   document.addEventListener('turbo:load', () => {
@@ -94,3 +121,4 @@
     }
   });
 </script>
+
