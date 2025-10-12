@@ -1,6 +1,5 @@
 <!-- トップバー -->
-<div class="bg-light text-muted small px-4 py-2 d-flex justify-content-end gap-3">
-  <!-- <a href="#" class="text-muted text-decoration-none"><%= t('header.howto_repilog') %></a>　-->
+<div class="bg-light text-muted small px-4 py-2 d-flex justify-content-end gap-3 flex-nowrap" style="overflow-x:auto;">
   <%= link_to t('header.help_page'), help_path, class: "text-muted text-decoration-none" %>
   <%= link_to t('header.to_register_page'), new_user_path, class: 'text-muted text-decoration-none' %>
   <%= link_to t('header.login'), login_path, class: 'text-muted text-decoration-none' %>
@@ -8,16 +7,56 @@
 
 <!-- メインヘッダー -->
 <header class="bg-dark px-4 py-4">
-  <div class="d-flex align-items-center justify-content-between">
+  <div class="d-flex align-items-center justify-content-between flex-nowrap">
+    
+    <!-- 左: ロゴ -->
     <h1 class="h4 fw-bold m-0">
       <%= link_to t('header.logo'), root_path, class: 'text-white text-decoration-none' %>
     </h1>
 
-    <div class="text-center flex-grow-1">
+    <!-- 中央: メッセージ -->
+    <div class="text-center flex-grow-1 mx-3">
       <%= link_to t('header.message'), new_user_path, class: 'text-warning fw-semibold text-decoration-none' %>
     </div>
 
-    <!-- 右端: 空白（バランス用） -->
-    <div style="width: 9rem;"></div>
+    <!-- 右端: 空白（PC用バランス） -->
+    <div class="d-none d-md-block" style="width: 9rem;"></div>
   </div>
 </header>
+
+<!-- スマホ用微調整 -->
+<style>
+  @media (max-width: 768px) {
+    /* トップバー文字サイズとリンク間隔 */
+    .bg-light {
+      font-size: 0.7rem;
+      gap: 0.4rem;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+
+    /* ロゴを少し小さく */
+    header h1.h4 {
+      font-size: 1rem;
+    }
+
+    /* 中央メッセージを少し小さく */
+    header .text-warning {
+      font-size: 0.65rem;
+    }
+
+    /* 中央部分の左右マージンを小さく */
+    header .flex-grow-1 {
+      margin-left: 0.3rem;
+      margin-right: 0.3rem;
+    }
+
+    /* ヘッダー全体のパディングを小さく */
+    header {
+      padding-left: 1rem;
+      padding-right: 1rem;
+      padding-top: 0.8rem;
+      padding-bottom: 0.8rem;
+    }
+  }
+</style>

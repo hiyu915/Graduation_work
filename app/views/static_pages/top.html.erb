@@ -112,8 +112,7 @@
                   <div class="text-center mt-3 mb-3" id="register-btn-wrapper">
                     <%= link_to t("howto_repilog.steps.register.button"),
                                 new_user_path,
-                                class: "btn howto-register-btn",
-                                style: "background-color:#ffeb99; color:#333; border:none; font-weight:bold; font-size:1rem; padding:0.5rem 1rem;" %>
+                                class: "btn howto-register-btn" %>
                   </div>
                 <% end %>
 
@@ -125,8 +124,7 @@
           <div class="text-center mt-4 mb-5">
             <%= link_to t("howto_repilog.cta"),
                         new_user_path,
-                        class: "btn btn-lg",
-                        style: "background-color:#ffeb99; color:#333; border:none; font-weight:bold;" %>
+                        class: "btn howto-register-btn btn-lg" %>
           </div>
 
         </div>
@@ -134,12 +132,24 @@
     </div>
   </div>
 
-  <!-- スマホ用ボタン調整 -->
+  <!-- スタイル -->
   <style>
+    .howto-register-btn {
+      background-color: #ffeb99;
+      color: #333;
+      border: none;
+      font-weight: bold;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      display: inline-block;
+      text-decoration: none;
+    }
+
     @media (max-width: 768px) {
-      #register-btn-wrapper a.howto-register-btn {
-        font-size: 0.8rem !important;
-        padding: 0.3rem 0.6rem !important;
+      .howto-register-btn {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
       }
     }
   </style>

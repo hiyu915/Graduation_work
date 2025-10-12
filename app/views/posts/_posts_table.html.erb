@@ -1,3 +1,4 @@
+<!-- 投稿一覧のテーブル表示 -->
 <div class="text-end mb-2">
   <%= render "repeat_toggle_button" %>
 </div>
@@ -17,7 +18,7 @@
 <% by_visit_date  = current_query.merge(sort: "visit_date",  direction: next_direction_for.call("visit_date")) %>
 <% by_visit_count = current_query.merge(sort: "visit_count", direction: next_direction_for.call("visit_count")) %>
 
-<div class="btn-group" role="group" aria-label="<%= t('posts.index.sort.label') %>">
+<div class="btn-group mb-2" role="group" aria-label="<%= t('posts.index.sort.label') %>">
   <%= link_to(
         (t('posts.index.sort.by_visit_date') + (current_sort == "visit_date" ? (current_direction == "asc" ? " ▲" : " ▼") : "")).html_safe,
         posts_path(by_visit_date),
@@ -33,26 +34,52 @@
       ) %>
 </div>
 
-<table class="table table-hover align-middle table-bordered text-center">
-  <thead class="table-light">
-    <tr>
-      <th class="w-10"><%= t('posts.index.table_header.visit_date') %></th>
-      <th class="w-20"><%= t('posts.index.table_header.shop_name') %></th>
-      <th class="w-10"><%= t('posts.index.table_header.category') %></th>
-      <th class="w-20"><%= t('posts.index.table_header.location') %></th>
-      <th class="w-10"><%= t('posts.index.table_header.companion') %></th>
-      <th class="w-10"><%= t('posts.index.table_header.feeling') %></th>
-      <th class="w-10"><%= t('posts.index.table_header.visit_reason') %></th>
-      <th class="w-5"><%= t('posts.index.table_header.visit_count') %></th>
-      <th class="w-5"><%= t('posts.index.table_header.repeat') %></th>
-      <th class="w-10"><%= t('posts.index.table_header.detail_edit') %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= render partial: 'post', collection: posts, as: :post, locals: { visits_by_shop: visits_by_shop, show_history_button: true } %>
-  </tbody>
-</table>
+<div class="table-responsive">
+  <table class="table table-hover align-middle table-bordered text-center">
+    <thead class="table-light">
+      <tr>
+        <th class="w-10"><%= t('posts.index.table_header.visit_date') %></th>
+        <th class="w-20"><%= t('posts.index.table_header.shop_name') %></th>
+        <th class="w-10"><%= t('posts.index.table_header.category') %></th>
+        <th class="w-20"><%= t('posts.index.table_header.location') %></th>
+        <th class="w-10"><%= t('posts.index.table_header.companion') %></th>
+        <th class="w-10"><%= t('posts.index.table_header.feeling') %></th>
+        <th class="w-10"><%= t('posts.index.table_header.visit_reason') %></th>
+        <th class="w-5"><%= t('posts.index.table_header.visit_count') %></th>
+        <th class="w-5"><%= t('posts.index.table_header.repeat') %></th>
+        <th class="w-10"><%= t('posts.index.table_header.detail_edit') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'post', collection: posts, as: :post, locals: { visits_by_shop: visits_by_shop, show_history_button: true } %>
+    </tbody>
+  </table>
+</div>
 
 <div class="d-flex justify-content-center">
   <%= paginate posts, theme: 'bootstrap-5' %>
 </div>
+
+<style>
+/* スマホ版 */
+@media (max-width: 768px) {
+  /* テーブル文字の縮小 */
+  table th, table td {
+    font-size: 0.45rem;       /* 文字を極小に縮小 */
+    padding: 0.15rem 0.2rem;  /* セル余白をさらに縮小 */
+    white-space: nowrap;       /* 横並びを維持 */
+  }
+
+  /* ボタン・アイコンは縮小しない */
+  .btn-sm,
+  td[id^="favorite-button-"] i {
+    font-size: initial;
+    padding: initial;
+  }
+
+  /* 横スクロール対応 */
+  .table-responsive {
+    overflow-x: auto;
+  }
+}
+</style>
