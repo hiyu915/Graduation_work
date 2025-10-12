@@ -4,7 +4,7 @@
 </div>
 
 <% current_query = request.query_parameters.except(:page, :direction, :sort) %>
-<% current_sort = "visit_date" %> <%# 履歴一覧は来店日ソート固定 %>
+<% current_sort = "visit_date" %>
 <% current_direction = params[:direction].presence || "desc" %>
 <% next_direction = current_direction == "desc" ? "asc" : "desc" %>
 <% by_visit_date = current_query.merge(sort: "visit_date", direction: next_direction) %>
