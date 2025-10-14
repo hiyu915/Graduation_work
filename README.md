@@ -186,6 +186,17 @@ https://repilog.com/
 
 </div>
 
+## 使用技術
+| カテゴリ | 技術内容 |
+|-----------|-----------|
+| サーバーサイド | Ruby on Rails 8.0.3 / Ruby 3.3.6 |
+| フロントエンド | Hotwire (Turbo / Stimulus) |
+| CSSフレームワーク | Bootstrap 5系 |
+| Web API | Amazon S3 API / Google Maps API / OpenStreetMap API / SendGrid |
+| データベースサーバー | PostgreSQL |
+| ファイルサーバー | AWS S3 |
+| アプリケーションサーバー | Render |
+| バージョン管理ツール | GitHub・Git Flow |
 
 ## ER図
 <img width="1050" height="780" alt="Image" src="https://github.com/user-attachments/assets/0c6e0753-ed7f-4045-b916-7e571146d5d3" />
